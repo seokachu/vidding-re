@@ -42,3 +42,6 @@ next-env.d.ts
 
 # claude code
 .claude/worktrees/
+
+# 로컬 작업용 폰트 원본 (배포에는 public/ 하위 파일을 쓴다)
+/PretendardVariable.woff2
