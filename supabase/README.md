@@ -200,7 +200,7 @@ b2 → 3,000 P 입찰 + b1 공감(+10)       → 3,010  ← 낙찰
 |---|---|
 | Site URL | `https://vidding-re.vercel.app` |
 | Redirect URLs | 3개 (아래) |
-| Google · Kakao 제공자 | **아직 Disabled** — Client ID/Secret 입력 필요 |
+| Google · Kakao 제공자 | **Enabled — 실제 로그인 성공 확인 (2026-07-31)** |
 
 ```
 http://localhost:3000/**
@@ -239,7 +239,20 @@ https://vtkeruqexphuvritwkyt.supabase.co/auth/v1/callback
 - **Google** — Cloud Console → 사용자 인증 정보 → 승인된 리디렉션 URI 에 위 URL 등록
 - **Kakao** — Kakao Developers → 카카오 로그인 → Redirect URI 에 위 URL 등록
 
-### Kakao 는 이메일이 선택 동의다 — 중요
+### Kakao 앱 설정 — 완료된 상태
+
+앱 `vidding-re` (ID `1529829`), **비즈 앱**(개인 개발자)이라 이메일을 필수 동의로 받을 수 있다.
+
+| 동의항목 | ID | 상태 |
+|---|---|---|
+| 닉네임 | `profile_nickname` | 필수 동의 |
+| 프로필 사진 | `profile_image` | 필수 동의 |
+| 카카오계정(이메일) | `account_email` | **필수 동의 [수집]** |
+
+이메일을 **필수 동의**로 둔 이유가 아래다. 선택 동의면 사용자가 체크를 풀 수 있고,
+그러면 가입이 막힌다. 비즈 앱이라 필수로 걸 수 있었다.
+
+### 이메일이 없으면 가입을 중단한다
 
 F10 4 는 "이메일 정보 없음 → **가입을 중단**하고 이메일 제공에 동의가 필요함을 안내한다"고 정한다.
 `handle_new_user()` 는 `new.email` 이 비어 있으면 `EMAIL_REQUIRED` 예외를 던져 **가입 자체를 실패시킨다.**
@@ -247,13 +260,9 @@ F10 4 는 "이메일 정보 없음 → **가입을 중단**하고 이메일 제�
 > 초기 구현은 `<uuid>@no-email.local` 로 채워 계정을 만들고 가입 보너스 5,000 P 까지 지급했다.
 > 연락 불가능한 계정이 원장에 남으므로 `20260731000007` 에서 바로잡았다.
 
-앱에서 해야 할 일이 두 가지다.
-
-1. Kakao 로그인 요청에 **`account_email` 스코프**를 포함한다
-2. Kakao Developers → 동의 항목에서 **카카오계정(이메일)** 을 활성화한다
-   (필수 동의로 받으려면 비즈니스 앱 전환이 필요하다)
-
 로그인 콜백에서 `EMAIL_REQUIRED` 로 실패하면 "이메일 제공에 동의해야 가입할 수 있어요"를 안내한다.
+
+> 로그인 요청에는 `account_email profile_nickname profile_image` 스코프를 포함한다 (위 코드 참고).
 
 ### 닉네임·아바타 매핑
 
