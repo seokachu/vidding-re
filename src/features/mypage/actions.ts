@@ -135,22 +135,3 @@ export async function deleteAddress(): Promise<AddressFormState> {
   revalidatePath(ROUTES.mypage);
   redirect(ROUTES.mypage);
 }
-
-/**
- * 찜 해제 (F8 3.5 — 카드에서 바로 뗄 수 있다).
- *
- * > **임시 구현이다.** 찜 토글은 워크트리 A 의 `src/features/explore/` 소관이다.
- * > 그쪽이 올라오면 이 함수 대신 그 토글을 쓴다.
- */
-export async function removeFavorite(auctionId: string): Promise<void> {
-  const user = await requireAuthUser(ROUTES.mypage);
-
-  const supabase = await createClient();
-  await supabase
-    .from("auction_favorites")
-    .delete()
-    .eq("auction_id", auctionId)
-    .eq("user_id", user.id);
-
-  revalidatePath(ROUTES.mypage);
-}

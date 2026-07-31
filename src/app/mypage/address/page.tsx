@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 
-import { TopAppBar } from "@/components/ui";
+import { ErrorState, TopAppBar } from "@/components/ui";
 import { requireAuthUser } from "@/lib/auth";
 import { isSafeReturnTo, ROUTES } from "@/lib/routes";
 import { AddressForm } from "@/features/mypage/address-form";
 import { getMyAddress } from "@/features/mypage/queries";
-import { RetryErrorState } from "@/features/mypage/retry";
 
 export const metadata: Metadata = { title: "배송지 · Vidding" };
 
@@ -37,7 +36,7 @@ export default async function AddressPage(props: {
       <>
         <TopAppBar title="배송지" />
         <main className="flex-1">
-          <RetryErrorState description="배송지를 불러오지 못했어요" />
+          <ErrorState description="배송지를 불러오지 못했어요" />
         </main>
       </>
     );

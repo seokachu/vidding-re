@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { ChatRoom } from "@/features/notify/chat-room";
-import { RetryState } from "@/features/notify/retry-state";
-import { TopAppBar } from "@/components/ui";
+import { ErrorState, TopAppBar } from "@/components/ui";
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -40,7 +39,7 @@ export default async function ChatPage({
       <>
         <TopAppBar title="채팅" />
         <main className="flex-1">
-          <RetryState description={"대화를 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
+          <ErrorState description={"대화를 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
         </main>
       </>
     );

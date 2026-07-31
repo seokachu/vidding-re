@@ -2,8 +2,7 @@ import { ChevronRight, PackageOpen } from "lucide-react";
 import Link from "next/link";
 
 import { TabShell } from "@/components/layout/tab-shell";
-import { AuctionCard, AuctionCardCompact, EmptyState } from "@/components/ui";
-import { ListErrorState } from "@/features/explore/list-error-state";
+import { AuctionCard, AuctionCardCompact, EmptyState, ErrorState } from "@/components/ui";
 import {
   getEndingSoonAuctions,
   getLatestAuctions,
@@ -77,7 +76,7 @@ export default async function HomePage() {
         </div>
 
         {!latest.ok ? (
-          <ListErrorState />
+          <ErrorState description="목록을 불러오지 못했어요" />
         ) : latest.items.length === 0 ? (
           <EmptyState
             icon={PackageOpen}

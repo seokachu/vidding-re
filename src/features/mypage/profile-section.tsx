@@ -1,8 +1,7 @@
-import { Avatar, ListRow } from "@/components/ui";
+import { Avatar, InlineRetry, ListRow } from "@/components/ui";
 import { formatPoint } from "@/lib/format";
 import { ROUTES } from "@/lib/routes";
 import type { Address } from "@/lib/supabase/database.types";
-import { InlineRetry } from "./retry";
 import type { MyProfile, Result } from "./types";
 
 /**

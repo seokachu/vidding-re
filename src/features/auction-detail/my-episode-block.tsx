@@ -4,12 +4,11 @@ import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { Button, ButtonLink, StoryCard } from "@/components/ui";
+import { Button, ButtonLink, StoryCard, Toast, useToast } from "@/components/ui";
 import { ROUTES } from "@/lib/routes";
 
 import { deleteEpisodeAction } from "./actions";
 import type { EpisodeItem } from "./types";
-import { Toast, useToast } from "./toast";
 
 /**
  * 내 사연 고정 블록 (F3 3.6).

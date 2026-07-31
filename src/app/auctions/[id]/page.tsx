@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { TopAppBar } from "@/components/ui";
+import { BottomBar, TopAppBar } from "@/components/ui";
 import { getAuctionContext } from "@/lib/relationship.server";
 import { AuctionActions } from "@/features/auction-detail/auction-actions";
 import { AuctionResult } from "@/features/auction-detail/auction-result";
-import { BottomBar } from "@/features/auction-detail/bottom-bar";
 import { AuctionSummary } from "@/features/auction-detail/auction-summary";
 import {
   loadAuctionDetail,

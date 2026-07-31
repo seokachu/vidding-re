@@ -1,9 +1,8 @@
 import { BellOff } from "lucide-react";
 
 import { TabShell } from "@/components/layout/tab-shell";
-import { ButtonLink, EmptyState } from "@/components/ui";
+import { ButtonLink, EmptyState, ErrorState } from "@/components/ui";
 import { NotificationList } from "@/features/notify/notification-list";
-import { RetryState } from "@/features/notify/retry-state";
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -32,7 +31,7 @@ export default async function NotificationsPage() {
   return (
     <TabShell title="알림">
       {error ? (
-        <RetryState description={"알림을 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
+        <ErrorState description={"알림을 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
       ) : data.length === 0 ? (
         <EmptyState
           icon={BellOff}

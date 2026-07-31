@@ -1,10 +1,9 @@
 "use client";
 
-import { StoryCard } from "@/components/ui";
+import { StoryCard, Toast, useToast } from "@/components/ui";
 
 import type { EpisodeItem } from "./types";
 import { EpisodeLikeButton } from "./episode-like-button";
-import { Toast, useToast } from "./toast";
 
 /**
  * 사연 카드 한 장. **목록이 곧 랭킹이다** (00-관계-판정 3.4.1).

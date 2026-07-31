@@ -3,10 +3,10 @@ import { FilePen, Heart, Package, Plus, Search } from "lucide-react";
 
 import { SignOutButton } from "@/components/auth/signout-button";
 import { TabShell } from "@/components/layout/tab-shell";
-import { AuctionCard, ButtonLink, EmptyState } from "@/components/ui";
+import { AuctionCard, ButtonLink, EmptyState, ErrorState } from "@/components/ui";
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES } from "@/lib/routes";
-import { FavoriteRemoveButton } from "@/features/mypage/favorite-remove-button";
+import { FavoriteButton } from "@/features/explore";
 import { MyEpisodeCard } from "@/features/mypage/my-episode-card";
 import { MypageTabs } from "@/features/mypage/mypage-tabs";
 import { parseTab } from "@/features/mypage/tabs";
@@ -18,7 +18,6 @@ import {
   getMyFavorites,
   getMyProfile,
 } from "@/features/mypage/queries";
-import { RetryErrorState } from "@/features/mypage/retry";
 import type { Result } from "@/features/mypage/types";
 
 export const metadata: Metadata = { title: "마이페이지 · Vidding" };
@@ -137,7 +136,7 @@ export default async function MyPage(props: {
                     <AuctionCard
                       auction={auction}
                       trailing={
-                        <FavoriteRemoveButton auctionId={auction.auction_id} />
+                        <FavoriteButton auctionId={auction.auction_id} favorited />
                       }
                     />
                   </li>
@@ -172,7 +171,7 @@ function Panel<T>({
 }) {
   if (!result.ok) {
     return (
-      <RetryErrorState description="목록을 불러오지 못했어요. 다른 탭은 그대로 볼 수 있어요" />
+      <ErrorState description="목록을 불러오지 못했어요. 다른 탭은 그대로 볼 수 있어요" />
     );
   }
 

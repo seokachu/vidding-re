@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Coins } from "lucide-react";
 
-import { EmptyState, TopAppBar } from "@/components/ui";
+import { EmptyState, ErrorState, TopAppBar } from "@/components/ui";
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES } from "@/lib/routes";
 import { PointList } from "@/features/mypage/point-list";
 import { getMyPoints } from "@/features/mypage/queries";
-import { RetryErrorState } from "@/features/mypage/retry";
 
 export const metadata: Metadata = { title: "포인트 내역 · Vidding" };
 
@@ -29,7 +28,7 @@ export default async function PointsPage() {
 
       <main className="flex-1 px-gutter pb-10">
         {!points.ok ? (
-          <RetryErrorState description="포인트 내역을 불러오지 못했어요" />
+          <ErrorState description="포인트 내역을 불러오지 못했어요" />
         ) : points.data.length === 0 ? (
           <EmptyState
             icon={Coins}

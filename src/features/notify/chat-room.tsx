@@ -5,13 +5,12 @@ import { ArrowUp, Info, RotateCcw, WifiOff } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { TopAppBar } from "@/components/ui";
+import { ErrorState, TopAppBar } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
 import type { Message } from "@/lib/supabase/database.types";
 import { fetchChatMessages, markChatRead, sendChatMessage } from "./actions";
-import { RetryState } from "./retry-state";
 
 /** 보내는 중이거나 실패한 내 메시지. 서버에 아직 행이 없으므로 따로 들고 있는다 */
 type Outgoing = {
@@ -209,7 +208,7 @@ export function ChatRoom({
       <main className="flex flex-1 flex-col gap-[14px] px-gutter pb-6 pt-5">
         {loadFailed ? (
           // 조회 실패를 빈 대화로 위장하지 않는다 (F6 4)
-          <RetryState description={"대화를 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
+          <ErrorState description={"대화를 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
         ) : (
           <>
             {rows.length === 0 && outgoing.length === 0 && (

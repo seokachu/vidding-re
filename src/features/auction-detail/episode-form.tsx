@@ -3,13 +3,7 @@
 import { Info } from "lucide-react";
 import { useActionState, useState } from "react";
 
-import {
-  Button,
-  ButtonLink,
-  PointStepper,
-  TextAreaField,
-  TextField,
-} from "@/components/ui";
+import { BottomBar, Button, ButtonLink, PointStepper, TextAreaField, TextField } from "@/components/ui";
 import {
   BID_MIN,
   BID_STEPS,
@@ -26,7 +20,6 @@ import {
   updateEpisodeAction,
   type EpisodeFormState,
 } from "./actions";
-import { BottomBar } from "./bottom-bar";
 
 const GUIDE = [
   "진정성 있는 개인적인 이야기를 들려주세요",

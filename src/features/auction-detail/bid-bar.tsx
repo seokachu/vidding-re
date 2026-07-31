@@ -3,13 +3,11 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { Button } from "@/components/ui";
+import { Button, PointStepper, Toast, useToast } from "@/components/ui";
 import { BID_MAX, BID_MIN, nextBidStep } from "@/lib/constants";
 import { formatPoint } from "@/lib/format";
 
 import { placeBidAction } from "./actions";
-import { BidStepper } from "./bid-stepper";
-import { Toast, useToast } from "./toast";
 
 /**
  * 참여자의 하단 바 — 자기 사연에 포인트를 더 건다 (F3 3.3).
@@ -77,7 +75,7 @@ export function BidBar({
 
   return (
     <div className="flex w-full flex-col gap-2.5">
-      <BidStepper
+      <PointStepper
         value={value}
         onChange={setValue}
         min={floor}
