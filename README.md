@@ -71,6 +71,8 @@
 | [PRD](./docs/PRD.md) | 배경 · 문제 · 목표 · 사용자 · 기능 · 시나리오 · MVP 범위 |
 | [데이터 모델](./docs/데이터-모델-명세.md) | 테이블 · RLS · 고정 상수 |
 | [기능 스펙](./docs/specs/README.md) | 기능별 상세 13개 |
+| [코드 구조](./docs/구조.md) | 폴더 구조 · 관계 판정 · 토큰 사용법 |
+| [Supabase](./supabase/README.md) | 마이그레이션 · 인증 설정 · 검증 결과 |
 
 ---
 
@@ -89,10 +91,19 @@
 
 ```bash
 pnpm install
+cp .env.example .env.local     # Supabase 키를 채운다
 pnpm dev
 ```
 
 http://localhost:3000
+
+**더미 데이터** — 마감·낙찰·유찰까지 실제 흐름대로 만든다.
+`SUPABASE_SERVICE_ROLE_KEY` 가 있어야 한다.
+
+```bash
+pnpm seed            # 이미 있으면 건너뛴다
+pnpm seed --clean    # 지우고 다시 만든다
+```
 
 ---
 

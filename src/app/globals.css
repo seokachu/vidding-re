@@ -1,19 +1,119 @@
 @import "tailwindcss";
 
-/* 테마는 라이트 1벌이다. 다크 축을 정의하지 않는다 (PRD B1·E2) */
-:root {
-  --background: #ffffff;
-  --foreground: #131720;
+/* ==========================================================================
+   디자인 토큰 — design/design.pen 의 문서 변수를 그대로 옮긴 것이다.
+   .pen 이 단일 출처다. 값을 바꾸려면 .pen 을 먼저 고친다.
+
+   테마는 잉크 블루 라이트 1벌뿐이다. 다크 축을 정의하지 않는다 (PRD B1·E2).
+   ========================================================================== */
+
+@theme {
+  /* --- 팔레트 ----------------------------------------------------------- */
+  --color-primary-50: #f2f5fd;
+  --color-primary-100: #e2e8fa;
+  --color-primary-200: #c6d2f4;
+  --color-primary-300: #9db0e9;
+  --color-primary-400: #6a85da;
+  --color-primary-500: #3d5fc6;
+  --color-primary-600: #1d48b0;
+  --color-primary-700: #163784;
+  --color-primary-800: #112960;
+  --color-primary-900: #0c1c40;
+
+  --color-warning-50: #fcebea;
+  --color-warning-100: #f7d3d1;
+  --color-warning-500: #d9433a;
+  --color-warning-600: #c8322b;
+  --color-warning-700: #a82720;
+
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f6f7fb;
+  --color-neutral-100: #edeff5;
+  --color-neutral-200: #e1e4ec;
+  --color-neutral-300: #cbd0dc;
+  --color-neutral-400: #9ba3b5;
+  --color-neutral-500: #757e92;
+  --color-neutral-600: #5b6474;
+  --color-neutral-700: #414958;
+  --color-neutral-800: #262c38;
+  --color-neutral-900: #131720;
+
+  /* --- 시맨틱 ----------------------------------------------------------- */
+  --color-bg: #ffffff;
+  --color-surface: #f6f7fb;
+  --color-surface-sunken: #edeff5;
+  --color-border: #e1e4ec;
+  --color-border-strong: #cbd0dc;
+
+  --color-text-primary: #131720;
+  --color-text-secondary: #5b6474;
+  --color-text-tertiary: #9ba3b5;
+  --color-text-on-accent: #ffffff;
+
+  --color-accent: #1d48b0;
+  --color-accent-pressed: #163784;
+  --color-accent-subtle: #e2e8fa;
+  --color-accent-text: #163784;
+
+  /* 레드는 마감 임박·경고 의미로만 쓴다 (F11 3.6) */
+  --color-warning: #c8322b;
+  --color-warning-subtle: #fcebea;
+  --color-warning-text: #a82720;
+
+  --color-closed: #757e92;
+  --color-closed-subtle: #edeff5;
+
+  /* --- 타입 스케일 ------------------------------------------------------ */
+  --text-display: 28px;
+  --text-display--line-height: 1.35;
+  --text-title: 20px;
+  --text-title--line-height: 1.35;
+  --text-subtitle: 17px;
+  --text-subtitle--line-height: 1.45;
+  --text-body: 15px;
+  --text-body--line-height: 1.6;
+  --text-caption: 13px;
+  --text-caption--line-height: 1.6;
+  --text-label: 12px;
+  --text-label--line-height: 1.45;
+  --text-micro: 11px;
+  --text-micro--line-height: 1.6;
+
+  --leading-tight: 1.35;
+  --leading-snug: 1.45;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
+
+  /* --- 반경 ------------------------------------------------------------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* --- 폭 --------------------------------------------------------------- */
+  --spacing-gutter: 20px;
+  --container-screen: 390px;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-pretendard);
 }
 
+/* 390px 모바일 폭을 기준으로 만든 디자인이다. 더 넓은 화면에서는 가운데 정렬한다 */
+:root {
+  --shell-width: 390px;
+}
+
+html {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-bg);
   font-family: var(--font-sans);
+}
+
+/* 숫자는 폭이 흔들리지 않게 고정폭으로 읽는다 (포인트·남은 시간) */
+.tabular {
+  font-variant-numeric: tabular-nums;
 }

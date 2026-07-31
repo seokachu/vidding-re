@@ -1,0 +1,70 @@
+import { ImageIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { cn } from "@/lib/cn";
+import { formatTimeLeft } from "@/lib/format";
+import { ROUTES } from "@/lib/routes";
+import type { AuctionSummary } from "@/lib/supabase/database.types";
+
+/**
+ * 세로형 좁은 카드. 홈의 **마감 임박 가로 스크롤**에 쓴다 (F2 3.1).
+ *
+ * 남은 시간을 강조색으로 보여준다 — 이 줄에 사용자가 반응해야 한다.
+ */
+export function AuctionCardCompact({
+  auction,
+  className,
+}: {
+  auction: Pick<
+    AuctionSummary,
+    "auction_id" | "title" | "thumbnail" | "end_at" | "episode_count"
+  >;
+  className?: string;
+}) {
+  const left = formatTimeLeft(auction.end_at);
+
+  return (
+    <Link
+      href={ROUTES.auction(auction.auction_id)}
+      className={cn("flex w-[158px] shrink-0 flex-col gap-[9px]", className)}
+    >
+      <div className="flex h-28 w-full items-center justify-center overflow-hidden rounded-md bg-surface-sunken">
+        {auction.thumbnail ? (
+          <Image
+            src={auction.thumbnail}
+            alt=""
+            width={158}
+            height={112}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <ImageIcon size={22} className="text-text-tertiary" />
+        )}
+      </div>
+
+      <p className="line-clamp-2 text-[14px] font-semibold leading-snug text-text-primary">
+        {auction.title}
+      </p>
+
+      <div className="flex items-center gap-1.5 text-label">
+        <span
+          className={cn(
+            "tabular font-semibold",
+            left.closed
+              ? "text-text-tertiary"
+              : left.endingSoon
+                ? "text-warning"
+                : "text-text-secondary",
+          )}
+        >
+          {left.text}
+        </span>
+        <span className="text-text-tertiary">·</span>
+        <span className="tabular text-text-secondary">
+          사연 {auction.episode_count}
+        </span>
+      </div>
+    </Link>
+  );
+}
