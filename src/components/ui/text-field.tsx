@@ -11,6 +11,11 @@ type FieldShellProps = {
   helper?: string;
   /** 에러가 있으면 도움말 자리를 대신 차지하고 테두리가 경고색이 된다 */
   error?: string;
+  /**
+   * 라벨 줄 오른쪽 자리. 남은 글자 수를 실시간으로 보여줄 때 쓴다
+   * (F1 4.2 · F3 4.2). 라벨이 없으면 그리지 않는다.
+   */
+  counter?: React.ReactNode;
   htmlFor?: string;
   className?: string;
   children: React.ReactNode;
@@ -21,6 +26,7 @@ export function FieldShell({
   required,
   helper,
   error,
+  counter,
   htmlFor,
   className,
   children,
@@ -28,13 +34,21 @@ export function FieldShell({
   return (
     <div className={cn("flex w-full flex-col gap-[7px]", className)}>
       {label && (
-        <label
-          htmlFor={htmlFor}
-          className="flex items-center gap-[3px] text-label font-semibold text-text-secondary"
-        >
-          {label}
-          {required && <span className="text-warning">*</span>}
-        </label>
+        <div className="flex items-baseline justify-between gap-2">
+          <label
+            htmlFor={htmlFor}
+            className="flex items-center gap-[3px] text-label font-semibold text-text-secondary"
+          >
+            {label}
+            {required && <span className="text-warning">*</span>}
+          </label>
+
+          {counter && (
+            <span className="tabular shrink-0 text-label text-text-tertiary">
+              {counter}
+            </span>
+          )}
+        </div>
       )}
 
       {children}
@@ -70,6 +84,7 @@ export function TextField({
   required,
   helper,
   error,
+  counter,
   className,
   id,
   ...props
@@ -80,6 +95,7 @@ export function TextField({
       required={required}
       helper={helper}
       error={error}
+      counter={counter}
       htmlFor={id}
       className={className}
     >
@@ -105,6 +121,7 @@ export function TextAreaField({
   required,
   helper,
   error,
+  counter,
   className,
   id,
   rows = 6,
@@ -116,6 +133,7 @@ export function TextAreaField({
       required={required}
       helper={helper}
       error={error}
+      counter={counter}
       htmlFor={id}
       className={className}
     >

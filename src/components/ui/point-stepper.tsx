@@ -18,6 +18,13 @@ import { formatPoint } from "@/lib/format";
 export function PointStepper({
   value,
   onChange,
+  /**
+   * 이 단계 아래로는 내리지 못한다. **이미 확정된 입찰액을 넘긴다.**
+   *
+   * 2,000 P 를 이미 건 사연에서 − 로 1,000 까지 내려갈 수 있으면 안 된다.
+   * 입찰은 올리기만 가능하기 때문이다 (F3 4.3 · §4.1 4단계).
+   */
+  min = BID_STEPS[0],
   /** 잔액이 모자라면 이 단계 위로는 올리지 못한다 */
   max = BID_STEPS[BID_STEPS.length - 1],
   disabled,
@@ -25,6 +32,7 @@ export function PointStepper({
 }: {
   value: number;
   onChange: (next: number) => void;
+  min?: number;
   max?: number;
   disabled?: boolean;
   className?: string;
@@ -33,7 +41,7 @@ export function PointStepper({
   const down = prevBidStep(value);
 
   const canUp = !disabled && up !== null && up <= max;
-  const canDown = !disabled && down !== null;
+  const canDown = !disabled && down !== null && down >= min;
 
   return (
     <div

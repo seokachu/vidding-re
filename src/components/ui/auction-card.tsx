@@ -37,21 +37,36 @@ export function AuctionCard({
   const status = auctionDisplayStatus(auction);
   const left = formatTimeLeft(auction.end_at);
 
+  // 마감된 카드는 글자를 죽인다 (.pen S02). 목록에서 아직 참여할 수 있는 것과
+  // 끝난 것이 같은 무게로 보이면 안 된다
+  const { closed } = status;
+
   return (
     <div
       className={cn(
-        "relative flex w-full gap-[14px] rounded-md border border-border bg-bg p-[14px]",
+        "relative flex w-full gap-[14px] rounded-md border border-border p-[14px]",
+        closed ? "bg-surface" : "bg-bg",
         className,
       )}
     >
-      <Thumb src={auction.thumbnail} size={88} rounded="rounded-sm" />
+      <Thumb
+        src={auction.thumbnail}
+        size={88}
+        rounded="rounded-sm"
+        className={closed ? "opacity-60" : undefined}
+      />
 
       <div className="flex h-22 min-w-0 flex-1 flex-col justify-center gap-[7px]">
         <div className="flex items-center gap-2">
           <Badge tone={status.tone}>{status.label}</Badge>
         </div>
 
-        <h3 className="truncate text-subtitle font-semibold text-text-primary">
+        <h3
+          className={cn(
+            "truncate text-subtitle font-semibold",
+            closed ? "text-text-tertiary" : "text-text-primary",
+          )}
+        >
           <Link
             href={ROUTES.auction(auction.auction_id)}
             className="before:absolute before:inset-0"
@@ -60,8 +75,18 @@ export function AuctionCard({
           </Link>
         </h3>
 
-        <div className="flex items-center gap-[7px] text-caption text-text-secondary">
-          <span className={cn("tabular", left.endingSoon && "text-warning-text")}>
+        <div
+          className={cn(
+            "flex items-center gap-[7px] text-caption",
+            closed ? "text-text-tertiary" : "text-text-secondary",
+          )}
+        >
+          <span
+            className={cn(
+              "tabular",
+              !closed && left.endingSoon && "text-warning-text",
+            )}
+          >
             {left.text}
           </span>
           <span className="text-text-tertiary">·</span>
