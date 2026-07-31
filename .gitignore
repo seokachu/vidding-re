@@ -43,5 +43,11 @@ next-env.d.ts
 # claude code
 .claude/worktrees/
 
-# 로컬 작업용 폰트 원본 (배포에는 public/ 하위 파일을 쓴다)
+# 로컬 작업용 폰트 원본 (배포에 쓰는 파일은 src/app/fonts/ 에 있다)
 /PretendardVariable.woff2
+
+# 디자인 — 제출물은 design.pen 하나다
+# 리뷰용으로 내보낸 화면 이미지
+design/exports/
+# Pencil 캔버스가 쓰는 폰트 사본
+design/*.woff2
