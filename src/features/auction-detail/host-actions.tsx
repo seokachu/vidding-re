@@ -79,12 +79,18 @@ export function HostActions({
               수정하기
             </ButtonLink>
           )}
+          {/*
+            색을 여기서 고정하지 않는다. Button 의 secondary 가 활성일 때
+            text-primary, 비활성일 때 text-tertiary 로 알아서 바꾼다.
+            회색을 박아 두면 **누를 수 있을 때도 못 누르는 것처럼 보이고**,
+            정말 못 누를 때(사연이 모인 경매)와 구분되지 않는다.
+          */}
           <Button
             variant="secondary"
             block
             disabled={!canDelete}
             onClick={() => setConfirming(true)}
-            className="py-[14px] text-caption text-text-tertiary"
+            className="py-[14px] text-caption"
           >
             삭제하기
           </Button>
