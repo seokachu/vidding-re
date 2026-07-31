@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vidding
 
-## Getting Started
+**돈이 아니라 사연으로 입찰하는 경매 플랫폼.**
 
-First, run the development server:
+가장 높은 금액을 부른 사람이 아니라, 가장 공감받은 이야기를 쓴 사람이 낙찰받는다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| 구분 | 일반 경매 | Vidding |
+|---|---|---|
+| 입찰 수단 | 금액 | 사연(스토리) |
+| 낙찰 기준 | 최고가 | 사연이 받은 공감 |
+| 참여 경험 | 가격 경쟁 | 이야기 공유·공감 |
+
+---
+
+## 이 프로젝트
+
+기존 서비스의 기획과 디자인을 참고해 **새로 만드는 개인 프로젝트**다.
+
+기존 서비스는 사용자를 **경매진행자**와 **입찰참여자**로 나누고 헤더 토글로 전환하게 했다.
+같은 사람인데도 **토글을 바꿔야 버튼이 눌렸다.**
+
+> 신분(내가 누구인가)이 아니라 **관계(이 경매와 나는 어떤 사이인가)** 로 판단한다.
+
+| 관계 | 조건 |
+|---|---|
+| **주최자** | 내가 등록한 경매 |
+| **참여자** | 내가 사연을 쓴 경매 |
+| **방문자** | 로그인했지만 위 둘 다 아님 |
+| **비회원** | 미로그인 |
+
+관계는 계정 속성이 아니라 **경매마다 따로** 정해진다. 사용자가 선언하지 않는다.
+
+---
+
+## 핵심 규칙
+
+**낙찰**
+
+```
+최종 점수 = 본인이 건 포인트 + 받은 공감 가중치
+동점이면 → 먼저 작성한 사연
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**입찰** — ＋/− 버튼으로만 조작한다. 숫자를 직접 입력하지 않는다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+1,000 → 1,500 → 2,000 → 2,500 → 3,000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**공감** — 주최자 `+50 P` · 그 외 `+10 P`
+주최자가 결과에 개입하는 수단은 공감 하나뿐이다.
 
-## Learn More
+**포인트** — 물건을 나누면 얻고, 물건을 받으면 쓴다.
 
-To learn more about Next.js, take a look at the following resources:
+| 흐름 | 내용 |
+|---|---|
+| 가입 | +5,000 P (1회) |
+| 입찰 | 차감 |
+| 미낙찰 · 유찰 · 사연 삭제 | 전액 반환 |
+| 낙찰 | 낙찰자 → **주최자에게 이전** |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**채팅** — 낙찰 이후 주최자와 낙찰자 사이에서만 열린다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 문서
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| 문서 | 내용 |
+|---|---|
+| [기획 전체](./docs/README.md) | 인덱스 · 핵심 규칙 · 단순화 원칙 |
+| [PRD](./docs/PRD.md) | 배경 · 문제 · 목표 · 사용자 · 기능 · 시나리오 · MVP 범위 |
+| [데이터 모델](./docs/데이터-모델-명세.md) | 테이블 · RLS · 고정 상수 |
+| [기능 스펙](./docs/specs/README.md) | 기능별 상세 13개 |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 기술 스택
+
+| 구분 | 사용 |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS 4 |
+| Backend | Supabase (DB · 인증) |
+
+---
+
+## 시작하기
+
+```bash
+pnpm install
+pnpm dev
+```
+
+http://localhost:3000
+
+---
+
+## 라이선스
+
+[MIT](./LICENSE)
