@@ -8393,6 +8393,35 @@
                   "fontFamily": "$font-body",
                   "fontSize": "$text-title",
                   "fontWeight": "$w-bold"
+                },
+                {
+                  "type": "frame",
+                  "id": "k1wWNm",
+                  "name": "More",
+                  "gap": 2,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "D5Biq",
+                      "name": "L",
+                      "fill": "$accent",
+                      "content": "전체",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "IgnyA",
+                      "name": "Chevron",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "chevron-right",
+                      "library": "lucide",
+                      "fill": "$accent"
+                    }
+                  ]
                 }
               ]
             },
@@ -11254,7 +11283,7 @@
             {
               "type": "frame",
               "id": "pRuGm",
-              "name": "공감을 받았어요",
+              "name": "새 메시지가 도착했어요",
               "width": "fill_container",
               "stroke": "$border",
               "strokeWidth": {
@@ -11284,7 +11313,7 @@
                       "name": "Icon",
                       "width": 18,
                       "height": 18,
-                      "icon": "heart",
+                      "icon": "message-circle",
                       "library": "lucide",
                       "fill": "$text-secondary"
                     }
@@ -11311,7 +11340,7 @@
                           "id": "mWQCC",
                           "name": "T",
                           "fill": "$text-primary",
-                          "content": "공감을 받았어요",
+                          "content": "새 메시지가 도착했어요",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-caption",
                           "fontWeight": "$w-semibold"
@@ -11325,7 +11354,7 @@
                       "fill": "$text-secondary",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "내 사연이 공감 3개를 받았어요",
+                      "content": "\"에스프레소 머신\" 대화에 새 메시지가 있어요",
                       "lineHeight": "$lh-normal",
                       "fontFamily": "$font-body",
                       "fontSize": "$text-label",
@@ -13087,7 +13116,7 @@
                 },
                 "YK4Ux": {
                   "content": "미등록",
-                  "fill": "$warning"
+                  "fill": "$text-tertiary"
                 }
               }
             }
@@ -15268,6 +15297,77 @@
           "children": [
             {
               "type": "frame",
+              "id": "tsepl",
+              "name": "참여자 공감 + 주최자 공감 = 총점",
+              "width": "fill_container",
+              "fill": "$surface",
+              "cornerRadius": "$radius-md",
+              "gap": 12,
+              "padding": [
+                13,
+                14
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "uDCSf",
+                  "name": "IW",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$bg",
+                  "cornerRadius": "$radius-pill",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "ot7hC",
+                      "name": "I",
+                      "width": 16,
+                      "height": 16,
+                      "icon": "equal",
+                      "library": "lucide",
+                      "fill": "$accent"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZxdrW",
+                  "name": "T",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "I2JUZA",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "content": "참여자 공감 + 주최자 공감 = 총점",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "slXKL",
+                      "name": "D",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "두 공감을 더한 점수가 가장 높은 사연이 낙찰됩니다",
+                      "lineHeight": "$lh-normal",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
               "id": "c19bj",
               "name": "공감이 점수가 됩니다",
               "width": "fill_container",
@@ -16537,7 +16637,7 @@
                 },
                 "YK4Ux": {
                   "content": "미등록",
-                  "fill": "$warning"
+                  "fill": "$text-tertiary"
                 }
               }
             }
