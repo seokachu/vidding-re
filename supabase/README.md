@@ -12,6 +12,7 @@
 | `20260731000004_functions.sql` | RPC 4개 · 서버 전용 함수 3개 · 트리거 5개 (§4, §10) |
 | `20260731000005_storage_realtime.sql` | `auction-images` 버킷 · Realtime 발행 (§11.5) |
 | `20260731000006_cron.sql` | `pg_cron` 작업 2개 (§9, §11.3, §11.6) |
+| `20260731000007_auth_email_required.sql` | 이메일 없는 계정 가입 중단 (F10 4) |
 
 ---
 
@@ -147,6 +148,54 @@ b2 → 3,000 P 입찰 + b1 공감(+10)       → 3,010  ← 낙찰
 | 공개 프로필(`v_user_profiles`) 조회 | 보임 (의도한 동작) |
 
 `pg_cron` 은 1분마다 `close_due_auctions()` 를 실행하며 `cron.job_run_details` 에서 `succeeded` 로 확인했다.
+
+---
+
+## 인증 (F10)
+
+### 대시보드 설정 현황
+
+| 항목 | 상태 |
+|---|---|
+| Site URL | `http://localhost:3000` |
+| Redirect URLs | `http://localhost:3000/**` · `https://vidding-re.vercel.app/**` · `https://vidding-re-*-seokachu.vercel.app/**` |
+| Google · Kakao 제공자 | **아직 Disabled** — Client ID/Secret 입력 필요 |
+
+### 제공자를 켤 때 필요한 것
+
+콘솔에 등록할 콜백 URL은 **하나**다. 제공자 화면에 표시되는 값과 같다.
+
+```
+https://vtkeruqexphuvritwkyt.supabase.co/auth/v1/callback
+```
+
+- **Google** — Cloud Console → 사용자 인증 정보 → 승인된 리디렉션 URI 에 위 URL 등록
+- **Kakao** — Kakao Developers → 카카오 로그인 → Redirect URI 에 위 URL 등록
+
+### Kakao 는 이메일이 선택 동의다 — 중요
+
+F10 4 는 "이메일 정보 없음 → **가입을 중단**하고 이메일 제공에 동의가 필요함을 안내한다"고 정한다.
+`handle_new_user()` 는 `new.email` 이 비어 있으면 `EMAIL_REQUIRED` 예외를 던져 **가입 자체를 실패시킨다.**
+
+> 초기 구현은 `<uuid>@no-email.local` 로 채워 계정을 만들고 가입 보너스 5,000 P 까지 지급했다.
+> 연락 불가능한 계정이 원장에 남으므로 `20260731000007` 에서 바로잡았다.
+
+앱에서 해야 할 일이 두 가지다.
+
+1. Kakao 로그인 요청에 **`account_email` 스코프**를 포함한다
+2. Kakao Developers → 동의 항목에서 **카카오계정(이메일)** 을 활성화한다
+   (필수 동의로 받으려면 비즈니스 앱 전환이 필요하다)
+
+로그인 콜백에서 `EMAIL_REQUIRED` 로 실패하면 "이메일 제공에 동의해야 가입할 수 있어요"를 안내한다.
+
+### 닉네임·아바타 매핑
+
+제공자마다 키가 달라 순서대로 찾는다.
+
+```
+닉네임   nick_name → full_name → name → preferred_username → user_name → 이메일 아이디 → '이름없음'
+아바타   avatar_url → picture → NULL
+```
 
 ---
 
