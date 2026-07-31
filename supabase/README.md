@@ -13,6 +13,11 @@
 | `20260731000005_storage_realtime.sql` | `auction-images` 버킷 · Realtime 발행 (§11.5) |
 | `20260731000006_cron.sql` | `pg_cron` 작업 2개 (§9, §11.3, §11.6) |
 | `20260731000007_auth_email_required.sql` | 이메일 없는 계정 가입 중단 (F10 4) |
+| `20260731000008_ending_soon_window.sql` | 마감 임박 기준 24시간 → 3시간 (§11.3 개정) |
+
+> **이미 적용된 마이그레이션은 고치지 않는다.** 바뀐 내용은 새 파일로 덧붙인다.
+> 기존 DB 는 이미 실행한 파일을 다시 읽지 않으므로, 파일을 고치면
+> **새로 만든 DB 와 기존 DB 가 갈라진다.** 07·08 이 그래서 별도 파일이다.
 
 ---
 
@@ -108,7 +113,11 @@ UNIQUE (user_id, type, auction_id) WHERE type IN ('AUCTION_ENDING_SOON','AUCTION
 ```
 
 `notify_ending_soon()` 은 10분마다 돌지만 이 인덱스가 중복을 막는다.
-**반복 실행이 곧 재시도이고, 알림은 마감 24시간 이내에 진입한 시점 한 번만 간다.**
+**반복 실행이 곧 재시도이고, 알림은 마감 3시간 이내에 진입한 시점 한 번만 간다.**
+
+> **임박 기준은 3시간이다** (§11.3). 기간 선택지가 1·3·7일로 바뀌면서, 24시간 기준으로는
+> 1일(24시간) 경매가 등록되는 순간 임박 상태가 되고 알림도 즉시 나가는 문제가 있었다.
+> 크론이 10분 주기이므로 3시간 창을 놓칠 일은 없다.
 
 ---
 
@@ -157,9 +166,35 @@ b2 → 3,000 P 입찰 + b1 공감(+10)       → 3,010  ← 낙찰
 
 | 항목 | 상태 |
 |---|---|
-| Site URL | `http://localhost:3000` |
-| Redirect URLs | `http://localhost:3000/**` · `https://vidding-re.vercel.app/**` · `https://vidding-re-*-seokachu.vercel.app/**` |
+| Site URL | `https://vidding-re.vercel.app` |
+| Redirect URLs | 3개 (아래) |
 | Google · Kakao 제공자 | **아직 Disabled** — Client ID/Secret 입력 필요 |
+
+```
+http://localhost:3000/**
+https://vidding-re.vercel.app/**                              ← 프로덕션
+https://vidding-*-seoyoungs-projects-aabd6a70.vercel.app/**   ← 프리뷰
+```
+
+> 프리뷰 호스트는 `vidding-<해시>-<팀슬러그>.vercel.app` 형태다.
+> 프로젝트 이름이 `vidding-re` 인데 호스트 접두어는 `vidding` 으로 잘린다.
+> 처음에 `vidding-re-*-seokachu` 로 잘못 등록했다가 실제 배포 후 바로잡았다.
+
+**Site URL 은 프로덕션을 가리킨다.** `redirectTo` 를 지정하지 않은 요청의 기본 도착지이므로,
+`localhost` 로 두면 실제 사용자가 로그인 후 로컬로 튕긴다. 그래서 미리 프로덕션으로 맞춰뒀다.
+
+그 대가로 **로컬 개발에서는 `redirectTo` 를 반드시 넘겨야 한다.** 넘기지 않으면
+로그인 후 프로덕션으로 이동한다. `localhost:3000` 은 허용 목록에 있으므로 명시만 하면 된다.
+
+```ts
+supabase.auth.signInWithOAuth({
+  provider: 'kakao',
+  options: {
+    redirectTo: `${location.origin}/auth/callback`,   // 로컬·프리뷰·프로덕션 모두 이걸로 해결된다
+    scopes: 'account_email profile_nickname profile_image',
+  },
+})
+```
 
 ### 제공자를 켤 때 필요한 것
 
