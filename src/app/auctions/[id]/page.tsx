@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { BottomBar, TopAppBar } from "@/components/ui";
+import { FavoriteButton } from "@/features/explore";
+import { getMyFavoriteIds } from "@/features/explore/queries";
 import { getAuctionContext } from "@/lib/relationship.server";
 import { AuctionActions } from "@/features/auction-detail/auction-actions";
 import { AuctionResult } from "@/features/auction-detail/auction-result";
@@ -95,6 +97,20 @@ export default async function AuctionDetailPage({
 
   const breakdown = winner ? await loadScoreBreakdown(winner.id) : null;
 
+  /**
+   * 찜 버튼 (F7). `.pen` 은 이것을 상단 바 우측 하트로 그린다.
+   *
+   * **주최자에게는 아예 노출하지 않는다** (00-관계-판정 3.5 · F7 완료 조건 3).
+   * 마감된 경매에도 남는다 — 찜은 개인 북마크라 경매 상태와 무관하다.
+   *
+   * 조회에 실패하면 `null` 을 그대로 넘긴다. 버튼이 비활성으로 바뀌어
+   * '찜 안 함'과 구분된다 (F7 4).
+   */
+  const favorites = context.can.favorite ? await getMyFavoriteIds([id]) : null;
+  const favoriteButton = context.can.favorite ? (
+    <FavoriteButton auctionId={id} favorited={favorites?.has(id) ?? null} />
+  ) : undefined;
+
   const actions = (
     <AuctionActions
       context={context}
@@ -108,7 +124,7 @@ export default async function AuctionDetailPage({
   if (winner && list) {
     return (
       <>
-        <TopAppBar title={detail.title} />
+        <TopAppBar title={detail.title} action={favoriteButton} />
         <main className="flex-1">
           <AuctionResult
             auction={detail}
@@ -127,8 +143,7 @@ export default async function AuctionDetailPage({
   /* --- 진행중 · 유찰 ----------------------------------------------------- */
   return (
     <>
-      {/* 우측 자리는 찜 버튼(F7)이다. 워크트리 A 의 `features/explore` 가 채운다 */}
-      <TopAppBar title="" />
+      <TopAppBar title="" action={favoriteButton} />
 
       <main className="flex-1">
         <AuctionSummary
