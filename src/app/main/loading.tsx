@@ -2,7 +2,7 @@ import {
   Bone,
   CardBone,
   TabShellSkeleton,
-} from "@/components/layout/tab-shell-skeleton";
+} from "@/components/layout/skeleton";
 
 /** 홈 (S01) 이 도착하기 전 */
 export default function Loading() {

@@ -1,4 +1,4 @@
-import { Bone, TabShellSkeleton } from "@/components/layout/tab-shell-skeleton";
+import { Bone, TabShellSkeleton } from "@/components/layout/skeleton";
 
 /** 알림 (S08) 이 도착하기 전 */
 export default function Loading() {

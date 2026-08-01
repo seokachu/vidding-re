@@ -8049,7 +8049,7 @@
                   "id": "l8Puf",
                   "name": "D",
                   "fill": "$text-secondary",
-                  "content": "되돌리는 데 품이 드는 행동 앞에서만 세운다. 취소가 왼쪽, 실행이 오른쪽이다",
+                  "content": "되돌리는 데 품이 드는 행동 앞에 세운다 — 로그아웃 · 경매 삭제 · 사연 삭제 · 배송지 삭제. 취소가 왼쪽, 실행이 오른쪽이다",
                   "fontFamily": "$font-body",
                   "fontSize": "$text-caption",
                   "fontWeight": "normal"
@@ -9388,6 +9388,9 @@
           "descendants": {
             "TIXWG": {
               "content": ""
+            },
+            "Uo49Q": {
+              "enabled": false
             },
             "F9w8Mo": {
               "icon": "ellipsis"
@@ -12481,7 +12484,11 @@
               "content": "배송지"
             },
             "Uo49Q": {
-              "enabled": false
+              "enabled": true
+            },
+            "F9w8Mo": {
+              "icon": "trash-2",
+              "fill": "$text-secondary"
             }
           }
         },
@@ -13978,7 +13985,7 @@
                           "fill": "$text-secondary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "모바일 390px · 22화면 (기본 16 + 상태 변형 6)",
+                          "content": "모바일 390px · 24화면 (기본 17 + 상태 변형 7)",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-caption",
                           "fontWeight": "normal"
@@ -14004,7 +14011,7 @@
               "id": "yBNyL",
               "name": "T",
               "fill": "$text-primary",
-              "content": "화면 14종",
+              "content": "화면 15종",
               "fontFamily": "$font-body",
               "fontSize": "$text-subtitle",
               "fontWeight": "$w-semibold"
@@ -14187,7 +14194,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "S06 경매 등록",
+                          "content": "S06 경매 등록 / S06b 경매 수정",
                           "lineHeight": "$lh-normal",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-label",
@@ -14422,10 +14429,9 @@
                     },
                     {
                       "type": "frame",
-                      "id": "V9yErN",
-                      "name": "spacer",
+                      "id": "HYrR7",
+                      "name": "S15 포인트 내역",
                       "width": "fill_container",
-                      "height": "fill_container",
                       "fill": "$surface",
                       "cornerRadius": "$radius-sm",
                       "padding": [
@@ -14435,12 +14441,12 @@
                       "children": [
                         {
                           "type": "text",
-                          "id": "rRlJS",
+                          "id": "NGunW",
                           "name": "V",
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "상태 변형은 모두 인스턴스 오버라이드",
+                          "content": "S15 포인트 내역",
                           "lineHeight": "$lh-normal",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-label",
@@ -18345,6 +18351,661 @@
           "layoutPosition": "absolute",
           "x": 40,
           "y": 317
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ZNCfg",
+      "x": 3680,
+      "y": 9605,
+      "name": "S06b 경매 수정",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "k8dzXX",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "XNIKu",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "경매 수정"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "k3UtL",
+          "name": "이미지",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "LKuOu",
+              "name": "Label Row",
+              "width": "fill_container",
+              "gap": 3,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "x0B9m",
+                  "name": "L",
+                  "fill": "$text-secondary",
+                  "content": "사진",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-semibold"
+                },
+                {
+                  "type": "text",
+                  "id": "iNcuH",
+                  "name": "R",
+                  "fill": "$warning",
+                  "content": "*",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-semibold"
+                },
+                {
+                  "type": "text",
+                  "id": "eoN7j",
+                  "name": "C",
+                  "fill": "$text-tertiary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "1 / 3",
+                  "textAlign": "right",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-label",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CCzhE",
+              "name": "Slots",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "His0L",
+                  "name": "Slot 1",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "ndc1995kuuk",
+                    "link": "https://unsplash.com/@ndc1995kuuk",
+                    "author": "Noah Cook"
+                  },
+                  "width": "fill_container",
+                  "height": 106,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1742613713092-43e5f56be531?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzF8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": "$radius-md",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "BLANv",
+                      "x": 44,
+                      "y": 42,
+                      "name": "Img",
+                      "enabled": false,
+                      "width": 22,
+                      "height": 22,
+                      "icon": "image",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "R5qKN4",
+                      "layoutPosition": "absolute",
+                      "x": 82,
+                      "y": 6,
+                      "name": "Remove",
+                      "width": 22,
+                      "height": 22,
+                      "fill": "#131720CC",
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "kOOvQ",
+                          "name": "X",
+                          "width": 13,
+                          "height": 13,
+                          "icon": "x",
+                          "library": "lucide",
+                          "fill": "$text-on-accent"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fRIKp",
+                  "name": "Slot 2",
+                  "width": "fill_container",
+                  "height": 106,
+                  "fill": "$bg",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "CC4Zi",
+                      "name": "Plus",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "plus",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "JATIx",
+                  "name": "Slot 3",
+                  "width": "fill_container",
+                  "height": 106,
+                  "fill": "$bg",
+                  "cornerRadius": "$radius-md",
+                  "stroke": "$border-strong",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "hvLD7",
+                      "name": "Plus",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "plus",
+                      "library": "lucide",
+                      "fill": "$text-tertiary"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XPzLI",
+          "name": "Form",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            24,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "id": "WsEKO",
+              "type": "ref",
+              "ref": "TQGU8",
+              "name": "제목",
+              "width": "fill_container",
+              "descendants": {
+                "sxUR8": {
+                  "content": "제목"
+                },
+                "WPk8j": {
+                  "content": "필름 카메라 나눔",
+                  "fill": "$text-primary"
+                },
+                "jr9JC": {
+                  "content": "예 · 필름 카메라 나눔"
+                }
+              }
+            },
+            {
+              "id": "aZf21",
+              "type": "ref",
+              "ref": "TQGU8",
+              "name": "설명",
+              "width": "fill_container",
+              "descendants": {
+                "sxUR8": {
+                  "content": "사연 요청 설명"
+                },
+                "QwGFZ": {
+                  "height": 130,
+                  "alignItems": "start"
+                },
+                "WPk8j": {
+                  "content": "아버지가 쓰시던 필름 카메라입니다. 잘 쓸 분께 보내고 싶어요. 어떤 사연이 있는지 들려주세요.",
+                  "lineHeight": "$lh-relaxed",
+                  "fill": "$text-primary"
+                },
+                "jr9JC": {
+                  "content": "참여자가 무엇을 쓸지 정하는 기준이 됩니다"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "st7DV",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 28
+        },
+        {
+          "type": "frame",
+          "id": "EfChP",
+          "name": "Bottom Bar",
+          "width": "fill_container",
+          "fill": "$bg",
+          "stroke": "$border",
+          "strokeWidth": {
+            "top": 1
+          },
+          "strokeAlignment": "inner",
+          "padding": [
+            14,
+            20,
+            22,
+            20
+          ],
+          "children": [
+            {
+              "id": "Yvjcb",
+              "type": "ref",
+              "ref": "Qjzld",
+              "name": "CTA",
+              "width": "fill_container",
+              "descendants": {
+                "yiucs": {
+                  "content": "수정 완료"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "wx1lY",
+      "x": 4140,
+      "y": 9605,
+      "name": "S15 포인트 내역",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "flSS0",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "o1eIpx",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "포인트 내역"
+            },
+            "Uo49Q": {
+              "enabled": false
+            },
+            "F9w8Mo": {
+              "icon": "trash-2",
+              "fill": "$text-secondary"
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "EBHYJ",
+          "name": "List",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "XtTP1",
+              "name": "낙찰 수령",
+              "width": "fill_container",
+              "stroke": "$border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "strokeAlignment": "inner",
+              "gap": 12,
+              "padding": [
+                16,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "T2SCe0",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YU13H",
+                      "name": "Label",
+                      "fill": "$text-primary",
+                      "content": "낙찰 수령",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-body",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fKyUj",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "낙찰 사연의 입찰 포인트 수취",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "i6BVWM",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "9시간 전",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "aaxLH",
+                  "name": "Amount",
+                  "fill": "$text-primary",
+                  "content": "+3,000 P",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-body",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "u3LcRn",
+              "name": "반환",
+              "width": "fill_container",
+              "stroke": "$border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "strokeAlignment": "inner",
+              "gap": 12,
+              "padding": [
+                16,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "yfiw3",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nHKGu",
+                      "name": "Label",
+                      "fill": "$text-primary",
+                      "content": "반환",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-body",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r9FuW",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "미낙찰 사연의 입찰 포인트 반환",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "d1qCR",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "2일 전",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "x8THJz",
+                  "name": "Amount",
+                  "fill": "$text-primary",
+                  "content": "+1,500 P",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-body",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "i9i7J",
+              "name": "입찰",
+              "width": "fill_container",
+              "stroke": "$border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "strokeAlignment": "inner",
+              "gap": 12,
+              "padding": [
+                16,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "z49Lo5",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "b1RxV",
+                      "name": "Label",
+                      "fill": "$text-primary",
+                      "content": "입찰",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-body",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J1bfd",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "‘원목 스툴 2개’ 사연 입찰",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qIrvv",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "3일 전",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "W0QP5F",
+                  "name": "Amount",
+                  "fill": "$warning-text",
+                  "content": "−1,500 P",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-body",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zhY7A",
+              "name": "가입 축하",
+              "width": "fill_container",
+              "stroke": "$border",
+              "strokeWidth": {
+                "bottom": 1
+              },
+              "strokeAlignment": "inner",
+              "gap": 12,
+              "padding": [
+                16,
+                0
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "E21KLw",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CdRag",
+                      "name": "Label",
+                      "fill": "$text-primary",
+                      "content": "가입 축하",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-body",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DvrZ2",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "가입 축하 포인트",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "X8VcF",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "5일 전",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "DwoRd",
+                  "name": "Amount",
+                  "fill": "$text-primary",
+                  "content": "+5,000 P",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-body",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PBtf8",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 28
         }
       ]
     }
