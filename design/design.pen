@@ -8017,6 +8017,94 @@
               ]
             }
           ]
+        },
+        {
+          "type": "frame",
+          "id": "COHKh",
+          "name": "다이얼로그",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "children": [
+            {
+              "type": "frame",
+              "id": "Kqnv7",
+              "name": "Head",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "tgCg9",
+                  "name": "T",
+                  "fill": "$text-primary",
+                  "content": "다이얼로그",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-subtitle",
+                  "fontWeight": "$w-semibold"
+                },
+                {
+                  "type": "text",
+                  "id": "l8Puf",
+                  "name": "D",
+                  "fill": "$text-secondary",
+                  "content": "되돌리는 데 품이 드는 행동 앞에서만 세운다. 취소가 왼쪽, 실행이 오른쪽이다",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-caption",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xV8ny",
+              "name": "Stage",
+              "width": "fill_container",
+              "fill": "$surface",
+              "cornerRadius": "$radius-md",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 28,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H6hb8",
+                  "name": "Row",
+                  "width": "fill_container",
+                  "gap": 28,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "O59SGD",
+                      "name": "로그아웃 확인",
+                      "layout": "vertical",
+                      "gap": 9,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wR5kF",
+                          "name": "Cap",
+                          "fill": "$text-tertiary",
+                          "content": "로그아웃 확인",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-micro",
+                          "fontWeight": "$w-semibold",
+                          "letterSpacing": 0.4
+                        },
+                        {
+                          "id": "cAyCy",
+                          "type": "ref",
+                          "ref": "EAHFZ",
+                          "name": "Dialog"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -8113,7 +8201,7 @@
       "type": "frame",
       "id": "sLgf2",
       "x": 0,
-      "y": 5846,
+      "y": 6205,
       "name": "S01 홈",
       "clip": true,
       "width": 390,
@@ -8572,7 +8660,7 @@
       "type": "frame",
       "id": "kTx4l",
       "x": 460,
-      "y": 5846,
+      "y": 6205,
       "name": "S02 경매 탐색",
       "clip": true,
       "width": 390,
@@ -8869,7 +8957,7 @@
       "type": "frame",
       "id": "LVlsU",
       "x": 920,
-      "y": 5846,
+      "y": 6205,
       "name": "S03 경매 상세 · 방문자",
       "clip": true,
       "width": 390,
@@ -9277,7 +9365,7 @@
       "type": "frame",
       "id": "MNBqM",
       "x": 1380,
-      "y": 5846,
+      "y": 6205,
       "name": "S04 경매 상세 · 주최자",
       "clip": true,
       "width": 390,
@@ -9778,7 +9866,7 @@
       "type": "frame",
       "id": "AcB19",
       "x": 1840,
-      "y": 5846,
+      "y": 6205,
       "name": "S05 사연 작성 · 입찰",
       "clip": true,
       "width": 390,
@@ -10187,7 +10275,7 @@
       "type": "frame",
       "id": "i6t6F",
       "x": 2300,
-      "y": 5846,
+      "y": 6205,
       "name": "S06 경매 등록",
       "clip": true,
       "width": 390,
@@ -10627,7 +10715,7 @@
       "type": "frame",
       "id": "yFHdN",
       "x": 0,
-      "y": 7546,
+      "y": 7905,
       "name": "S07 마이페이지",
       "clip": true,
       "width": 390,
@@ -10757,6 +10845,44 @@
                   "content": "등록됨"
                 }
               }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Bf2UZ",
+          "name": "Sign Out",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "lOLyK",
+              "name": "Row",
+              "width": "fill_container",
+              "padding": [
+                16,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "aV8hd",
+                  "name": "Label",
+                  "fill": "$text-secondary",
+                  "content": "로그아웃",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-body",
+                  "fontWeight": "normal"
+                }
+              ]
             }
           ]
         },
@@ -10931,7 +11057,7 @@
       "type": "frame",
       "id": "t2N7B",
       "x": 460,
-      "y": 7546,
+      "y": 7905,
       "name": "S08 알림",
       "clip": true,
       "width": 390,
@@ -11434,7 +11560,7 @@
       "type": "frame",
       "id": "J66DCj",
       "x": 920,
-      "y": 7546,
+      "y": 7905,
       "name": "S09 낙찰 결과",
       "clip": true,
       "width": 390,
@@ -11889,7 +12015,7 @@
       "type": "frame",
       "id": "W06xGI",
       "x": 1380,
-      "y": 7546,
+      "y": 7905,
       "name": "S10 채팅",
       "clip": true,
       "width": 390,
@@ -12330,7 +12456,7 @@
       "type": "frame",
       "id": "rzWD1",
       "x": 1840,
-      "y": 7546,
+      "y": 7905,
       "name": "S11 배송지 관리",
       "clip": true,
       "width": 390,
@@ -12628,7 +12754,7 @@
       "type": "frame",
       "id": "gWlO4",
       "x": 0,
-      "y": 9246,
+      "y": 9605,
       "name": "S13 로그인",
       "clip": true,
       "width": 390,
@@ -12988,7 +13114,7 @@
       "type": "frame",
       "id": "fFcpl",
       "x": 460,
-      "y": 9246,
+      "y": 9605,
       "name": "S14 마이페이지 · 빈 상태",
       "clip": true,
       "width": 390,
@@ -13119,6 +13245,44 @@
                   "fill": "$text-tertiary"
                 }
               }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u6eiFK",
+          "name": "Sign Out",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "RSlJV",
+              "name": "Row",
+              "width": "fill_container",
+              "padding": [
+                16,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "l0BT6",
+                  "name": "Label",
+                  "fill": "$text-secondary",
+                  "content": "로그아웃",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-body",
+                  "fontWeight": "normal"
+                }
+              ]
             }
           ]
         },
@@ -13729,7 +13893,7 @@
                           "fill": "$text-secondary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "재사용 컴포넌트 20종 · 상태 변형은 인스턴스 오버라이드",
+                          "content": "재사용 컴포넌트 21종 · 상태 변형은 인스턴스 오버라이드",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-caption",
                           "fontWeight": "normal"
@@ -13814,7 +13978,7 @@
                           "fill": "$text-secondary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "모바일 390px · 21화면 (기본 17 + 상태 변형 4)",
+                          "content": "모바일 390px · 22화면 (기본 16 + 상태 변형 6)",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-caption",
                           "fontWeight": "normal"
@@ -14050,7 +14214,7 @@
                           "fill": "$text-primary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "S07 마이페이지",
+                          "content": "S07 마이페이지 / S07b 로그아웃 확인",
                           "lineHeight": "$lh-normal",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-label",
@@ -14353,7 +14517,7 @@
       "type": "frame",
       "id": "TIZD4",
       "x": 2300,
-      "y": 7546,
+      "y": 7905,
       "name": "S12-1 온보딩 · 사연으로 입찰",
       "clip": true,
       "width": 390,
@@ -14686,7 +14850,7 @@
       "type": "frame",
       "id": "unoQW",
       "x": 2760,
-      "y": 7546,
+      "y": 7905,
       "name": "S12-2 온보딩 · 참여 방식",
       "clip": true,
       "width": 390,
@@ -15142,7 +15306,7 @@
       "type": "frame",
       "id": "TF5ol",
       "x": 3220,
-      "y": 7546,
+      "y": 7905,
       "name": "S12-3 온보딩 · 낙찰 규칙",
       "clip": true,
       "width": 390,
@@ -15816,7 +15980,7 @@
       "type": "frame",
       "id": "Sx1Kz",
       "x": 920,
-      "y": 9246,
+      "y": 9605,
       "name": "S03b 경매 상세 · 참여자",
       "clip": true,
       "width": 390,
@@ -16378,7 +16542,7 @@
       "type": "frame",
       "id": "b9gEHP",
       "x": 1380,
-      "y": 9246,
+      "y": 9605,
       "name": "S08b 알림 · 빈 상태",
       "clip": true,
       "width": 390,
@@ -16509,7 +16673,7 @@
       "type": "frame",
       "id": "YlHA5",
       "x": 1840,
-      "y": 9246,
+      "y": 9605,
       "name": "S14b 마이페이지 · 내 사연 빈 상태",
       "clip": true,
       "width": 390,
@@ -16640,6 +16804,44 @@
                   "fill": "$text-tertiary"
                 }
               }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fM6aS",
+          "name": "Sign Out",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "s9gSc",
+              "name": "Row",
+              "width": "fill_container",
+              "padding": [
+                16,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iIlAj",
+                  "name": "Label",
+                  "fill": "$text-secondary",
+                  "content": "로그아웃",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-body",
+                  "fontWeight": "normal"
+                }
+              ]
             }
           ]
         },
@@ -16797,7 +16999,7 @@
       "type": "frame",
       "id": "VG2dd",
       "x": 2300,
-      "y": 9246,
+      "y": 9605,
       "name": "S10b 채팅 · 전송 실패",
       "clip": true,
       "width": 390,
@@ -17333,7 +17535,7 @@
       "type": "frame",
       "id": "SpmdE",
       "x": 2760,
-      "y": 9246,
+      "y": 9605,
       "name": "S03c 경매 상세 · 유찰",
       "clip": true,
       "width": 390,
@@ -17686,6 +17888,463 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "EAHFZ",
+      "x": 2486,
+      "y": 2192,
+      "name": "Dialog",
+      "reusable": true,
+      "width": 310,
+      "fill": "$bg",
+      "cornerRadius": "$radius-lg",
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#0C1C4033",
+        "offset": {
+          "x": 0,
+          "y": 8
+        },
+        "blur": 28,
+        "spread": -4
+      },
+      "layout": "vertical",
+      "gap": 22,
+      "padding": 24,
+      "children": [
+        {
+          "type": "frame",
+          "id": "ScNbc",
+          "name": "Texts",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "children": [
+            {
+              "type": "text",
+              "id": "fxCy1",
+              "name": "Title",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "로그아웃할까요?",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-subtitle",
+              "fontWeight": "$w-semibold"
+            },
+            {
+              "type": "text",
+              "id": "UH1ok",
+              "name": "Body",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "다시 로그인하면 그대로 이어집니다",
+              "lineHeight": "$lh-normal",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-caption",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QDme4",
+          "name": "Actions",
+          "width": "fill_container",
+          "gap": 8,
+          "children": [
+            {
+              "id": "V1Kp9V",
+              "type": "ref",
+              "ref": "obcSG",
+              "name": "취소",
+              "width": "fill_container",
+              "descendants": {
+                "vYpGi": {
+                  "content": "취소"
+                }
+              }
+            },
+            {
+              "id": "J71j4",
+              "type": "ref",
+              "ref": "Qjzld",
+              "name": "확인",
+              "width": "fill_container",
+              "descendants": {
+                "yiucs": {
+                  "content": "로그아웃"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Uh1NH",
+      "x": 3220,
+      "y": 9605,
+      "name": "S07b 마이페이지 · 로그아웃 확인",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "emREq",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "GdpqN",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 52,
+          "padding": [
+            0,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "rYMiR",
+              "name": "T",
+              "fill": "$text-primary",
+              "content": "마이페이지",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-title",
+              "fontWeight": "$w-bold"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yU28m",
+          "name": "Profile",
+          "width": "fill_container",
+          "gap": 14,
+          "padding": [
+            14,
+            20,
+            20,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "B4jZu",
+              "type": "ref",
+              "ref": "I8qKQ",
+              "name": "Avatar",
+              "width": 56,
+              "height": 56,
+              "descendants": {
+                "r5CcN": {
+                  "content": "서",
+                  "fontSize": "$text-title"
+                }
+              }
+            },
+            {
+              "type": "frame",
+              "id": "ghqKE",
+              "name": "Names",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "I5Uo6e",
+                  "name": "Nick",
+                  "fill": "$text-primary",
+                  "content": "서연",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-title",
+                  "fontWeight": "$w-bold"
+                },
+                {
+                  "type": "text",
+                  "id": "TrPrv",
+                  "name": "Sub",
+                  "fill": "$text-secondary",
+                  "content": "경매 2 · 사연 3",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-caption",
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "RNrP7",
+          "name": "Rows",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            0,
+            20
+          ],
+          "children": [
+            {
+              "id": "djCnU",
+              "type": "ref",
+              "ref": "nBfiQ",
+              "name": "포인트",
+              "width": "fill_container"
+            },
+            {
+              "id": "GH7Ay",
+              "type": "ref",
+              "ref": "nBfiQ",
+              "name": "배송지",
+              "width": "fill_container",
+              "descendants": {
+                "uRu3p": {
+                  "content": "배송지"
+                },
+                "YK4Ux": {
+                  "content": "등록됨"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "KNEdY",
+          "name": "Sign Out",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "J5GWJ",
+              "name": "Row",
+              "width": "fill_container",
+              "padding": [
+                16,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "p9D6BV",
+                  "name": "Label",
+                  "fill": "$text-secondary",
+                  "content": "로그아웃",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-body",
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TZTMW",
+          "name": "Tabs",
+          "width": "fill_container",
+          "padding": [
+            22,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "id": "e1eDd",
+              "type": "ref",
+              "ref": "ZT7ZJ",
+              "name": "Tabs",
+              "width": "fill_container",
+              "descendants": {
+                "ODNe6": {
+                  "content": "내 경매"
+                },
+                "xTLct": {
+                  "content": "내 사연"
+                },
+                "q2SDDL": {
+                  "content": "찜"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fm3zs",
+          "name": "내 경매",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            16,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "id": "cI6vY",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "진행중",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1771795638711-4f67ddbfc3b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzZ8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "v1KyF": {
+                  "content": "원목 스툴 2개"
+                },
+                "dQGEO": {
+                  "content": "2일 3시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 6"
+                }
+              }
+            },
+            {
+              "id": "HJNTh",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "낙찰됨",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1717081917953-d1e233ad5c96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzZ8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "wsm9b": {
+                  "fill": "$accent"
+                },
+                "wsm9b/mneRN": {
+                  "content": "낙찰됨",
+                  "fill": "$text-on-accent"
+                },
+                "v1KyF": {
+                  "content": "캠핑 의자 2개"
+                },
+                "dQGEO": {
+                  "content": "3일 전 마감"
+                },
+                "ORIkG": {
+                  "content": "사연 31"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "RwvYY",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "A6mCV",
+          "type": "ref",
+          "ref": "wRmqk",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "descendants": {
+            "p2HkM": {
+              "fill": "#FFFFFF00"
+            },
+            "YpeTy": {
+              "fill": "$text-tertiary"
+            },
+            "KslOZ": {
+              "fill": "$text-tertiary"
+            },
+            "Pv8U7": {
+              "fill": "#FFFFFF00"
+            },
+            "RKash": {
+              "fill": "$text-tertiary"
+            },
+            "gOcim": {
+              "fill": "$text-tertiary"
+            },
+            "jST5W": {
+              "fill": "#FFFFFF00"
+            },
+            "f9aYw": {
+              "fill": "$text-tertiary"
+            },
+            "TNGrn": {
+              "fill": "$text-tertiary"
+            },
+            "E3SmKq": {
+              "fill": "$accent-subtle"
+            },
+            "asb9Z": {
+              "fill": "$accent"
+            },
+            "b3URX": {
+              "fill": "$accent"
+            }
+          }
+        },
+        {
+          "type": "rectangle",
+          "id": "h1gLY",
+          "layoutPosition": "absolute",
+          "x": 0,
+          "y": 62,
+          "name": "Scrim",
+          "fill": "#0C1C4080",
+          "width": 390,
+          "height": 749
+        },
+        {
+          "id": "Yjgjz",
+          "type": "ref",
+          "ref": "EAHFZ",
+          "name": "로그아웃 확인",
+          "layoutPosition": "absolute",
+          "x": 40,
+          "y": 317
         }
       ]
     }
