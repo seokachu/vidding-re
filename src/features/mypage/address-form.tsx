@@ -3,7 +3,13 @@
 import { Trash2, TriangleAlert } from "lucide-react";
 import { useActionState, useCallback, useState, useTransition } from "react";
 
-import { Button, FieldShell, TextField, TopAppBar } from "@/components/ui";
+import {
+  Button,
+  ConfirmDialog,
+  FieldShell,
+  TextField,
+  TopAppBar,
+} from "@/components/ui";
 import { cn } from "@/lib/cn";
 import type { Address } from "@/lib/supabase/database.types";
 import { deleteAddress, saveAddress, type AddressFormState } from "./actions";
@@ -73,10 +79,10 @@ export function AddressForm({
           address && (
             <button
               type="button"
-              onClick={() => setConfirming((v) => !v)}
+              onClick={() => setConfirming(true)}
               disabled={deleting}
               aria-label="배송지 삭제"
-              aria-expanded={confirming}
+              aria-haspopup="dialog"
               className="flex size-10 items-center justify-center rounded-sm text-text-secondary hover:bg-surface disabled:text-text-tertiary"
             >
               <Trash2 size={20} />
@@ -89,30 +95,6 @@ export function AddressForm({
         <input type="hidden" name="next" value={next ?? ""} />
 
         <div className="flex flex-1 flex-col gap-5 px-gutter pt-5">
-          {/* 되돌릴 수 없는 동작이라 한 번 되묻는다. 브라우저 기본 대화상자를 쓰지
-              않는 이유는 화면 밖 UI 라 문구도 폭도 이 서비스의 것이 아니기 때문이다 */}
-          {confirming && (
-            <div className="flex items-center gap-2 rounded-md bg-surface-sunken px-3 py-[10px]">
-              <p className="min-w-0 flex-1 text-caption text-text-primary">
-                배송지를 삭제할까요?
-              </p>
-              <button
-                type="button"
-                onClick={() => setConfirming(false)}
-                className="shrink-0 rounded-sm px-2 py-1 text-label font-semibold text-text-secondary"
-              >
-                취소
-              </button>
-              <button
-                type="button"
-                onClick={remove}
-                className="shrink-0 rounded-sm px-2 py-1 text-label font-semibold text-warning-text"
-              >
-                삭제
-              </button>
-            </div>
-          )}
-
           {notice && (
             <p
               role="alert"
@@ -225,6 +207,19 @@ export function AddressForm({
       {searching && (
         <AddressSearch onSelect={setPicked} onClose={closeSearch} />
       )}
+
+      <ConfirmDialog
+        open={confirming}
+        busy={deleting}
+        title="배송지를 삭제할까요?"
+        description="다음에 경매를 열 때 다시 등록해야 해요."
+        onCancel={() => setConfirming(false)}
+        confirm={
+          <Button className="flex-1" disabled={deleting} onClick={remove}>
+            {deleting ? "삭제 중…" : "삭제"}
+          </Button>
+        }
+      />
     </>
   );
 }

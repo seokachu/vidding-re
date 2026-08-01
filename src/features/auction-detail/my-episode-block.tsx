@@ -4,7 +4,14 @@ import { Pin } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
-import { Button, ButtonLink, StoryCard, Toast, useToast } from "@/components/ui";
+import {
+  Button,
+  ButtonLink,
+  ConfirmDialog,
+  StoryCard,
+  Toast,
+  useToast,
+} from "@/components/ui";
 import { ROUTES } from "@/lib/routes";
 
 import { deleteEpisodeAction } from "./actions";
@@ -75,57 +82,46 @@ export function MyEpisodeBlock({
         highlighted={episode.isWinner}
       />
 
-      {(canEdit || canDelete) &&
-        (confirming ? (
-          <div className="flex flex-col gap-2">
-            <p className="text-label leading-normal text-accent-text">
-              사연을 지우면 받은 공감도 함께 사라져요.
-              {episode.bidAmount > 0 && " 건 포인트는 전액 돌려드립니다."}
-            </p>
-            <div className="flex w-full gap-2">
-              <Button
-                variant="secondary"
-                block
-                disabled={pending}
-                onClick={() => setConfirming(false)}
-                className="py-[13px] text-label"
-              >
-                그만두기
-              </Button>
-              <Button
-                block
-                disabled={pending}
-                onClick={remove}
-                className="py-[13px] text-label"
-              >
-                {pending ? "지우는 중…" : "지우기"}
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="flex w-full gap-2">
-            {canEdit && (
-              <ButtonLink
-                variant="secondary"
-                block
-                href={ROUTES.episodeWrite(auctionId)}
-                className="py-[13px] text-label"
-              >
-                수정
-              </ButtonLink>
-            )}
-            {canDelete && (
-              <Button
-                variant="secondary"
-                block
-                onClick={() => setConfirming(true)}
-                className="py-[13px] text-label text-text-tertiary"
-              >
-                삭제
-              </Button>
-            )}
-          </div>
-        ))}
+      {(canEdit || canDelete) && (
+        <div className="flex w-full gap-2">
+          {canEdit && (
+            <ButtonLink
+              variant="secondary"
+              block
+              href={ROUTES.episodeWrite(auctionId)}
+              className="py-[13px] text-label"
+            >
+              수정
+            </ButtonLink>
+          )}
+          {canDelete && (
+            <Button
+              variant="secondary"
+              block
+              onClick={() => setConfirming(true)}
+              className="py-[13px] text-label text-text-tertiary"
+            >
+              삭제
+            </Button>
+          )}
+        </div>
+      )}
+
+      <ConfirmDialog
+        open={confirming}
+        busy={pending}
+        title="사연을 지울까요?"
+        description={
+          "받은 공감도 함께 사라져요." +
+          (episode.bidAmount > 0 ? " 건 포인트는 전액 돌려드립니다." : "")
+        }
+        onCancel={() => setConfirming(false)}
+        confirm={
+          <Button className="flex-1" disabled={pending} onClick={remove}>
+            {pending ? "지우는 중…" : "지우기"}
+          </Button>
+        }
+      />
 
       <Toast message={toast.message} onDone={toast.clear} />
     </div>

@@ -2,7 +2,13 @@
 
 import { useState, useTransition } from "react";
 
-import { Button, ButtonLink, Toast, useToast } from "@/components/ui";
+import {
+  Button,
+  ButtonLink,
+  ConfirmDialog,
+  Toast,
+  useToast,
+} from "@/components/ui";
 import { ROUTES } from "@/lib/routes";
 
 import { deleteAuctionAction } from "./actions";
@@ -42,66 +48,52 @@ export function HostActions({
 
   return (
     <section className="flex flex-col gap-2 px-gutter pt-5">
-      {confirming ? (
-        <>
-          <p className="text-caption leading-normal text-text-primary">
-            이 경매를 지울까요? 되돌릴 수 없어요.
-          </p>
-          <div className="flex w-full gap-2">
-            <Button
-              variant="secondary"
-              block
-              disabled={pending}
-              onClick={() => setConfirming(false)}
-              className="py-[14px] text-caption"
-            >
-              그만두기
-            </Button>
-            <Button
-              block
-              disabled={pending}
-              onClick={remove}
-              className="py-[14px] text-caption"
-            >
-              {pending ? "지우는 중…" : "지우기"}
-            </Button>
-          </div>
-        </>
-      ) : (
-        <div className="flex w-full gap-2">
-          {canEdit && (
-            <ButtonLink
-              variant="secondary"
-              block
-              href={ROUTES.auctionEdit(auctionId)}
-              className="py-[14px] text-caption"
-            >
-              수정하기
-            </ButtonLink>
-          )}
-          {/*
-            색을 여기서 고정하지 않는다. Button 의 secondary 가 활성일 때
-            text-primary, 비활성일 때 text-tertiary 로 알아서 바꾼다.
-            회색을 박아 두면 **누를 수 있을 때도 못 누르는 것처럼 보이고**,
-            정말 못 누를 때(사연이 모인 경매)와 구분되지 않는다.
-          */}
-          <Button
+      <div className="flex w-full gap-2">
+        {canEdit && (
+          <ButtonLink
             variant="secondary"
             block
-            disabled={!canDelete}
-            onClick={() => setConfirming(true)}
+            href={ROUTES.auctionEdit(auctionId)}
             className="py-[14px] text-caption"
           >
-            삭제하기
-          </Button>
-        </div>
-      )}
+            수정하기
+          </ButtonLink>
+        )}
+        {/*
+          색을 여기서 고정하지 않는다. Button 의 secondary 가 활성일 때
+          text-primary, 비활성일 때 text-tertiary 로 알아서 바꾼다.
+          회색을 박아 두면 **누를 수 있을 때도 못 누르는 것처럼 보이고**,
+          정말 못 누를 때(사연이 모인 경매)와 구분되지 않는다.
+        */}
+        <Button
+          variant="secondary"
+          block
+          disabled={!canDelete}
+          onClick={() => setConfirming(true)}
+          className="py-[14px] text-caption"
+        >
+          삭제하기
+        </Button>
+      </div>
 
       {!canDelete && episodeCount > 0 && (
         <p className="text-micro text-text-tertiary">
           사연이 모인 경매는 삭제할 수 없어요
         </p>
       )}
+
+      <ConfirmDialog
+        open={confirming}
+        busy={pending}
+        title="이 경매를 지울까요?"
+        description="되돌릴 수 없어요."
+        onCancel={() => setConfirming(false)}
+        confirm={
+          <Button className="flex-1" disabled={pending} onClick={remove}>
+            {pending ? "지우는 중…" : "지우기"}
+          </Button>
+        }
+      />
 
       <Toast message={toast.message} onDone={toast.clear} />
     </section>
