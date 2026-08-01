@@ -95,11 +95,14 @@ export function MyEpisodeBlock({
             </ButtonLink>
           )}
           {canDelete && (
+            // 회색을 박지 않는다. secondary 가 활성일 때 text-primary,
+            // 비활성일 때 text-tertiary 로 알아서 바꾼다. 고정해 두면
+            // **누를 수 있는데도 못 누르는 것처럼 보인다** (host-actions 와 같은 규칙)
             <Button
               variant="secondary"
               block
               onClick={() => setConfirming(true)}
-              className="py-[13px] text-label text-text-tertiary"
+              className="py-[13px] text-label"
             >
               삭제
             </Button>
