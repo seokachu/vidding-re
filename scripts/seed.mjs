@@ -15,9 +15,21 @@
  *
  * service_role 키는 **가입·마감·정리에만** 쓴다. 나머지는 그 사용자로 로그인해
  * anon 키로 호출하므로 RLS 를 그대로 통과한다.
+ *
+ * ## 돌리기 전에 — 이메일 제공자를 켜야 한다
+ *
+ * 위의 "그 사용자로 로그인" 이 **이메일＋비밀번호 로그인**이다. 그런데 서비스는
+ * 소셜 둘만 제공하므로 (F10 3.1) 평소 이메일 제공자는 꺼 두고 산다.
+ * 꺼진 채로 돌리면 첫 계정에서 `Email logins are disabled` 로 멈춘다.
+ *
+ *   1. Supabase 대시보드 → Authentication → Sign In / Providers → Email → 켜기
+ *   2. `pnpm seed --clean`
+ *   3. 다시 끄기 (`/auth/v1/settings` 의 `email` 이 `false` 인지 확인)
+ *
+ * 서비스 요구사항과 시드 방식이 부딪히는 지점이라 없앨 수는 없다. RPC 가
+ * `auth.uid()` 로 판정하므로 service_role 로는 대신 부를 수 없기 때문이다.
  */
 
-import { deflateSync } from "node:zlib";
 import { createClient } from "@supabase/supabase-js";
 
 const url = need("NEXT_PUBLIC_SUPABASE_URL");
@@ -32,14 +44,57 @@ const CLEAN = process.argv.includes("--clean");
 const PASSWORD = "vidding-seed-2026!";
 const BUCKET = "auction-images";
 
+/* --- 사진 --------------------------------------------------------------
+ * Unsplash 직링크. 키 없이 받을 수 있고 상업 이용도 무료다.
+ * 경매의 `photo` 가 이 표의 키를 가리킨다.
+ * ---------------------------------------------------------------------- */
+
+const UNSPLASH = (id) =>
+  `https://images.unsplash.com/photo-${id}?w=1080&q=80&fm=jpg&fit=crop`;
+
+const PHOTOS = {
+  "film-camera": UNSPLASH("1532800181046-044ce9bfd577"), // Jakob Owens
+  "camping-chair": UNSPLASH("1516659583110-c59d8926c33a"), // Tim Foster
+  "espresso-machine": UNSPLASH("1627398621538-918a69017d28"), // Aaron Doucett
+  "wooden-stool": UNSPLASH("1773389061469-53969f48e7e2"), // Silver Ringvee
+  "wooden-desk": UNSPLASH("1714973148365-6db2ef41d7c7"), // Jakub Żerdzicki
+  "vintage-bicycle": UNSPLASH("1765798811107-3e6948d50dc5"), // Wolfgang Vrede
+  turntable: UNSPLASH("1634650254521-b1596c5a2d37"), // Andres Valdes
+  "acoustic-guitar": UNSPLASH("1654721355119-40e84bf6d951"), // Alicia Christin Gerald
+  "hiking-backpack": UNSPLASH("1609865898563-93d63b3daa64"), // Ali Kazal
+  "electric-kettle": UNSPLASH("1615634376875-f8999ce75a25"), // Margaret Jaszowska
+  "pet-carrier": UNSPLASH("1635094544840-dbcd03874f06"), // Jose Antonio Gallego Vázquez
+  "baby-stroller": UNSPLASH("1663579168345-8e955020f8ef"), // lucas Favre
+  bookshelf: UNSPLASH("1524401597352-ec4463663233"), // James
+  "area-rug": UNSPLASH("1600166931532-604e927c794b"), // Erfan Banaei
+  "potted-plant": UNSPLASH("1596388454571-8dd77023e9fa"), // Nguyen Dang Hoang Nhu
+  "camping-tent": UNSPLASH("1602079108581-4c5071154299"), // Suhyeon Choi
+  "floor-lamp": UNSPLASH("1738355120576-50093baa24a6"), // Alexander K
+  "board-game": UNSPLASH("1596687909057-dfac2b25b891"), // Shaurya Sagar
+  "yoga-mat": UNSPLASH("1599447472329-449d9e262420"), // Alex Shaw
+  "coffee-grinder": UNSPLASH("1778297308133-fc55ba28e4a1"), // Marin huang
+};
+
 /* --- 사람 -------------------------------------------------------------- */
 
 const PEOPLE = [
-  { key: "seoyeon", email: "seed-seoyeon@vidding.test", nick: "서연" },
-  { key: "jihun", email: "seed-jihun@vidding.test", nick: "지훈" },
-  { key: "minseo", email: "seed-minseo@vidding.test", nick: "민서" },
-  { key: "doyun", email: "seed-doyun@vidding.test", nick: "도윤" },
-];
+  { key: "seoyeon", nick: "서연" },
+  { key: "jihun", nick: "지훈" },
+  { key: "minseo", nick: "민서" },
+  { key: "doyun", nick: "도윤" },
+  { key: "haeun", nick: "하은" },
+  { key: "junwoo", nick: "준우" },
+  { key: "yerin", nick: "예린" },
+  { key: "siwoo", nick: "시우" },
+  { key: "chaewon", nick: "채원" },
+  { key: "taeyang", nick: "태양" },
+  { key: "sohee", nick: "소희" },
+  { key: "minjun", nick: "민준" },
+  { key: "jiwoo", nick: "지우" },
+  { key: "eunseo", nick: "은서" },
+  { key: "hyunwoo", nick: "현우" },
+  { key: "nayeon", nick: "나연" },
+].map((p) => ({ ...p, email: `seed-${p.key}@vidding.test` }));
 
 /* --- 경매 --------------------------------------------------------------
  * `closeAfter: true` 면 사연·입찰·공감을 다 채운 뒤 마감 시각을 과거로 당기고
@@ -47,13 +102,90 @@ const PEOPLE = [
  * ---------------------------------------------------------------------- */
 
 const AUCTIONS = [
+  /* --- 마감된 것 셋 — 먼저 둔다 ------------------------------------------
+   * 마감이 반환·이전을 일으켜 뒤에 오는 경매의 포인트 예산을 풀어준다.
+   * 목록에서도 오래된 순으로 아래에 깔린다.
+   * -------------------------------------------------------------------- */
+  {
+    host: "seoyeon",
+    title: "에스프레소 머신",
+    description: "원두를 바꿔가며 잘 썼습니다. 이어서 쓰실 분을 찾아요.",
+    photo: "espresso-machine",
+    hours: 24,
+    closeAfter: true, // 낙찰까지 진행한다 — 채팅방과 낙찰 알림이 여기서 생긴다
+    episodes: [
+      {
+        author: "doyun",
+        title: "작은 책방에 커피를 놓고 싶어요",
+        content:
+          "동네에 아주 작은 책방을 열었습니다. 오래 머무는 손님께 커피 한 잔을 내어드리고 싶은데 기계가 없어요.",
+        bid: 3000,
+        likedBy: ["seoyeon", "jihun", "minseo"],
+      },
+      {
+        author: "jihun",
+        title: "아침을 다시 만들고 싶습니다",
+        content:
+          "재택으로 바뀌고부터 하루의 시작이 흐릿해졌어요. 원두를 갈고 내리는 십 분이 그 경계가 되어줄 것 같습니다.",
+        bid: 2500,
+        likedBy: ["minseo"],
+      },
+      {
+        author: "minseo",
+        title: "어머니께 드리고 싶어요",
+        content:
+          "커피를 좋아하시는데 늘 봉지 커피만 드세요. 한 번쯤 제대로 된 걸 드리고 싶습니다.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "minseo",
+    title: "화분 스툴 2개",
+    description: "베란다에 두던 스툴입니다. 화분 받침으로 쓰기 좋아요.",
+    photo: "wooden-stool",
+    hours: 12,
+    closeAfter: true,
+    episodes: [], // 사연 0건 → 유찰 (F5)
+  },
+  {
+    host: "haeun",
+    title: "원목 책상",
+    description: "이사하면서 자리가 없어졌어요. 상판이 넓어 작업하기 좋습니다.",
+    photo: "wooden-desk",
+    hours: 24,
+    closeAfter: true,
+    episodes: [
+      {
+        author: "junwoo",
+        title: "졸업 작품을 여기서 끝내고 싶어요",
+        content:
+          "식탁에서 도면을 그리다 보니 밥때마다 치워야 합니다. 남은 두 달만이라도 펼쳐둔 채로 두고 싶어요.",
+        bid: 2000,
+        likedBy: ["haeun"],
+      },
+      {
+        author: "yerin",
+        title: "재봉틀을 올려두려고 합니다",
+        content:
+          "바닥에 두고 쓰다 허리가 상했어요. 튼튼한 상판이 필요합니다.",
+        bid: 1500,
+        likedBy: ["siwoo"],
+      },
+    ],
+  },
+
+  /* --- 진행중 — 전부 7일 ---------------------------------------------------
+   * 주말에 열어두고 평일 내내 살아 있어야 한다. 168시간으로 통일한다.
+   * -------------------------------------------------------------------- */
   {
     host: "seoyeon",
     title: "필름 카메라 나눔",
     description:
       "아버지가 쓰시던 필름 카메라입니다. 잘 쓸 분께 보내고 싶어요. 어떤 사연이 있는지 들려주세요.",
-    color: [29, 72, 176],
-    hours: 148, // 6일 4시간
+    photo: "film-camera",
+    hours: 168,
     episodes: [
       {
         author: "jihun",
@@ -85,8 +217,8 @@ const AUCTIONS = [
     host: "jihun",
     title: "캠핑 의자 2개",
     description: "두 번 쓰고 접어둔 캠핑 의자입니다. 필요한 분께 드릴게요.",
-    color: [200, 50, 43],
-    hours: 2.7, // 마감 임박 — 목록에서 경고색으로 보인다
+    photo: "camping-chair",
+    hours: 168,
     episodes: [
       {
         author: "minseo",
@@ -96,36 +228,11 @@ const AUCTIONS = [
         bid: 2000,
         likedBy: ["jihun"],
       },
-    ],
-  },
-  {
-    host: "seoyeon",
-    title: "에스프레소 머신",
-    description: "원두를 바꿔가며 잘 썼습니다. 이어서 쓰실 분을 찾아요.",
-    color: [22, 55, 132],
-    hours: 24,
-    closeAfter: true, // 낙찰까지 진행한다
-    episodes: [
       {
-        author: "doyun",
-        title: "작은 책방에 커피를 놓고 싶어요",
+        author: "haeun",
+        title: "옥상에 앉을 자리를 만들고 싶어요",
         content:
-          "동네에 아주 작은 책방을 열었습니다. 오래 머무는 손님께 커피 한 잔을 내어드리고 싶은데 기계가 없어요.",
-        bid: 3000,
-        likedBy: ["seoyeon", "jihun", "minseo"],
-      },
-      {
-        author: "jihun",
-        title: "아침을 다시 만들고 싶습니다",
-        content:
-          "재택으로 바뀌고부터 하루의 시작이 흐릿해졌어요. 원두를 갈고 내리는 십 분이 그 경계가 되어줄 것 같습니다.",
-        bid: 2500,
-        likedBy: ["minseo"],
-      },
-      {
-        author: "minseo",
-        title: "어머니께 드리고 싶어요",
-        content: "커피를 좋아하시는데 늘 봉지 커피만 드세요. 한 번쯤 제대로 된 걸 드리고 싶습니다.",
+          "옥상이 비어 있는데 앉을 데가 없어 다들 서서 이야기하다 내려갑니다. 두 자리면 충분해요.",
         bid: 1000,
         likedBy: [],
       },
@@ -133,12 +240,386 @@ const AUCTIONS = [
   },
   {
     host: "minseo",
-    title: "화분 스툴 2개",
-    description: "베란다에 두던 스툴입니다. 화분 받침으로 쓰기 좋아요.",
-    color: [117, 126, 146],
-    hours: 12,
-    closeAfter: true,
-    episodes: [], // 사연 0건 → 유찰 (F5)
+    title: "빈티지 자전거",
+    description: "몇 해 탔습니다. 체인만 갈면 아직 잘 나가요.",
+    photo: "vintage-bicycle",
+    hours: 168,
+    episodes: [
+      {
+        author: "doyun",
+        title: "출근길을 되찾고 싶습니다",
+        content:
+          "지하철 두 정거장인데 사람에 치여 아침마다 지칩니다. 강변으로 돌아가더라도 페달을 밟고 싶어요.",
+        bid: 1000,
+        likedBy: ["minseo"],
+      },
+      {
+        author: "junwoo",
+        title: "아이에게 물려주려고요",
+        content:
+          "제 첫 자전거도 얻어 탄 것이었어요. 딸아이가 이제 그 나이가 됐습니다.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "doyun",
+    title: "턴테이블",
+    description: "판을 정리하면서 같이 보냅니다. 바늘은 새로 갈아 두었어요.",
+    photo: "turntable",
+    hours: 168,
+    episodes: [
+      {
+        author: "yerin",
+        title: "아버지 레코드를 틀어보고 싶어요",
+        content:
+          "아버지가 남기신 판이 상자째 있는데 틀 방법이 없어 몇 해째 그대로입니다. 무슨 소리가 들어 있는지 아직 모릅니다.",
+        bid: 2000,
+        likedBy: ["doyun", "siwoo"],
+      },
+      {
+        author: "siwoo",
+        title: "가게에 소리를 들이고 싶습니다",
+        content:
+          "작은 공방을 하는데 하루 종일 기계 소리만 납니다. 손님이 오면 판 한 장 올려두고 싶어요.",
+        bid: 1500,
+        likedBy: ["chaewon"],
+      },
+      {
+        author: "chaewon",
+        title: "잠들기 전 한 면씩",
+        content:
+          "자기 전에 휴대폰을 놓지 못해요. 한 면이 끝나면 일어나야 하는 물건이 필요합니다.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "yerin",
+    title: "어쿠스틱 기타",
+    description: "대학 때부터 쓰던 기타입니다. 소리는 아직 좋아요.",
+    photo: "acoustic-guitar",
+    hours: 168,
+    episodes: [
+      {
+        author: "siwoo",
+        title: "병실에서 칠 수 있는 악기를 찾습니다",
+        content:
+          "어머니가 오래 누워 계셔서 병실에 자주 있습니다. 소리가 크지 않게 조용히 몇 곡 치고 싶어요.",
+        bid: 2000,
+        likedBy: ["yerin"],
+      },
+      {
+        author: "taeyang",
+        title: "다시 배워보려고요",
+        content:
+          "스무 살에 세 달 배우고 접었습니다. 그때 못 친 곡이 아직 마음에 남아 있어요.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "siwoo",
+    title: "등산 배낭",
+    description: "50리터짜리입니다. 종주 두 번 하고 모셔뒀어요.",
+    photo: "hiking-backpack",
+    hours: 168,
+    episodes: [
+      {
+        author: "chaewon",
+        title: "지리산을 걸어보려고 합니다",
+        content:
+          "올해는 꼭 종주하겠다고 새해에 적어뒀는데 아직 배낭이 없습니다. 여름 가기 전에 떠나고 싶어요.",
+        bid: 2000,
+        likedBy: ["siwoo"],
+      },
+      {
+        author: "sohee",
+        title: "아이와 야영을 갑니다",
+        content:
+          "짐이 늘어 제 가방으로는 감당이 안 됩니다. 아이 몫까지 지려면 큰 게 필요해요.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "chaewon",
+    title: "전기 주전자",
+    description: "이사하며 두 개가 됐어요. 하나는 보냅니다.",
+    photo: "electric-kettle",
+    hours: 168,
+    episodes: [
+      {
+        author: "taeyang",
+        title: "자취 첫 살림입니다",
+        content:
+          "냄비에 물을 끓이다 몇 번 태웠어요. 아침마다 급한데 이게 있으면 훨씬 나을 것 같습니다.",
+        bid: 1000,
+        likedBy: ["chaewon"],
+      },
+      {
+        author: "minjun",
+        title: "사무실에 두려고요",
+        content:
+          "탕비실이 없어 다들 차를 못 마십니다. 구석에 하나 두면 겨울이 견딜 만해질 거예요.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "taeyang",
+    title: "반려견 이동장",
+    description: "중형견용입니다. 아이가 커서 이제 안 맞아요.",
+    photo: "pet-carrier",
+    hours: 168,
+    episodes: [
+      {
+        author: "sohee",
+        title: "유기견을 데려오려고 합니다",
+        content:
+          "보호소에서 만난 아이를 데려오기로 했어요. 첫날 안전하게 데려올 것이 필요합니다.",
+        bid: 2000,
+        likedBy: ["taeyang", "minjun"],
+      },
+      {
+        author: "jiwoo",
+        title: "병원 다닐 일이 잦아졌어요",
+        content:
+          "노견이라 한 달에 두 번은 병원에 갑니다. 안고 가기엔 이제 무거워요.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "sohee",
+    title: "유모차",
+    description: "둘째까지 잘 썼습니다. 바퀴 상태 좋아요.",
+    photo: "baby-stroller",
+    hours: 168,
+    episodes: [
+      {
+        author: "minjun",
+        title: "첫 아이를 기다립니다",
+        content:
+          "다음 달이 예정일인데 아직 준비를 못 했어요. 새것까지는 욕심이고 튼튼한 것이면 됩니다.",
+        bid: 2000,
+        likedBy: ["sohee"],
+      },
+      {
+        author: "eunseo",
+        title: "친정에 하나 두려고요",
+        content:
+          "주말마다 아이를 데리고 가는데 매번 접어 싣는 게 일입니다. 한 대를 그쪽에 두고 싶어요.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "minjun",
+    title: "책장",
+    description: "5단 원목 책장입니다. 흠집은 조금 있어요.",
+    photo: "bookshelf",
+    hours: 168,
+    episodes: [
+      {
+        author: "jiwoo",
+        title: "바닥에 쌓인 책을 세우고 싶어요",
+        content:
+          "방 한쪽이 책탑입니다. 밟고 지나다니다 몇 권은 표지가 다 상했어요.",
+        bid: 1500,
+        likedBy: ["minjun"],
+      },
+      {
+        author: "hyunwoo",
+        title: "작은 도서관을 만들려고요",
+        content:
+          "아파트 공동 공간에 책을 모으는 중입니다. 놓을 데가 없어 상자에 담아만 뒀어요.",
+        bid: 2000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "jiwoo",
+    title: "러그",
+    description: "150×200 사이즈입니다. 세탁해서 보냅니다.",
+    photo: "area-rug",
+    hours: 168,
+    episodes: [
+      {
+        author: "eunseo",
+        title: "아랫집에 미안해서요",
+        content:
+          "아이가 뛰기 시작하면서 매일 조마조마합니다. 거실만이라도 깔아두고 싶어요.",
+        bid: 2000,
+        likedBy: ["jiwoo"],
+      },
+      {
+        author: "nayeon",
+        title: "첫 자취방을 꾸며봅니다",
+        content:
+          "바닥이 차가워서 앉을 엄두가 안 나요. 하나 깔면 방이 방 같아질 것 같습니다.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "eunseo",
+    title: "화분",
+    description: "분갈이하며 나온 여분입니다. 흙은 없어요.",
+    photo: "potted-plant",
+    hours: 168,
+    episodes: [
+      {
+        author: "hyunwoo",
+        title: "병실 창가에 두려고요",
+        content:
+          "아버지가 입원해 계신데 창밖만 보십니다. 초록색을 하나 놓아드리고 싶어요.",
+        bid: 1000,
+        likedBy: ["eunseo"],
+      },
+      {
+        author: "nayeon",
+        title: "식물을 처음 키워봅니다",
+        content:
+          "여러 번 죽였어요. 이번엔 제대로 배워서 오래 두고 보고 싶습니다.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "hyunwoo",
+    title: "4인용 텐트",
+    description: "두 시즌 썼습니다. 방수 상태 좋아요.",
+    photo: "camping-tent",
+    hours: 168,
+    episodes: [
+      {
+        author: "nayeon",
+        title: "가족 여행을 다시 시작하려고요",
+        content:
+          "아이들이 크면서 여행이 끊겼어요. 올여름엔 다 같이 한 번 나가보고 싶습니다.",
+        bid: 2000,
+        likedBy: ["hyunwoo"],
+      },
+      {
+        author: "seoyeon",
+        title: "혼자 하룻밤 자보려고 합니다",
+        content:
+          "올해 정신없이 지냈어요. 조용한 데서 하루만 자고 오면 좀 나아질 것 같습니다.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "nayeon",
+    title: "스탠드 조명",
+    description: "높이 조절되는 플로어 스탠드입니다. 전구 포함이에요.",
+    photo: "floor-lamp",
+    hours: 168,
+    episodes: [
+      {
+        author: "seoyeon",
+        title: "밤에 책 읽을 자리를 만들고 싶어요",
+        content:
+          "천장등이 너무 밝아 눈이 아픕니다. 구석에 하나 두고 거기서만 읽고 싶어요.",
+        bid: 2000,
+        likedBy: ["nayeon"],
+      },
+      {
+        author: "haeun",
+        title: "작업대가 어두워요",
+        content:
+          "저녁에 그림을 그리는데 손 그림자가 종이를 덮습니다. 옆에서 비춰줄 것이 필요해요.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "haeun",
+    title: "보드게임 모음",
+    description: "여섯 종류입니다. 구성품은 다 있어요.",
+    photo: "board-game",
+    hours: 168,
+    episodes: [
+      {
+        author: "junwoo",
+        title: "동아리 방에 두려고 합니다",
+        content:
+          "시험 끝나면 다들 갈 데가 없어 흩어져요. 모여 앉을 핑계가 하나 있으면 좋겠습니다.",
+        bid: 1500,
+        likedBy: ["haeun"],
+      },
+      {
+        author: "seoyeon",
+        title: "가족이 화면을 좀 덜 보게요",
+        content:
+          "저녁마다 각자 방에서 각자 화면을 봅니다. 식탁에 펼쳐둘 것이 필요해요.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "junwoo",
+    title: "요가 매트",
+    description: "두께 6mm입니다. 미끄럼 방지 잘 돼요.",
+    photo: "yoga-mat",
+    hours: 168,
+    episodes: [
+      {
+        author: "haeun",
+        title: "허리 재활을 시작합니다",
+        content:
+          "물리치료 받으면서 집에서도 하라고 하셨는데 맨바닥이라 자꾸 미룹니다.",
+        bid: 1000,
+        likedBy: ["junwoo"],
+      },
+      {
+        author: "yerin",
+        title: "아침 십 분을 만들어보려고요",
+        content:
+          "일어나자마자 휴대폰을 봅니다. 펴놓을 자리가 있으면 몸부터 움직일 것 같아요.",
+        bid: 1500,
+        likedBy: [],
+      },
+    ],
+  },
+  {
+    host: "nayeon",
+    title: "커피 그라인더",
+    description: "수동 그라인더입니다. 날 상태 좋아요.",
+    photo: "coffee-grinder",
+    hours: 168,
+    episodes: [
+      {
+        author: "chaewon",
+        title: "원두를 사두고 못 갈고 있어요",
+        content:
+          "선물 받은 원두가 두 봉지째 그대로입니다. 향이 다 날아가기 전에 마시고 싶어요.",
+        bid: 1000,
+        likedBy: ["nayeon"],
+      },
+      {
+        author: "sohee",
+        title: "캠핑장에서 내려 마시려고요",
+        content:
+          "전기 없는 데를 주로 다닙니다. 손으로 가는 것이 필요해요.",
+        bid: 1000,
+        likedBy: [],
+      },
+    ],
   },
 ];
 
@@ -157,7 +638,7 @@ async function main() {
     return;
   }
 
-  console.log("사람 4명을 만듭니다…");
+  console.log(`사람 ${PEOPLE.length}명을 만듭니다…`);
   const people = new Map();
   for (const person of PEOPLE) {
     people.set(person.key, await createPerson(person));
@@ -316,7 +797,7 @@ async function seedAuction(spec, people) {
   // 이미지 경로가 경매 ID 를 포함하므로(§11.5 경로 규칙) ID 를 먼저 정하고 올린다.
   // 그래야 image_urls 에 임시값을 넣었다 고치는 중간 상태가 생기지 않는다
   const auctionId = crypto.randomUUID();
-  const imageUrl = await uploadCover(host.id, auctionId, spec.color);
+  const imageUrl = await uploadCover(host.id, auctionId, spec.photo);
 
   const { data: auction, error } = await host.client
     .from("auctions")
@@ -399,67 +880,46 @@ async function seedAuction(spec, people) {
 /* --- 이미지 -------------------------------------------------------------- */
 
 /**
- * 단색 PNG 를 만들어 공개 버킷에 올린다.
+ * 표지 사진을 내려받아 공개 버킷에 올린다.
  *
- * 버킷이 jpg/png/webp 만 받으므로 (§11.5) 실제 PNG 를 만들어야 한다.
- * 의존성을 늘리지 않으려고 최소 PNG 를 직접 엮는다 — 64×64 단색이면 충분하다.
+ * 예전에는 단색 PNG 를 만들어 올렸다. 의존성 없이 되긴 했지만 **목록이 색종이처럼
+ * 보여서** 시안과 나란히 두면 서비스 쪽이 비어 보였다. 지금은 실제 사진을 쓴다.
+ *
+ * 사진은 Unsplash 직링크다. API 키가 없어도 되고, 주소는 `PHOTOS` 에 박아 두었다
+ * (전부 `image/jpeg` 200 을 확인한 것들이다). 받아오지 못하면 **조용히 넘어가지 않고
+ * 멈춘다** — 단색으로 되돌아가면 이 변경이 무의미해지고, 그걸 나중에 알아채기 어렵다.
  */
-async function uploadCover(userId, auctionId, rgb) {
-  const png = solidPng(64, 64, rgb);
-  const path = `${userId}/${auctionId}/cover.png`;
+async function uploadCover(userId, auctionId, photoKey) {
+  const source = PHOTOS[photoKey];
+  if (!source) throw new Error(`PHOTOS 에 "${photoKey}" 가 없습니다.`);
+
+  const bytes = await download(source, photoKey);
+  const path = `${userId}/${auctionId}/cover.jpg`;
 
   const { error } = await admin.storage
     .from(BUCKET)
-    .upload(path, png, { contentType: "image/png", upsert: true });
+    .upload(path, bytes, { contentType: "image/jpeg", upsert: true });
   if (error) throw new Error(`이미지 업로드 실패: ${error.message}`);
 
   return admin.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 }
 
-function solidPng(width, height, [r, g, b]) {
-  const row = Buffer.alloc(1 + width * 3);
-  for (let x = 0; x < width; x += 1) {
-    row[1 + x * 3] = r;
-    row[2 + x * 3] = g;
-    row[3 + x * 3] = b;
+/** 남의 서버에서 받는 일이라 한 번 삐끗할 수 있다. 세 번까지 다시 시도한다 */
+async function download(source, label, attempts = 3) {
+  let lastError;
+
+  for (let i = 1; i <= attempts; i += 1) {
+    try {
+      const response = await fetch(source);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return Buffer.from(await response.arrayBuffer());
+    } catch (error) {
+      lastError = error;
+      if (i < attempts) await new Promise((r) => setTimeout(r, 500 * i));
+    }
   }
-  const raw = Buffer.concat(Array.from({ length: height }, () => row));
 
-  const ihdr = Buffer.alloc(13);
-  ihdr.writeUInt32BE(width, 0);
-  ihdr.writeUInt32BE(height, 4);
-  ihdr[8] = 8; // bit depth
-  ihdr[9] = 2; // color type: truecolour
-
-  return Buffer.concat([
-    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-    chunk("IHDR", ihdr),
-    chunk("IDAT", deflateSync(raw)),
-    chunk("IEND", Buffer.alloc(0)),
-  ]);
-}
-
-function chunk(type, data) {
-  const length = Buffer.alloc(4);
-  length.writeUInt32BE(data.length, 0);
-
-  const body = Buffer.concat([Buffer.from(type, "ascii"), data]);
-  const crc = Buffer.alloc(4);
-  crc.writeUInt32BE(crc32(body), 0);
-
-  return Buffer.concat([length, body, crc]);
-}
-
-const CRC_TABLE = Array.from({ length: 256 }, (_, n) => {
-  let c = n;
-  for (let k = 0; k < 8; k += 1) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-  return c >>> 0;
-});
-
-function crc32(buffer) {
-  let c = 0xffffffff;
-  for (const byte of buffer) c = CRC_TABLE[(c ^ byte) & 0xff] ^ (c >>> 8);
-  return (c ^ 0xffffffff) >>> 0;
+  throw new Error(`사진 "${label}" 을 받지 못했습니다: ${lastError.message}`);
 }
 
 /* --- 정리 --------------------------------------------------------------- */
@@ -493,7 +953,11 @@ async function clean() {
   for (const auction of auctions ?? []) {
     await admin.storage
       .from(BUCKET)
-      .remove([`${auction.user_id}/${auction.id}/cover.png`]);
+      // png 는 단색 표지를 쓰던 시절 것이다. 옛 시드도 같이 걷어낸다
+      .remove([
+        `${auction.user_id}/${auction.id}/cover.jpg`,
+        `${auction.user_id}/${auction.id}/cover.png`,
+      ]);
   }
 
   await admin.from("auctions").delete().in("user_id", ids);
