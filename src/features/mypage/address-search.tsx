@@ -132,7 +132,8 @@ export function AddressSearch({
       role="dialog"
       aria-modal="true"
       aria-label="주소 검색"
-      className="fixed inset-0 z-40 mx-auto flex w-full max-w-[var(--shell-width)] flex-col bg-bg"
+      // 셸을 통째로 덮는 화면이라 좌우 경계도 셸과 같이 간다 (layout.tsx)
+      className="fixed inset-0 z-40 mx-auto flex w-full max-w-[var(--shell-width)] flex-col border-border bg-bg min-[391px]:pointer-fine:border-x"
     >
       <header className="flex h-14 shrink-0 items-center gap-0.5 border-b border-border px-2">
         <h2 className="min-w-0 flex-1 px-2 text-subtitle font-semibold text-text-primary">
