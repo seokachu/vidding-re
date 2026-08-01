@@ -19,15 +19,18 @@ import { BottomNav } from "./bottom-nav";
 /** 탭 4개(홈·탐색·알림·마이) 용 */
 export function TabShellSkeleton({
   title,
+  headerTrailing,
   children,
 }: {
   /** 없으면 헤더에 로고를 그린다 (홈) */
   title?: string;
+  /** 서버를 기다릴 필요가 없는 헤더 액션이면 회색 칸 대신 진짜를 넘긴다 */
+  headerTrailing?: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <>
-      <AppHeader title={title} />
+      <AppHeader title={title} trailing={headerTrailing} />
       <Body className="pb-[88px]">{children}</Body>
       {/* 읽지 않은 알림 점은 찍지 않는다. 그 수를 알려면 서버를 기다려야 하는데
           기다리지 않는 것이 이 화면의 존재 이유다 */}

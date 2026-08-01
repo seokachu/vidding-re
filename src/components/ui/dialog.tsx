@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import { createPortal } from "react-dom";
 
 import { Button } from "./button";
 
@@ -12,6 +13,10 @@ import { Button } from "./button";
  * **실행 버튼은 밖에서 넘긴다.** 이 다이얼로그는 폼 안에서도 쓰이는데,
  * 그때 실행 버튼은 그 폼의 `submit` 이어야 한다. 안에서 만들어 `onConfirm`
  * 콜백으로 부르면 자바스크립트가 없을 때 아무 일도 일어나지 않는다 (F10 3.7).
+ *
+ * **`body` 로 옮겨 그린다.** `z-50` 만으로는 부족하다 — 부르는 쪽이 헤더처럼
+ * `z-index` 가 걸린 자리에 있으면 그 쌓임 맥락 안에 갇혀, 더 높은 z 를 줘도
+ * 하단 네비(`z-30`) 아래로 깔린다. 모달은 부모의 맥락을 벗어나야 한다.
  */
 export function ConfirmDialog({
   open,
@@ -58,9 +63,11 @@ export function ConfirmDialog({
     if (open) panelRef.current?.focus();
   }, [open]);
 
-  if (!open) return null;
+  // `document` 확인은 서버 렌더 방어다. 지금은 모든 호출부가 닫힌 채로
+  // 시작하지만, 열린 채 마운트되는 곳이 생기면 서버에서 터진다
+  if (!open || typeof document === "undefined") return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* 덮개를 누르는 것은 취소와 같다 */}
       <button
@@ -105,6 +112,7 @@ export function ConfirmDialog({
           {confirm}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

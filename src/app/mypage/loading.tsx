@@ -1,3 +1,4 @@
+import { SignOutButton } from "@/components/auth/signout-button";
 import {
   Bone,
   CardBone,
@@ -7,7 +8,9 @@ import {
 /** 마이페이지 (S07) 가 도착하기 전 */
 export default function Loading() {
   return (
-    <TabShellSkeleton title="마이페이지">
+    // 로그아웃은 서버에서 읽어올 것이 없다. 회색 칸을 세웠다가 아이콘으로
+    // 바꾸면 헤더가 한 번 튄다 — 처음부터 진짜를 그린다
+    <TabShellSkeleton title="마이페이지" headerTrailing={<SignOutButton />}>
       {/* 프로필 */}
       <div className="flex items-center gap-[14px] px-gutter pb-5 pt-[14px]">
         <Bone className="size-14 shrink-0 rounded-full" />
@@ -28,13 +31,6 @@ export default function Loading() {
             <Bone className="h-[22px] w-16" />
           </div>
         ))}
-      </div>
-
-      {/* 로그아웃 */}
-      <div className="px-gutter pt-5">
-        <div className="py-4">
-          <Bone className="h-[22px] w-16" />
-        </div>
       </div>
 
       {/* 탭 + 목록 */}

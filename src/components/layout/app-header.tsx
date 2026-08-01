@@ -28,7 +28,12 @@ export function AppHeader({
   return (
     <header
       className={cn(
-        "sticky top-0 z-20 flex h-13 items-center justify-between gap-3 bg-bg px-gutter",
+        // 배경도 글자도 흰 바탕이라 경계가 사라진다. 내용이 밑으로 흘러들어가도
+        // 헤더가 서 있는 것이 보여야 한다. 그림자가 아니라 선인 이유는
+        // 이 시스템에서 그림자가 다이얼로그 하나에만 쓰이는 "떠 있음"의 표시이기
+        // 때문이다 — 헤더가 하는 일은 구획을 나누는 것이고, 그건 BottomBar·ListRow 와
+        // 같은 `border` 의 몫이다
+        "sticky top-0 z-20 flex h-13 items-center justify-between gap-3 border-b border-border bg-bg px-gutter",
         className,
       )}
     >

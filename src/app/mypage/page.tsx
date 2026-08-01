@@ -49,18 +49,15 @@ export default async function MyPage(props: {
     ]);
 
   return (
-    <TabShell title="마이페이지">
+    // 로그아웃은 헤더 우측에 둔다. 본문에 두면 어느 묶음에도 속하지 않아
+    // 홀로 떠 보이고, 탭 아래에 두면 탭마다 자리가 달라진다 (.pen S07)
+    <TabShell title="마이페이지" headerTrailing={<SignOutButton />}>
       <ProfileSection
         profile={profile}
         address={address}
         auctionCount={auctions.ok ? auctions.data.length : null}
         episodeCount={episodes.ok ? episodes.data.length : null}
       />
-
-      {/* 프로필 행과 탭 사이. 탭 내용 아래에 두면 탭마다 자리가 달라진다 (.pen S07) */}
-      <div className="px-gutter pt-5">
-        <SignOutButton />
-      </div>
 
       <MypageTabs
         initialTab={tab}

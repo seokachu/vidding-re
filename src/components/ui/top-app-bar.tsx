@@ -27,7 +27,8 @@ export function TopAppBar({
   return (
     <header
       className={cn(
-        "sticky top-0 z-20 flex h-14 items-center gap-0.5 bg-bg px-2",
+        // 헤더와 같은 규칙이다 (`AppHeader` 참고). 크롬 위아래를 같은 선으로 맞춘다
+        "sticky top-0 z-20 flex h-14 items-center gap-0.5 border-b border-border bg-bg px-2",
         className,
       )}
     >
