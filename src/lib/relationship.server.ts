@@ -7,6 +7,7 @@ import {
   type Abilities,
   type Relationship,
 } from "./relationship";
+import { getAuthUser } from "./auth";
 import { createClient } from "./supabase/server";
 
 /**
@@ -53,9 +54,7 @@ export async function getAuctionContext(
 ): Promise<AuctionContextResult> {
   const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   const userId = user?.id ?? null;
 
   const { data: summary, error: summaryError } = await supabase

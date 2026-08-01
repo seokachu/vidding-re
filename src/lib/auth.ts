@@ -1,6 +1,7 @@
 import "server-only";
 
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
 import { ROUTES, signinWithReturn } from "./routes";
 import { createClient } from "./supabase/server";
@@ -11,14 +12,19 @@ import type { User } from "./supabase/database.types";
  *
  * `getSession()` 이 아니라 `getUser()` 를 쓴다. 세션은 쿠키를 그대로 믿지만
  * `getUser()` 는 인증 서버에 검증을 요청한다. 서버 판정이 최종이어야 한다.
+ *
+ * **그래서 `cache()` 로 감싼다.** 검증이 네트워크 왕복이라, 한 페이지가 이걸
+ * 서너 번 부르면 그만큼 왕복이 쌓인다. `cache()` 는 **요청 하나 안에서만**
+ * 결과를 나눠 쓰므로 "서버 판정이 최종"이라는 원칙은 그대로다 — 요청이 바뀌면
+ * 다시 검증한다. 직접 `supabase.auth.getUser()` 를 부르지 말고 이걸 쓴다.
  */
-export async function getAuthUser() {
+export const getAuthUser = cache(async () => {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   return user;
-}
+});
 
 /**
  * `public.users` 의 내 행. 닉네임·아바타·잔액이 여기 있다.
@@ -27,12 +33,10 @@ export async function getAuthUser() {
  * 그때는 `null` 을 돌려주므로, 호출한 쪽에서 스켈레톤을 띄우고 다시 조회한다.
  */
 export async function getCurrentUser(): Promise<User | null> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   if (!user) return null;
 
+  const supabase = await createClient();
   const { data } = await supabase
     .from("users")
     .select("*")
@@ -58,12 +62,10 @@ export async function requireAuthUser(returnTo?: string) {
 
 /** 읽지 않은 알림 수. 헤더·하단 네비 배지가 쓴다 (F9 3.2) */
 export async function getUnreadNotificationCount(): Promise<number> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   if (!user) return 0;
 
+  const supabase = await createClient();
   const { count, error } = await supabase
     .from("notifications")
     .select("id", { count: "exact", head: true })

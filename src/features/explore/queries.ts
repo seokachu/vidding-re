@@ -1,5 +1,6 @@
 import "server-only";
 
+import { getAuthUser } from "@/lib/auth";
 import { createClient } from "@/lib/supabase/server";
 import type { AuctionSummary } from "@/lib/supabase/database.types";
 import type { AuctionSort } from "./sort";
@@ -147,12 +148,10 @@ export async function getMyFavoriteIds(
 ): Promise<Set<string> | null> {
   if (auctionIds.length === 0) return new Set();
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getAuthUser();
   if (!user) return new Set();
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("auction_favorites")
     .select("auction_id")
