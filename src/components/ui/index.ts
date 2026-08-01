@@ -1,8 +1,8 @@
 /**
  * 공통 UI 컴포넌트 — `design/design.pen` 의 `03 공통 UI 컴포넌트` 섹션.
  *
- * **이 폴더는 읽기 전용이다.** 화면 작업 중에 고치지 않는다.
- * 부족한 것이 있으면 각자 폴더에 임시로 만들고 알려주면 여기로 올린다.
+ * **`.pen` 이 단일 출처다.** 여기에 컴포넌트를 더하려면 `.pen` 에 먼저 그린다.
+ * 코드에만 있는 컴포넌트가 생기면 제출물의 컴포넌트 수가 어긋난다.
  */
 
 export { Avatar } from "./avatar";
@@ -11,6 +11,7 @@ export { Button, ButtonLink, type ButtonVariant } from "./button";
 export { AuctionCard, Thumb } from "./auction-card";
 export { AuctionCardCompact } from "./auction-card-compact";
 export { BottomBar } from "./bottom-bar";
+export { ConfirmDialog } from "./dialog";
 export { EmptyState } from "./empty-state";
 export { ErrorState, InlineRetry } from "./error-state";
 export { Fab } from "./fab";

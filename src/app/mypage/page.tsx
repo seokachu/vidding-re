@@ -57,6 +57,11 @@ export default async function MyPage(props: {
         episodeCount={episodes.ok ? episodes.data.length : null}
       />
 
+      {/* 프로필 행과 탭 사이. 탭 내용 아래에 두면 탭마다 자리가 달라진다 (.pen S07) */}
+      <div className="px-gutter pt-5">
+        <SignOutButton />
+      </div>
+
       <MypageTabs
         initialTab={tab}
         auctions={
@@ -146,10 +151,6 @@ export default async function MyPage(props: {
           />
         }
       />
-
-      <div className="mt-2 px-gutter">
-        <SignOutButton />
-      </div>
     </TabShell>
   );
 }
