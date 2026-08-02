@@ -2,6 +2,7 @@ import { Gift, Info } from "lucide-react";
 import Link from "next/link";
 
 import { Logo } from "@/components/ui/logo";
+import { cn } from "@/lib/cn";
 import { SIGNUP_BONUS } from "@/lib/constants";
 import { formatPoint } from "@/lib/format";
 import { ROUTES } from "@/lib/routes";
@@ -67,7 +68,37 @@ export function EntryScreen({
 
   return (
     <main className="flex flex-1 flex-col">
-      <div className="flex flex-col gap-[14px] px-8 pt-24">
+      {/*
+        **화면 맨 위에, 로고보다 먼저 놓는다.** 이 화면에 온 이유가 여기 적혀
+        있는데 가운데에 두었더니 파란 혜택 배너에 묻혀 가장 늦게 읽혔다.
+        자리를 바꾸지 않고 색만 올리면 또 묻힌다.
+
+        레드는 쓰지 않는다. 사용자가 잘못한 것이 없는데 오류로 읽힌다
+        (레드는 마감 임박·오류·필수 입력 전용, PRD B3). 잉크 블루를 채워
+        흰 글자를 얹으면 오해 없이 가장 먼저 눈에 들어온다.
+
+        여백을 위에서 걷어내고 바가 그 자리를 차지한다 — 바 아래 본문은
+        `pt-14`, 바가 없으면 원래대로 `pt-24` 다.
+      */}
+      {destination && (
+        <p
+          role="status"
+          className="flex items-start gap-2 bg-accent px-8 py-4 text-caption leading-normal text-text-on-accent"
+        >
+          <Info size={16} className="mt-[3px] shrink-0" />
+          <span>
+            <b className="font-bold">{withTopic(destination)}</b> 로그인해야 볼 수
+            있어요. 로그인하면 바로 이어집니다
+          </span>
+        </p>
+      )}
+
+      <div
+        className={cn(
+          "flex flex-col gap-[14px] px-8",
+          destination ? "pt-14" : "pt-24",
+        )}
+      >
         <Logo width={87} />
         <p className="text-subtitle leading-snug text-text-primary">
           사연으로 입찰하는 경매
@@ -97,26 +128,6 @@ export function EntryScreen({
         </div>
       )}
 
-      {/*
-        경고색을 쓰지 않는다. 사용자가 잘못한 것이 없고 **원래 그런 화면**일 뿐이다.
-        레드는 마감 임박·오류·필수 입력 전용이다 (PRD B3).
-      */}
-      {destination && (
-        <div className="px-8 pt-5">
-          <p
-            role="status"
-            className="flex items-start gap-2 rounded-md bg-surface px-4 py-3 text-caption leading-normal text-text-secondary"
-          >
-            <Info size={15} className="mt-[3px] shrink-0" />
-            <span>
-              <b className="font-semibold text-text-primary">
-                {withTopic(destination)}
-              </b>{" "}
-              로그인해야 볼 수 있어요. 로그인하면 바로 이어집니다
-            </span>
-          </p>
-        </div>
-      )}
 
       <div className="px-8 pt-10">
         <SigninButtons next={next} />
