@@ -4,7 +4,14 @@ import type { RealtimeChannel } from "@supabase/supabase-js";
 import { ArrowUp, Info, Package, RotateCcw, WifiOff } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 import { Button, ConfirmDialog, ErrorState, TopAppBar } from "@/components/ui";
 import { cn } from "@/lib/cn";
@@ -150,10 +157,17 @@ export function ChatRoom({
     };
   }, [roomId]);
 
-  /* --- 하단 고정 스크롤 -------------------------------------------------- */
-  useEffect(() => {
+  /**
+   * **항상 맨 아래(최신)를 보여준다.**
+   *
+   * `useLayoutEffect` 인 이유는 그리기 전에 옮겨야 맨 위가 잠깐 비치지 않기
+   * 때문이고, 의존성이 개수가 아니라 `messages` 자체인 이유는 **읽음 처리 뒤
+   * `refresh()` 로 목록이 갱신될 때 개수는 그대로**여서 개수만 보면 다시
+   * 내려가지 않기 때문이다.
+   */
+  useLayoutEffect(() => {
     endRef.current?.scrollIntoView({ block: "end" });
-  }, [messages.length, outgoing.length]);
+  }, [messages, outgoing.length]);
 
   /* --- 전송 -------------------------------------------------------------- */
   const deliver = useCallback(async (localId: string, content: string) => {
@@ -232,7 +246,16 @@ export function ChatRoom({
   const rows = withDateSeparators(messages);
 
   return (
-    <>
+    /*
+      **대화는 화면 높이에 가둔다** (카카오톡과 같은 구조). 전에는 페이지 전체가
+      늘어나며 스크롤돼서, 방에 들어가면 맨 위(가장 오래된 말)에 서고 최신
+      메시지는 화면 밖으로 밀려 있었다. 읽음 처리 뒤 `refresh()` 가 화면을 다시
+      그리면 스크롤이 또 위로 돌아갔다.
+
+      이제 헤더·안내·입력줄은 제자리에 고정되고 **가운데 메시지 영역만 스크롤**한다.
+      바깥 페이지가 움직이지 않으므로 다시 그려도 보던 자리가 유지된다.
+    */
+    <div className="flex h-dvh flex-col">
       <TopAppBar title={otherName} />
 
       {/* 이 대화의 목적을 한 줄로 못 박는다 — 채팅은 전달 논의 하나다 (F6 2) */}
@@ -260,7 +283,7 @@ export function ChatRoom({
         </p>
       )}
 
-      <main className="flex flex-1 flex-col gap-[14px] px-gutter pb-6 pt-5">
+      <main className="no-scrollbar flex min-h-0 flex-1 flex-col gap-[14px] overflow-y-auto px-gutter pb-6 pt-5">
         {loadFailed ? (
           // 조회 실패를 빈 대화로 위장하지 않는다 (F6 4)
           <ErrorState description={"대화를 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
@@ -308,7 +331,7 @@ export function ChatRoom({
         <div ref={endRef} />
       </main>
 
-      <div className="sticky bottom-0 border-t border-border bg-bg">
+      <div className="shrink-0 border-t border-border bg-bg">
         {/* 낙찰자에게만. 택배에 필요한 것은 받는 쪽 정보다 (F6 3.6) */}
         {isWinner && (
           <div className="px-4 pt-3">
@@ -369,7 +392,7 @@ export function ChatRoom({
           </Button>
         }
       />
-    </>
+    </div>
   );
 }
 
