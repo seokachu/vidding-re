@@ -99,8 +99,9 @@ export async function saveAddress(
   revalidatePath(ROUTES.address);
   revalidatePath(ROUTES.mypage);
 
-  // 배송지가 없어 하던 일이 끊겼을 수 있다 (경매 등록의 선행 조건, F12 3.4).
-  // 끊긴 자리로 되돌린다. 값이 수상하면 홈으로 보낸다 (`resolveReturnTo`)
+  // 배송지를 채우려고 다른 화면에서 넘어왔을 수 있다. 그 자리로 되돌린다.
+  // 값이 수상하면 홈으로 보낸다 (`resolveReturnTo`). 경매 등록은 더 이상
+  // 이 경로로 오지 않지만, 복귀 규격 자체는 남겨 둔다 (F12 3.4)
   const next = formData.get("next");
   redirect(
     typeof next === "string" && next ? resolveReturnTo(next) : ROUTES.mypage,
@@ -110,10 +111,11 @@ export async function saveAddress(
 /**
  * 삭제.
  *
- * **명세보다 DB 가 엄격하다** (supabase/README.md 10). `auctions.address_id` 는
- * NOT NULL FK 이고 마감된 경매도 발송지 스냅샷으로 이 행을 참조하므로,
- * 경매를 한 번이라도 연 배송지는 지워지지 않는다. 앱에서 미리 판정하지 않고
- * DB 가 돌려주는 `23503` 을 그대로 안내로 옮긴다 — 판정 기준이 둘이 되면 어긋난다.
+ * **경매가 물고 있어도 지울 수 있다** (F12 3.3 개정). 배송지가 등록 요건이던
+ * 시절에는 `auctions.address_id` 가 NOT NULL 이라 한 번이라도 경매를 연
+ * 배송지는 지워지지 않았다. 이제 그 값은 발송지 스냅샷일 뿐이라
+ * `on delete set null` 로 참조만 끊고 경매는 그대로 둔다
+ * (`20260802000001_address_optional.sql`).
  */
 export async function deleteAddress(): Promise<AddressFormState> {
   const user = await requireAuthUser(ROUTES.address);
@@ -125,9 +127,6 @@ export async function deleteAddress(): Promise<AddressFormState> {
     .eq("user_id", user.id);
 
   if (error) {
-    if (error.code === "23503") {
-      return { message: "진행 중인 경매에 사용 중인 배송지입니다" };
-    }
     return { message: "삭제하지 못했어요. 잠시 후 다시 시도해주세요" };
   }
 

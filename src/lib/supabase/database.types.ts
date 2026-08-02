@@ -127,7 +127,8 @@ export type Database = {
         Row: {
           id: string;
           user_id: string;
-          address_id: string;
+          /** 발송지 스냅샷(선택). 등록 요건이 아니다 (F1 3.2 개정) */
+          address_id: string | null;
           title: string;
           description: string;
           image_urls: string[];
@@ -141,7 +142,7 @@ export type Database = {
         Insert: {
           id?: string;
           user_id: string;
-          address_id: string;
+          address_id?: string | null;
           title: string;
           description: string;
           image_urls: string[];
@@ -158,7 +159,7 @@ export type Database = {
           description?: string;
           image_urls?: string[];
           end_at?: string;
-          address_id?: string;
+          address_id?: string | null;
         };
         Relationships: [
           {

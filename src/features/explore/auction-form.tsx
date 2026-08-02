@@ -196,11 +196,6 @@ export function AuctionForm({
         case "UNAUTHENTICATED":
           router.push(signinWithReturn(ROUTES.auctionWrite));
           return;
-        case "NO_ADDRESS":
-          router.push(
-            `${ROUTES.address}?next=${encodeURIComponent(ROUTES.auctionWrite)}`,
-          );
-          return;
         case "FORBIDDEN":
           setFormError("이 경매는 수정할 수 없어요");
           return;

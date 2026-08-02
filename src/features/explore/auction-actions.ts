@@ -29,8 +29,6 @@ import {
 export type AuctionSubmitResult =
   | { ok: false; reason: "INVALID"; fieldErrors: AuctionFieldErrors }
   | { ok: false; reason: "UNAUTHENTICATED" }
-  /** 배송지가 없으면 등록할 수 없다 (F1 3.2) */
-  | { ok: false; reason: "NO_ADDRESS" }
   /** 내 경매가 아니거나 이미 마감됐다 (F1 4.1) */
   | { ok: false; reason: "FORBIDDEN" }
   | { ok: false; reason: "ERROR"; message: string };
@@ -63,8 +61,14 @@ export async function createAuction(
     return { ok: false, reason: "INVALID", fieldErrors: { days: "필수 입력 항목입니다" } };
   }
 
-  // 낙찰 후 물건을 보내야 하므로 배송지가 선행 조건이다 (F1 3.2)
-  const { data: address, error: addressError } = await supabase
+  /**
+   * 배송지는 **요건이 아니라 선택이다** (F1 3.2 개정). 전달 방법은 낙찰 뒤
+   * 채팅에서 정하고 (F6 2), 직거래면 주소 자체가 필요 없다.
+   *
+   * 그래도 이미 등록해 둔 사람은 발송지 스냅샷으로 붙여 둔다. 조회가 실패해도
+   * 등록을 막지 않는다 — 없어도 되는 값 때문에 되는 일을 멈추지 않는다.
+   */
+  const { data: address } = await supabase
     .from("addresses")
     .select("id")
     .eq("user_id", user.id)
@@ -72,14 +76,11 @@ export async function createAuction(
     .limit(1)
     .maybeSingle();
 
-  if (addressError) return { ok: false, reason: "ERROR", message: GENERIC_ERROR };
-  if (!address) return { ok: false, reason: "NO_ADDRESS" };
-
   const { data, error } = await supabase
     .from("auctions")
     .insert({
       user_id: user.id,
-      address_id: address.id,
+      address_id: address?.id ?? null,
       title: input.title.trim(),
       description: input.description.trim(),
       image_urls: input.imageUrls,

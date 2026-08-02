@@ -184,7 +184,7 @@ export function ChatRoom({
       <div className="flex items-start gap-2 bg-surface px-gutter py-3">
         <Info size={15} className="mt-0.5 shrink-0 text-text-secondary" />
         <p className="text-label leading-normal text-text-secondary">
-          낙찰 이후 전달 방법을 정하는 대화예요.{" "}
+          택배로 보낼지 직접 만날지, 배송지도 여기서 정하세요.{" "}
           <Link
             href={ROUTES.auction(auctionId)}
             className="font-semibold text-accent-text underline underline-offset-2"
