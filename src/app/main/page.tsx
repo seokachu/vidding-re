@@ -61,6 +61,16 @@ export default async function HomePage() {
               <AuctionCardCompact
                 key={auction.auction_id}
                 auction={auction}
+                /* 같은 화면 안에서 어떤 카드엔 있고 어떤 카드엔 없으면 규칙이 없어 보인다 */
+                trailing={
+                  auction.canFavorite ? (
+                    <FavoriteButton
+                      auctionId={auction.auction_id}
+                      favorited={auction.favorited}
+                      size="sm"
+                    />
+                  ) : undefined
+                }
               />
             ))}
           </div>

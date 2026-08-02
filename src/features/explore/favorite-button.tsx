@@ -25,13 +25,20 @@ export function FavoriteButton({
   favorited,
   /** 로그인 후 돌아올 위치. 없으면 지금 보고 있는 경로로 돌아온다 (F7 4) */
   returnTo,
+  /**
+   * `sm` 은 홈의 좁은 카드(158px)용이다. 40px 버튼을 그대로 얹으면 카드에 비해
+   * 하트가 너무 커서 사진을 가린다.
+   */
+  size = "md",
   className,
 }: {
   auctionId: string;
   favorited: boolean | null;
   returnTo?: string;
+  size?: "md" | "sm";
   className?: string;
 }) {
+  const small = size === "sm";
   const router = useRouter();
   const pathname = usePathname();
 
@@ -95,7 +102,8 @@ export function FavoriteButton({
         onClick={onClick}
         title={unknown ? "잠시 후 다시 시도해주세요" : undefined}
         className={cn(
-          "flex size-10 items-center justify-center rounded-sm transition-colors",
+          "flex items-center justify-center rounded-sm transition-colors",
+          small ? "size-8" : "size-10",
           active ? "text-accent" : "text-text-primary",
           unknown && "text-text-tertiary",
           pending || unknown
@@ -103,7 +111,7 @@ export function FavoriteButton({
             : "hover:bg-surface",
         )}
       >
-        <Heart size={22} fill={active ? "currentColor" : "none"} />
+        <Heart size={small ? 17 : 22} fill={active ? "currentColor" : "none"} />
       </button>
 
       {message && (

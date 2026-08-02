@@ -59,6 +59,18 @@ export function AuctionCard({
       <div className="flex h-22 min-w-0 flex-1 flex-col justify-center gap-[7px]">
         <div className="flex items-center gap-2">
           <Badge tone={status.tone}>{status.label}</Badge>
+
+          {/*
+            **배지와 같은 줄에 둔다.** 따로 세우면 카드 세로 가운데에 걸려
+            혼자 내려간 것처럼 보인다. 버튼은 40px 이고 배지는 22px 이라
+            위아래 9px 씩 걷어내 **줄 높이를 배지에 맞춘다** — 그래야 카드
+            높이가 버튼 때문에 늘어나지 않는다.
+          */}
+          {trailing && (
+            <div className="relative z-10 -my-[9px] ml-auto shrink-0">
+              {trailing}
+            </div>
+          )}
         </div>
 
         <h3
@@ -94,7 +106,6 @@ export function AuctionCard({
         </div>
       </div>
 
-      {trailing && <div className="relative z-10 shrink-0">{trailing}</div>}
     </div>
   );
 }
