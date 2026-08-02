@@ -29,6 +29,9 @@ export type Json =
 /** `auctions.status` — 상태는 둘뿐이다. '마감 임박'은 end_at 으로 계산하는 파생 상태다 (P5) */
 export type AuctionStatus = "OPEN" | "CLOSED";
 
+/** `messages.kind` — 배송 정보만 일반 대화와 다르게 그린다 (F6 3.6) */
+export type MessageKind = "TEXT" | "ADDRESS";
+
 /** `points.type` — 신규 발행은 SIGNUP_BONUS 하나뿐이다 (데이터 모델 §3.7) */
 export type PointType =
   | "SIGNUP_BONUS"
@@ -352,6 +355,8 @@ export type Database = {
           chat_room_id: string;
           sender_id: string;
           content: string;
+          /** TEXT = 일반 대화, ADDRESS = 낙찰자가 보낸 배송 정보 (F6 3.6) */
+          kind: MessageKind;
           read_at: string | null;
           created_at: string;
         };
@@ -360,6 +365,7 @@ export type Database = {
           chat_room_id: string;
           sender_id: string;
           content: string;
+          kind?: MessageKind;
           read_at?: string | null;
           created_at?: string;
         };

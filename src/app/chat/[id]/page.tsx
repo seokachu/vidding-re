@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { ChatRoom } from "@/features/notify/chat-room";
 import { ErrorState, TopAppBar } from "@/components/ui";
 import { requireAuthUser } from "@/lib/auth";
+import { formatShippingInfo } from "@/lib/format";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 
@@ -69,6 +70,23 @@ export default async function ChatPage({
 
   const otherId = user.id === auction.user_id ? winnerId : auction.user_id;
 
+  /**
+   * 배송 정보를 보내는 것은 **낙찰자뿐이다** (F6 3.6). 택배에 필요한 것은 받는
+   * 쪽 정보이므로 주최자에게는 버튼 자체를 그리지 않는다.
+   *
+   * 미리보기에 쓸 값만 미리 읽어 둔다. **실제로 전송되는 값은 서버 액션이 그때
+   * 다시 읽는다** — 여기 값은 화면에 보여주기 위한 것이다.
+   */
+  const isWinner = winnerId !== null && user.id === winnerId;
+
+  const { data: myAddress } = isWinner
+    ? await supabase
+        .from("addresses")
+        .select("recipient, phone, zipcode, address1, address2")
+        .eq("user_id", user.id)
+        .maybeSingle()
+    : { data: null };
+
   const { data: other } = otherId
     ? await supabase
         .from("v_user_profiles")
@@ -90,6 +108,9 @@ export default async function ChatPage({
       otherName={other?.nick_name ?? "상대"}
       auctionId={auction.id}
       auctionTitle={auction.title}
+      isWinner={isWinner}
+      // 미리보기용. 없으면 버튼이 배송지 등록으로 안내한다 (F6 3.6)
+      myShippingInfo={myAddress ? formatShippingInfo(myAddress) : null}
       initialMessages={messages ?? []}
       // 조회 실패를 빈 대화로 위장하지 않는다 (F6 4)
       loadFailed={Boolean(messagesError)}

@@ -28,7 +28,8 @@ export function ConfirmDialog({
 }: {
   open: boolean;
   title: string;
-  description?: string;
+  /** 문장이 아니라 **보낼 값을 그대로 보여줘야 할 때**가 있어 노드를 받는다 (F6 3.6) */
+  description?: React.ReactNode;
   onCancel: () => void;
   /** 실행 버튼. 폼 제출이어야 할 때가 있어 밖에서 받는다 */
   confirm: React.ReactNode;
@@ -95,7 +96,7 @@ export function ConfirmDialog({
           </p>
 
           {description && (
-            <p className="text-caption text-text-secondary">{description}</p>
+            <div className="text-caption text-text-secondary">{description}</div>
           )}
         </div>
 

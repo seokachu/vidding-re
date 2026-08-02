@@ -3,6 +3,7 @@
 import { refresh } from "next/cache";
 
 import { getAuthUser } from "@/lib/auth";
+import { formatShippingInfo } from "@/lib/format";
 import { createClient } from "@/lib/supabase/server";
 import type { Message } from "@/lib/supabase/database.types";
 
@@ -65,6 +66,50 @@ export async function markChatRead(roomId: string): Promise<boolean> {
 export type SendResult =
   | { ok: true; message: Message }
   | { ok: false; reason: "EMPTY" | "AUTH" | "FAILED" };
+
+/**
+ * 배송 정보 전송 (F6 3.6). **낙찰자가 자기 배송지를 메시지로 보낸다.**
+ *
+ * 보낼 값을 클라이언트에서 받지 않고 **여기서 다시 읽는다.** 화면이 미리보기용으로
+ * 같은 값을 이미 갖고 있지만, 전송되는 것은 서버가 방금 읽은 것이어야 한다 —
+ * 클라이언트가 준 문자열을 그대로 넣으면 남의 이름·연락처를 배송 정보로 위장해
+ * 보낼 수 있다.
+ *
+ * 주최자가 `addresses` 를 읽는 것이 아니라 낙찰자가 **자기 것을 복사해 보내는**
+ * 구조라, `addresses_select_own` 정책을 열 필요가 없다. 보낸 뒤 배송지를 고쳐도
+ * 이미 보낸 메시지는 그때 값 그대로 남는다.
+ */
+export async function sendShippingInfo(
+  roomId: string,
+): Promise<SendResult | { ok: false; reason: "NO_ADDRESS" }> {
+  const user = await getAuthUser();
+  if (!user) return { ok: false, reason: "AUTH" };
+
+  const supabase = await createClient();
+
+  const { data: address, error: addressError } = await supabase
+    .from("addresses")
+    .select("recipient, phone, zipcode, address1, address2")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+  if (addressError) return { ok: false, reason: "FAILED" };
+  if (!address) return { ok: false, reason: "NO_ADDRESS" };
+
+  const { data, error } = await supabase
+    .from("messages")
+    .insert({
+      chat_room_id: roomId,
+      sender_id: user.id,
+      content: formatShippingInfo(address),
+      kind: "ADDRESS",
+    })
+    .select("*")
+    .single();
+
+  if (error || !data) return { ok: false, reason: "FAILED" };
+  return { ok: true, message: data };
+}
 
 /**
  * 메시지 전송. 실패를 예외로 던지지 않고 결과로 돌려준다 —

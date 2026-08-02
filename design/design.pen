@@ -12058,448 +12058,6 @@
     },
     {
       "type": "frame",
-      "id": "W06xGI",
-      "x": 1380,
-      "y": 7905,
-      "name": "S10 채팅",
-      "clip": true,
-      "width": 390,
-      "fill": "$bg",
-      "layout": "vertical",
-      "children": [
-        {
-          "id": "pacHq",
-          "type": "ref",
-          "ref": "h655AG",
-          "name": "Status Bar",
-          "width": "fill_container"
-        },
-        {
-          "id": "HvExq",
-          "type": "ref",
-          "ref": "lVcLu",
-          "name": "App Bar",
-          "width": "fill_container",
-          "descendants": {
-            "TIXWG": {
-              "content": "지현"
-            },
-            "Uo49Q": {
-              "enabled": false
-            }
-          }
-        },
-        {
-          "type": "frame",
-          "id": "xNHsB",
-          "name": "Notice",
-          "width": "fill_container",
-          "fill": "$surface",
-          "gap": 8,
-          "padding": [
-            12,
-            20
-          ],
-          "children": [
-            {
-              "type": "icon",
-              "id": "Bmg99",
-              "name": "Icon",
-              "width": 15,
-              "height": 15,
-              "icon": "info",
-              "library": "lucide",
-              "fill": "$text-secondary"
-            },
-            {
-              "type": "text",
-              "id": "dmR6R",
-              "name": "T",
-              "fill": "$text-secondary",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "낙찰 이후 전달 방법을 정하는 대화예요. ‘필름 카메라 나눔’ 경매",
-              "lineHeight": "$lh-normal",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-label",
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "Cj3EE",
-          "name": "Messages",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 14,
-          "padding": [
-            20,
-            20,
-            0,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "FAZRn",
-              "name": "Date",
-              "width": "fill_container",
-              "padding": [
-                0,
-                0,
-                4,
-                0
-              ],
-              "justifyContent": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "jzilb",
-                  "name": "D",
-                  "fill": "$text-tertiary",
-                  "content": "오늘",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "g0Xxa",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "gKmPW",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "E8xO7",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "OucXO",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:12",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "Y4hDyM",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "fbZyR",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "WEoZc",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "EfvKt",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:20",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "VOwFe",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "k4vOGv",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "UeWgV",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "HjDsz",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "XMLyn",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "aCqMi",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:21",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "EFsYf",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "bASiY",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "gaWKb",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "xdazV",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:24",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "QNZ4D",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "E0OBU",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "네, 마이페이지에 등록해 둔 주소로 부탁드립니다.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "QhmLQ",
-          "name": "Bottom Space",
-          "width": "fill_container",
-          "height": 24
-        },
-        {
-          "type": "frame",
-          "id": "LUlq2",
-          "name": "Input Bar",
-          "width": "fill_container",
-          "fill": "$bg",
-          "stroke": "$border",
-          "strokeWidth": {
-            "top": 1
-          },
-          "strokeAlignment": "inner",
-          "strokeLinejoin": "round",
-          "gap": 9,
-          "padding": [
-            12,
-            16,
-            22,
-            16
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "rLVun",
-              "name": "Input",
-              "width": "fill_container",
-              "fill": "$surface",
-              "cornerRadius": "$radius-pill",
-              "padding": [
-                12,
-                15
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "vKQ6E",
-                  "name": "P",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "메시지 입력",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-caption",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "idJ8K",
-              "name": "Send",
-              "width": 42,
-              "height": 42,
-              "fill": "$accent",
-              "cornerRadius": "$radius-pill",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "YbcMc",
-                  "name": "Icon",
-                  "width": 19,
-                  "height": 19,
-                  "icon": "arrow-up",
-                  "library": "lucide",
-                  "fill": "$text-on-accent"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "rzWD1",
       "x": 1840,
       "y": 7905,
@@ -17040,543 +16598,6 @@
     },
     {
       "type": "frame",
-      "id": "VG2dd",
-      "x": 2300,
-      "y": 9605,
-      "name": "S10b 채팅 · 전송 실패",
-      "clip": true,
-      "width": 390,
-      "fill": "$bg",
-      "layout": "vertical",
-      "children": [
-        {
-          "id": "qcP8z",
-          "type": "ref",
-          "ref": "h655AG",
-          "name": "Status Bar",
-          "width": "fill_container"
-        },
-        {
-          "id": "o1vYRM",
-          "type": "ref",
-          "ref": "lVcLu",
-          "name": "App Bar",
-          "width": "fill_container",
-          "descendants": {
-            "TIXWG": {
-              "content": "지현"
-            },
-            "Uo49Q": {
-              "enabled": false
-            }
-          }
-        },
-        {
-          "type": "frame",
-          "id": "l2FIZ",
-          "name": "Notice",
-          "width": "fill_container",
-          "fill": "$surface",
-          "gap": 8,
-          "padding": [
-            12,
-            20
-          ],
-          "children": [
-            {
-              "type": "icon",
-              "id": "I5BoYs",
-              "name": "Icon",
-              "width": 15,
-              "height": 15,
-              "icon": "info",
-              "library": "lucide",
-              "fill": "$text-secondary"
-            },
-            {
-              "type": "text",
-              "id": "c3Xfr",
-              "name": "T",
-              "fill": "$text-secondary",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "낙찰 이후 전달 방법을 정하는 대화예요. ‘필름 카메라 나눔’ 경매",
-              "lineHeight": "$lh-normal",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-label",
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "I6xDtW",
-          "name": "Messages",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 14,
-          "padding": [
-            20,
-            20,
-            0,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "H7Rjts",
-              "name": "Date",
-              "width": "fill_container",
-              "padding": [
-                0,
-                0,
-                4,
-                0
-              ],
-              "justifyContent": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "eBeG1",
-                  "name": "D",
-                  "fill": "$text-tertiary",
-                  "content": "오늘",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "iFbXa",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "E49eH",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "JEpGG",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "TDBGz",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:12",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "UofXJ",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "IaYYK",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "VtOTC",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "y3ZeVn",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:20",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "o0VUkr",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Ugnld",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "rbtKU",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "p0FQN",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "bysUP",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "eZ3rk",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:21",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "HczIz",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "e7H6kd",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Z6IlzD",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "Ixf6v",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:24",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "i6IWR",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "cuUoK",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "네, 마이페이지에 등록해 둔 주소로 부탁드립니다.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "S1u9Pu",
-              "name": "me failed",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "hJ6Fh",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 3,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "lor14",
-                      "name": "Retry",
-                      "gap": 4,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon",
-                          "id": "C0dz6",
-                          "name": "Icon",
-                          "width": 11,
-                          "height": 11,
-                          "icon": "rotate-ccw",
-                          "library": "lucide",
-                          "fill": "$warning"
-                        },
-                        {
-                          "type": "text",
-                          "id": "a3UqaO",
-                          "name": "L",
-                          "fill": "$warning",
-                          "content": "재전송",
-                          "fontFamily": "$font-body",
-                          "fontSize": "$text-micro",
-                          "fontWeight": "$w-semibold"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "w5vhp",
-                      "name": "Err",
-                      "fill": "$warning-text",
-                      "content": "전송 실패",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "nTIxH",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$bg",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "stroke": "$warning",
-                  "strokeWidth": 1,
-                  "strokeAlignment": "inner",
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "tOjn5",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "혹시 이번 주 안에 보내주실 수 있을까요?",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "d0q8M",
-          "name": "Bottom Space",
-          "width": "fill_container",
-          "height": 24
-        },
-        {
-          "type": "frame",
-          "id": "Qgy76",
-          "name": "Input Bar",
-          "width": "fill_container",
-          "fill": "$bg",
-          "stroke": "$border",
-          "strokeWidth": {
-            "top": 1
-          },
-          "strokeAlignment": "inner",
-          "strokeLinejoin": "round",
-          "gap": 9,
-          "padding": [
-            12,
-            16,
-            22,
-            16
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "O8NXPG",
-              "name": "Input",
-              "width": "fill_container",
-              "fill": "$surface",
-              "cornerRadius": "$radius-pill",
-              "padding": [
-                12,
-                15
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "L1lfKc",
-                  "name": "P",
-                  "fill": "$text-tertiary",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "메시지 입력",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-caption",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "R6s46u",
-              "name": "Send",
-              "width": 42,
-              "height": 42,
-              "fill": "$accent",
-              "cornerRadius": "$radius-pill",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "b9ofp",
-                  "name": "Icon",
-                  "width": 19,
-                  "height": 19,
-                  "icon": "arrow-up",
-                  "library": "lucide",
-                  "fill": "$text-on-accent"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "SpmdE",
       "x": 2760,
       "y": 9605,
@@ -19040,6 +18061,1172 @@
           "name": "Bottom Space",
           "width": "fill_container",
           "height": 28
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "eC5Ub",
+      "x": 1380,
+      "y": 7905,
+      "name": "S10 채팅",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "muK5z",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "qWh2t",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "지현"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "C3jJj5",
+          "name": "Notice",
+          "width": "fill_container",
+          "fill": "$surface",
+          "gap": 8,
+          "padding": [
+            12,
+            20
+          ],
+          "children": [
+            {
+              "type": "icon",
+              "id": "Jzvqs",
+              "name": "Icon",
+              "width": 15,
+              "height": 15,
+              "icon": "info",
+              "library": "lucide",
+              "fill": "$text-secondary"
+            },
+            {
+              "type": "text",
+              "id": "cCY3X",
+              "name": "T",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "택배로 보낼지 직접 만날지, 배송지도 여기서 정하세요. ‘필름 카메라 나눔’ 경매",
+              "lineHeight": "$lh-normal",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-label",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ocV2s",
+          "name": "Messages",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "LB474",
+              "name": "Date",
+              "width": "fill_container",
+              "padding": [
+                0,
+                0,
+                4,
+                0
+              ],
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "W18aYp",
+                  "name": "D",
+                  "fill": "$text-tertiary",
+                  "content": "오늘",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VUDof",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WTeFI",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ZpExR",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "YE7EG",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:12",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "P9psbu",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xov1P",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c1Dc8",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lOIhA",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:20",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iwI8f",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PDfaG",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AWwgD",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U9xUE",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "s2QB1V",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "H4uYp",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:21",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "EsCGQ",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zt8o1",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Uohbl",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VycLF",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:24",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OA6ow",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BLDgi",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "네, 배송 정보 보내드릴게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "estHF",
+              "name": "me / 배송 정보",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "c4XpO",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "w9ews",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:25",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YPcTH",
+                  "name": "Card",
+                  "width": 250,
+                  "fill": "$bg",
+                  "cornerRadius": 14,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "a8CIpd",
+                      "name": "Head",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "Z4A77h",
+                          "name": "Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "package",
+                          "library": "lucide",
+                          "fill": "$accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MeWn3",
+                          "name": "Label",
+                          "fill": "$text-primary",
+                          "content": "배송 정보",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "EWAby",
+                      "name": "Body",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "서연 · 010-2345-6789\n(04524) 서울 중구 세종대로 110\n302동 1401호",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Sfh6h",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "type": "frame",
+          "id": "etK03",
+          "name": "Input Bar",
+          "width": "fill_container",
+          "fill": "$bg",
+          "stroke": "$border",
+          "strokeWidth": {
+            "top": 1
+          },
+          "strokeAlignment": "inner",
+          "strokeLinejoin": "round",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            12,
+            16,
+            22,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "JHCcL",
+              "name": "Ship Button",
+              "width": "fill_container",
+              "cornerRadius": "$radius-pill",
+              "stroke": "$border-strong",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner",
+              "gap": 6,
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "O03WBx",
+                  "name": "Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "package",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "BJ26S",
+                  "name": "Label",
+                  "fill": "$text-primary",
+                  "content": "배송 정보 보내기",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-caption",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "l7SF6",
+              "name": "Input Row",
+              "width": "fill_container",
+              "gap": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "F1pREw",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-pill",
+                  "padding": [
+                    12,
+                    15
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HVUfF",
+                      "name": "P",
+                      "fill": "$text-tertiary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "메시지 입력",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vYYOy",
+                  "name": "Send",
+                  "width": 42,
+                  "height": 42,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-pill",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "pThY5",
+                      "name": "Icon",
+                      "width": 19,
+                      "height": 19,
+                      "icon": "arrow-up",
+                      "library": "lucide",
+                      "fill": "$text-on-accent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Nx5ov",
+      "x": 2300,
+      "y": 9605,
+      "name": "S10b 채팅 · 전송 실패",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "LwrpS",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "yqNBo",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "지현"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "Cu5Pg",
+          "name": "Notice",
+          "width": "fill_container",
+          "fill": "$surface",
+          "gap": 8,
+          "padding": [
+            12,
+            20
+          ],
+          "children": [
+            {
+              "type": "icon",
+              "id": "RGesD",
+              "name": "Icon",
+              "width": 15,
+              "height": 15,
+              "icon": "info",
+              "library": "lucide",
+              "fill": "$text-secondary"
+            },
+            {
+              "type": "text",
+              "id": "CaXQP",
+              "name": "T",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "택배로 보낼지 직접 만날지, 배송지도 여기서 정하세요. ‘필름 카메라 나눔’ 경매",
+              "lineHeight": "$lh-normal",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-label",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "P6I0r1",
+          "name": "Messages",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "ORD68",
+              "name": "Date",
+              "width": "fill_container",
+              "padding": [
+                0,
+                0,
+                4,
+                0
+              ],
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iSuAh",
+                  "name": "D",
+                  "fill": "$text-tertiary",
+                  "content": "오늘",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "i6oZiZ",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "yfnCk",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dlXER",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "qtwE3",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:12",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VcV9n",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hh92Q",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UcADb",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "b4IhZ0",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:20",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jWBhO",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GKrIJ",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vizSG",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NC1Gq",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h1moZ",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "yq3ms",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:21",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "F2QmR6",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KFuGA",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "C9ynX",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OBDxm",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:24",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pWp0y",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QV0nb",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "네, 배송 정보 보내드릴게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "StA0e",
+              "name": "me failed",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HLZLd",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PQrK3",
+                      "name": "Retry",
+                      "gap": 4,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "GN8vu",
+                          "name": "Icon",
+                          "width": 11,
+                          "height": 11,
+                          "icon": "rotate-ccw",
+                          "library": "lucide",
+                          "fill": "$warning"
+                        },
+                        {
+                          "type": "text",
+                          "id": "te6Wq",
+                          "name": "L",
+                          "fill": "$warning",
+                          "content": "재전송",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-micro",
+                          "fontWeight": "$w-semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "jAUEC",
+                      "name": "Err",
+                      "fill": "$warning-text",
+                      "content": "전송 실패",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kbZ3U",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$bg",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "stroke": "$warning",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "t4SFZ",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "혹시 이번 주 안에 보내주실 수 있을까요?",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "iVsNB",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "type": "frame",
+          "id": "ckV10",
+          "name": "Input Bar",
+          "width": "fill_container",
+          "fill": "$bg",
+          "stroke": "$border",
+          "strokeWidth": {
+            "top": 1
+          },
+          "strokeAlignment": "inner",
+          "strokeLinejoin": "round",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            12,
+            16,
+            22,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "A2bTc",
+              "name": "Ship Button",
+              "width": "fill_container",
+              "cornerRadius": "$radius-pill",
+              "stroke": "$border-strong",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner",
+              "gap": 6,
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "vHc2E",
+                  "name": "Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "package",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "gmf8o",
+                  "name": "Label",
+                  "fill": "$text-primary",
+                  "content": "배송 정보 보내기",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-caption",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kfnCj",
+              "name": "Input Row",
+              "width": "fill_container",
+              "gap": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eNzqv",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-pill",
+                  "padding": [
+                    12,
+                    15
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WOsDH",
+                      "name": "P",
+                      "fill": "$text-tertiary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "메시지 입력",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "wMlb1",
+                  "name": "Send",
+                  "width": 42,
+                  "height": 42,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-pill",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "Rfz86",
+                      "name": "Icon",
+                      "width": 19,
+                      "height": 19,
+                      "icon": "arrow-up",
+                      "library": "lucide",
+                      "fill": "$text-on-accent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }

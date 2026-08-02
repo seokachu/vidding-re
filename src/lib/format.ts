@@ -69,3 +69,26 @@ export function formatRelativeTime(at: string | Date, now: Date = new Date()) {
 export function initialOf(nickName: string | null | undefined): string {
   return nickName?.trim().charAt(0) || "?";
 }
+
+/**
+ * 배송 정보 한 덩어리. 낙찰자가 채팅으로 보낼 때와 미리보기에 같은 것을 쓴다 (F6 3.6).
+ *
+ * **줄 나눔이 곧 카드의 행이다.** 이름·연락처 / 주소 / 상세 주소 순서로 세 줄까지
+ * 나온다. 카드가 그려지지 않는 경로에서 그냥 텍스트로 읽어도 말이 되어야 하므로,
+ * 별도의 직렬화 형식(JSON 등)을 쓰지 않는다.
+ */
+export function formatShippingInfo(address: {
+  recipient: string;
+  phone: string;
+  zipcode: string;
+  address1: string;
+  address2?: string | null;
+}): string {
+  return [
+    `${address.recipient} · ${address.phone}`,
+    `(${address.zipcode}) ${address.address1}`,
+    address.address2?.trim(),
+  ]
+    .filter(Boolean)
+    .join("\n");
+}

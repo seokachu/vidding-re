@@ -1,16 +1,22 @@
 "use client";
 
 import type { RealtimeChannel } from "@supabase/supabase-js";
-import { ArrowUp, Info, RotateCcw, WifiOff } from "lucide-react";
+import { ArrowUp, Info, Package, RotateCcw, WifiOff } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import { ErrorState, TopAppBar } from "@/components/ui";
+import { Button, ConfirmDialog, ErrorState, TopAppBar } from "@/components/ui";
 import { cn } from "@/lib/cn";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/client";
-import type { Message } from "@/lib/supabase/database.types";
-import { fetchChatMessages, markChatRead, sendChatMessage } from "./actions";
+import type { Message, MessageKind } from "@/lib/supabase/database.types";
+import {
+  fetchChatMessages,
+  markChatRead,
+  sendChatMessage,
+  sendShippingInfo,
+} from "./actions";
 
 /** 보내는 중이거나 실패한 내 메시지. 서버에 아직 행이 없으므로 따로 들고 있는다 */
 type Outgoing = {
@@ -31,6 +37,8 @@ export function ChatRoom({
   otherName,
   auctionId,
   auctionTitle,
+  isWinner,
+  myShippingInfo,
   initialMessages,
   loadFailed,
 }: {
@@ -39,9 +47,14 @@ export function ChatRoom({
   otherName: string;
   auctionId: string;
   auctionTitle: string;
+  /** 배송 정보를 보내는 것은 낙찰자뿐이다 (F6 3.6) */
+  isWinner: boolean;
+  /** 미리보기용. `null` 이면 버튼이 배송지 등록으로 안내한다 */
+  myShippingInfo: string | null;
   initialMessages: Message[];
   loadFailed: boolean;
 }) {
+  const router = useRouter();
   /**
    * 서버가 그려 준 목록(`initialMessages`)이 진실이고, state 에는 **그 뒤에 들어온 것만**
    * 담는다. 둘을 렌더 중에 합치므로 `initialMessages` 가 바뀔 때마다 state 를 맞춰 주는
@@ -51,6 +64,9 @@ export function ChatRoom({
   const [outgoing, setOutgoing] = useState<Outgoing[]>([]);
   const [draft, setDraft] = useState("");
   const [connected, setConnected] = useState(true);
+  const [askingShip, setAskingShip] = useState(false);
+  const [shipping, setShipping] = useState(false);
+  const [shipError, setShipError] = useState<string>();
   const endRef = useRef<HTMLDivElement>(null);
 
   // 나중에 받은 것이 이긴다 — read_at 이 채워진 행으로 덮인다
@@ -165,6 +181,45 @@ export function ChatRoom({
     void deliver(localId, content);
   }
 
+  /* --- 배송 정보 (F6 3.6) ------------------------------------------------ */
+
+  /** 배송지가 없으면 등록 화면으로 보내고, 마치면 이 대화로 돌아온다 */
+  function goRegisterAddress() {
+    router.push(
+      `${ROUTES.address}?next=${encodeURIComponent(ROUTES.chat(roomId))}`,
+    );
+  }
+
+  function openShipping() {
+    setShipError(undefined);
+    if (!myShippingInfo) return goRegisterAddress();
+    setAskingShip(true);
+  }
+
+  /**
+   * 이름·연락처·주소가 한 번에 나가는 일이라 **보낼 값을 그대로 보여주고**
+   * 확인을 받은 뒤에만 보낸다. 되돌릴 수 없기 때문이다.
+   */
+  async function confirmShipping() {
+    setShipping(true);
+    const result = await sendShippingInfo(roomId);
+    setShipping(false);
+
+    if (result.ok) {
+      setLive((prev) => mergeById(prev, [result.message]));
+      setAskingShip(false);
+      return;
+    }
+
+    // 미리보기를 그린 뒤에 지웠을 수 있다. 그때는 등록 화면으로 보낸다
+    if (result.reason === "NO_ADDRESS") {
+      setAskingShip(false);
+      return goRegisterAddress();
+    }
+
+    setShipError("보내지 못했어요. 잠시 후 다시 시도해주세요");
+  }
+
   function retry(item: Outgoing) {
     setOutgoing((prev) =>
       prev.map((o) =>
@@ -229,6 +284,7 @@ export function ChatRoom({
                 <Bubble
                   key={row.message.id}
                   content={row.message.content}
+                  kind={row.message.kind}
                   mine={row.message.sender_id === meId}
                   time={formatClock(row.message.created_at)}
                   read={Boolean(row.message.read_at)}
@@ -252,29 +308,67 @@ export function ChatRoom({
         <div ref={endRef} />
       </main>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          submit();
-        }}
-        className="sticky bottom-0 flex items-center gap-[9px] border-t border-border bg-bg px-4 pb-6 pt-3"
-      >
-        <input
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder="메시지 입력"
-          aria-label="메시지 입력"
-          className="min-w-0 flex-1 rounded-full bg-surface px-[15px] py-3 text-caption text-text-primary outline-none placeholder:text-text-tertiary focus:ring-2 focus:ring-accent"
-        />
-        <button
-          type="submit"
-          aria-label="보내기"
-          disabled={draft.trim().length === 0}
-          className="flex size-[42px] shrink-0 items-center justify-center rounded-full bg-accent text-text-on-accent hover:bg-accent-pressed disabled:bg-neutral-300"
+      <div className="sticky bottom-0 border-t border-border bg-bg">
+        {/* 낙찰자에게만. 택배에 필요한 것은 받는 쪽 정보다 (F6 3.6) */}
+        {isWinner && (
+          <div className="px-4 pt-3">
+            <button
+              type="button"
+              onClick={openShipping}
+              aria-haspopup="dialog"
+              className="flex w-full items-center justify-center gap-[6px] rounded-full border border-border-strong py-[10px] text-caption font-semibold text-text-primary hover:bg-surface"
+            >
+              <Package size={15} />
+              배송 정보 보내기
+            </button>
+          </div>
+        )}
+
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            submit();
+          }}
+          className="flex items-center gap-[9px] px-4 pb-6 pt-3"
         >
-          <ArrowUp size={19} />
-        </button>
-      </form>
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            placeholder="메시지 입력"
+            aria-label="메시지 입력"
+            className="min-w-0 flex-1 rounded-full bg-surface px-[15px] py-3 text-caption text-text-primary outline-none placeholder:text-text-tertiary focus:ring-2 focus:ring-accent"
+          />
+          <button
+            type="submit"
+            aria-label="보내기"
+            disabled={draft.trim().length === 0}
+            className="flex size-[42px] shrink-0 items-center justify-center rounded-full bg-accent text-text-on-accent hover:bg-accent-pressed disabled:bg-neutral-300"
+          >
+            <ArrowUp size={19} />
+          </button>
+        </form>
+      </div>
+
+      <ConfirmDialog
+        open={askingShip}
+        busy={shipping}
+        title="이 정보를 보낼까요?"
+        description={
+          <div className="flex flex-col gap-2">
+            <p>보내면 상대가 대화에서 계속 볼 수 있어요</p>
+            <p className="whitespace-pre-line rounded-md bg-surface px-3 py-[10px] leading-relaxed text-text-primary">
+              {myShippingInfo}
+            </p>
+            {shipError && <p className="text-warning-text">{shipError}</p>}
+          </div>
+        }
+        onCancel={() => setAskingShip(false)}
+        confirm={
+          <Button className="flex-1" disabled={shipping} onClick={confirmShipping}>
+            {shipping ? "보내는 중…" : "보내기"}
+          </Button>
+        }
+      />
     </>
   );
 }
@@ -283,6 +377,7 @@ export function ChatRoom({
 
 function Bubble({
   content,
+  kind = "TEXT",
   mine,
   time,
   read,
@@ -291,6 +386,7 @@ function Bubble({
   onRetry,
 }: {
   content: string;
+  kind?: MessageKind;
   mine: boolean;
   time?: string;
   read?: boolean;
@@ -298,21 +394,37 @@ function Bubble({
   failed?: boolean;
   onRetry?: () => void;
 }) {
-  const bubble = (
-    <div
-      className={cn(
-        "max-w-[250px] px-[14px] py-3 text-caption leading-relaxed",
-        mine
-          ? "rounded-[14px_14px_4px_14px]"
-          : "rounded-[14px_14px_14px_4px] bg-surface-sunken text-text-primary",
-        mine && failed && "border border-warning bg-bg text-text-primary",
-        mine && !failed && "bg-accent text-text-on-accent",
-        mine && sending && "opacity-70",
-      )}
-    >
-      {content}
-    </div>
-  );
+  /**
+   * 배송 정보는 **말풍선이 아니라 카드로** 그린다 (F6 3.6). 보낸 사람에 따라
+   * 색이 갈리지 않는 것은 의도다 — 이건 누가 한 말이 아니라 **양쪽이 같이 보는
+   * 자료**이고, 대화를 한참 올려 다시 찾을 때 한눈에 걸려야 한다.
+   */
+  const bubble =
+    kind === "ADDRESS" ? (
+      <div className="w-[250px] rounded-[14px] border border-border bg-bg p-[14px]">
+        <p className="flex items-center gap-[6px] text-label font-semibold text-text-primary">
+          <Package size={14} className="shrink-0 text-accent" />
+          배송 정보
+        </p>
+        <p className="mt-2 whitespace-pre-line text-caption leading-relaxed text-text-primary">
+          {content}
+        </p>
+      </div>
+    ) : (
+      <div
+        className={cn(
+          "max-w-[250px] px-[14px] py-3 text-caption leading-relaxed",
+          mine
+            ? "rounded-[14px_14px_4px_14px]"
+            : "rounded-[14px_14px_14px_4px] bg-surface-sunken text-text-primary",
+          mine && failed && "border border-warning bg-bg text-text-primary",
+          mine && !failed && "bg-accent text-text-on-accent",
+          mine && sending && "opacity-70",
+        )}
+      >
+        {content}
+      </div>
+    );
 
   if (!mine) {
     return (
