@@ -6246,6 +6246,8 @@
               "id": "vhr5L",
               "name": "Badge Row",
               "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
               "children": [
                 {
                   "id": "wsm9b",
@@ -6257,6 +6259,30 @@
                       "content": "진행중"
                     }
                   }
+                },
+                {
+                  "type": "frame",
+                  "id": "zvitD",
+                  "x": 326,
+                  "y": 0,
+                  "name": "Fav",
+                  "enabled": false,
+                  "width": 24,
+                  "height": 24,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "g67wSw",
+                      "name": "Heart",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "heart",
+                      "library": "lucide",
+                      "fill": "$text-primary"
+                    }
+                  ]
                 }
               ]
             },
@@ -8221,772 +8247,33 @@
               "fontWeight": "normal"
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "sLgf2",
-      "x": 0,
-      "y": 6205,
-      "name": "S01 홈",
-      "clip": true,
-      "width": 390,
-      "fill": "$bg",
-      "layout": "vertical",
-      "children": [
-        {
-          "id": "RPlEN",
-          "type": "ref",
-          "ref": "h655AG",
-          "name": "Status Bar",
-          "width": "fill_container"
         },
         {
           "type": "frame",
-          "id": "L22d7",
-          "name": "Home Header",
-          "width": "fill_container",
-          "height": 52,
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "strokeAlignment": "inner",
-          "padding": [
-            0,
-            20
-          ],
-          "justifyContent": "space_between",
+          "id": "ED3yp",
+          "layoutPosition": "absolute",
+          "x": 122,
+          "y": 4,
+          "name": "Fav",
+          "enabled": false,
+          "width": 32,
+          "height": 32,
+          "fill": "#FFFFFFBF",
+          "cornerRadius": "$radius-pill",
+          "justifyContent": "center",
           "alignItems": "center",
           "children": [
             {
-              "id": "TjHNf",
-              "type": "ref",
-              "ref": "Y0Vcs3",
-              "name": "Logo",
-              "width": 45,
-              "height": 23
+              "type": "icon",
+              "id": "ggtnY",
+              "name": "Heart",
+              "width": 17,
+              "height": 17,
+              "icon": "heart",
+              "library": "lucide",
+              "fill": "$text-primary"
             }
           ]
-        },
-        {
-          "type": "frame",
-          "id": "Srj14",
-          "name": "Intro",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 8,
-          "padding": [
-            16,
-            20,
-            28,
-            20
-          ],
-          "children": [
-            {
-              "type": "text",
-              "id": "F04JY",
-              "name": "H",
-              "fill": "$text-primary",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "사연을 기다리는 물건",
-              "lineHeight": "$lh-tight",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-display",
-              "fontWeight": "$w-bold"
-            },
-            {
-              "type": "text",
-              "id": "oRo9l",
-              "name": "P",
-              "fill": "$text-secondary",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "가장 공감받은 이야기가 가져갑니다",
-              "lineHeight": "$lh-normal",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-caption",
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "v0024m",
-          "name": "마감 임박",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 14,
-          "children": [
-            {
-              "type": "frame",
-              "id": "AjbVD",
-              "name": "Head Wrap",
-              "width": "fill_container",
-              "padding": [
-                0,
-                20
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "poZbf",
-                  "name": "Section Head",
-                  "width": "fill_container",
-                  "justifyContent": "space_between",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "anh3A",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "content": "마감 임박",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-title",
-                      "fontWeight": "$w-bold"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "k7YH5",
-                      "name": "More",
-                      "gap": 2,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "whcWx",
-                          "name": "L",
-                          "fill": "$accent",
-                          "content": "전체",
-                          "fontFamily": "$font-body",
-                          "fontSize": "$text-caption",
-                          "fontWeight": "$w-semibold"
-                        },
-                        {
-                          "type": "icon",
-                          "id": "JWh8z",
-                          "name": "Chevron",
-                          "width": 15,
-                          "height": 15,
-                          "icon": "chevron-right",
-                          "library": "lucide",
-                          "fill": "$accent"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "ry2PI",
-              "name": "Scroller",
-              "width": "fill_container",
-              "gap": 12,
-              "padding": [
-                0,
-                0,
-                0,
-                20
-              ],
-              "children": [
-                {
-                  "id": "EfMp2",
-                  "type": "ref",
-                  "ref": "nXn9K",
-                  "name": "캠핑 의자 2개",
-                  "descendants": {
-                    "qdshk": {
-                      "fill": {
-                        "type": "image",
-                        "enabled": true,
-                        "url": "https://images.unsplash.com/photo-1708175530492-a873df8d5597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NTF8&ixlib=rb-4.1.0&q=80&w=1080",
-                        "mode": "fill"
-                      }
-                    },
-                    "PoLxP": {
-                      "enabled": false
-                    },
-                    "LEa1B": {
-                      "content": "캠핑 의자 2개"
-                    },
-                    "Ovs9H": {
-                      "content": "2시간 41분"
-                    },
-                    "eNL7b": {
-                      "content": "사연 31"
-                    }
-                  }
-                },
-                {
-                  "id": "zWAQC",
-                  "type": "ref",
-                  "ref": "nXn9K",
-                  "name": "도자기 화병",
-                  "descendants": {
-                    "qdshk": {
-                      "fill": {
-                        "type": "image",
-                        "enabled": true,
-                        "url": "https://images.unsplash.com/photo-1723779229613-8c835de978f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0NzA2MzR8&ixlib=rb-4.1.0&q=80&w=1080",
-                        "mode": "fill"
-                      }
-                    },
-                    "PoLxP": {
-                      "enabled": false
-                    },
-                    "LEa1B": {
-                      "content": "도자기 화병"
-                    },
-                    "Ovs9H": {
-                      "content": "1시간 12분"
-                    },
-                    "eNL7b": {
-                      "content": "사연 9"
-                    }
-                  }
-                },
-                {
-                  "id": "LB9gy",
-                  "type": "ref",
-                  "ref": "nXn9K",
-                  "name": "자전거",
-                  "descendants": {
-                    "qdshk": {
-                      "fill": {
-                        "type": "image",
-                        "enabled": true,
-                        "url": "https://images.unsplash.com/photo-1784399361319-fd25cc6ac614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0NzA2MzV8&ixlib=rb-4.1.0&q=80&w=1080",
-                        "mode": "fill"
-                      }
-                    },
-                    "PoLxP": {
-                      "enabled": false
-                    },
-                    "LEa1B": {
-                      "content": "자전거"
-                    },
-                    "Ovs9H": {
-                      "content": "48분"
-                    },
-                    "eNL7b": {
-                      "content": "사연 4"
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "k4WvYI",
-          "name": "최근 경매",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 12,
-          "padding": [
-            32,
-            20,
-            0,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "Mz13L",
-              "name": "Section Head",
-              "width": "fill_container",
-              "justifyContent": "space_between",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Us4Cy",
-                  "name": "T",
-                  "fill": "$text-primary",
-                  "content": "최근 올라온 경매",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-title",
-                  "fontWeight": "$w-bold"
-                },
-                {
-                  "type": "frame",
-                  "id": "k1wWNm",
-                  "name": "More",
-                  "gap": 2,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "D5Biq",
-                      "name": "L",
-                      "fill": "$accent",
-                      "content": "전체",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "icon",
-                      "id": "IgnyA",
-                      "name": "Chevron",
-                      "width": 15,
-                      "height": 15,
-                      "icon": "chevron-right",
-                      "library": "lucide",
-                      "fill": "$accent"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "ntA0H",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "필름 카메라 나눔",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1695192699177-f98215c7bc4c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzJ8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "v1KyF": {
-                  "content": "필름 카메라 나눔"
-                },
-                "dQGEO": {
-                  "content": "6일 4시간 남음"
-                },
-                "ORIkG": {
-                  "content": "사연 12"
-                }
-              }
-            },
-            {
-              "id": "vQz5Y",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "에스프레소 머신",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1432107294469-414527cb5c65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzN8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "v1KyF": {
-                  "content": "에스프레소 머신"
-                },
-                "dQGEO": {
-                  "content": "4일 9시간 남음"
-                },
-                "ORIkG": {
-                  "content": "사연 8"
-                }
-              }
-            },
-            {
-              "id": "Nqeu2",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "원목 스툴 2개",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1764590544169-c9f5b240c229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzR8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "v1KyF": {
-                  "content": "원목 스툴 2개"
-                },
-                "dQGEO": {
-                  "content": "2일 3시간 남음"
-                },
-                "ORIkG": {
-                  "content": "사연 6"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "m8TF7",
-          "name": "Bottom Space",
-          "width": "fill_container",
-          "height": 24
-        },
-        {
-          "id": "WICC9",
-          "type": "ref",
-          "ref": "wRmqk",
-          "name": "Tab Bar",
-          "width": "fill_container",
-          "descendants": {
-            "p2HkM": {
-              "fill": "$accent-subtle"
-            },
-            "YpeTy": {
-              "fill": "$accent"
-            },
-            "KslOZ": {
-              "fill": "$accent"
-            },
-            "Pv8U7": {
-              "fill": "#FFFFFF00"
-            },
-            "RKash": {
-              "fill": "$text-tertiary"
-            },
-            "gOcim": {
-              "fill": "$text-tertiary"
-            },
-            "jST5W": {
-              "fill": "#FFFFFF00"
-            },
-            "f9aYw": {
-              "fill": "$text-tertiary"
-            },
-            "TNGrn": {
-              "fill": "$text-tertiary"
-            },
-            "E3SmKq": {
-              "fill": "#FFFFFF00"
-            },
-            "asb9Z": {
-              "fill": "$text-tertiary"
-            },
-            "b3URX": {
-              "fill": "$text-tertiary"
-            }
-          }
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "kTx4l",
-      "x": 460,
-      "y": 6205,
-      "name": "S02 경매 탐색",
-      "clip": true,
-      "width": 390,
-      "fill": "$bg",
-      "layout": "vertical",
-      "children": [
-        {
-          "id": "bhRLw",
-          "type": "ref",
-          "ref": "h655AG",
-          "name": "Status Bar",
-          "width": "fill_container"
-        },
-        {
-          "type": "frame",
-          "id": "BUk5v",
-          "name": "Header",
-          "width": "fill_container",
-          "height": 52,
-          "stroke": "$border",
-          "strokeWidth": {
-            "bottom": 1
-          },
-          "strokeAlignment": "inner",
-          "padding": [
-            0,
-            20
-          ],
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "rAiKY",
-              "name": "T",
-              "fill": "$text-primary",
-              "content": "경매 현황",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-title",
-              "fontWeight": "$w-bold"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "vOgB8",
-          "name": "Search + Sort",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 12,
-          "padding": [
-            10,
-            20,
-            20,
-            20
-          ],
-          "children": [
-            {
-              "id": "r16Ld",
-              "type": "ref",
-              "ref": "FWS6P",
-              "name": "Search",
-              "width": "fill_container"
-            },
-            {
-              "id": "ayXcr",
-              "type": "ref",
-              "ref": "ZT7ZJ",
-              "name": "Sort",
-              "width": "fill_container"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "r8idFw",
-          "name": "목록",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 12,
-          "padding": [
-            0,
-            20
-          ],
-          "children": [
-            {
-              "id": "N4MZw",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "캠핑 의자 2개",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1770306924100-a619b6104948?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "wsm9b": {
-                  "fill": "$warning-subtle"
-                },
-                "wsm9b/mneRN": {
-                  "content": "마감 임박",
-                  "fill": "$warning-text"
-                },
-                "v1KyF": {
-                  "content": "캠핑 의자 2개"
-                },
-                "dQGEO": {
-                  "content": "2시간 41분 남음",
-                  "fill": "$warning",
-                  "fontWeight": "$w-semibold"
-                },
-                "ORIkG": {
-                  "content": "사연 31"
-                }
-              }
-            },
-            {
-              "id": "VMiQx",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "필름 카메라 나눔",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1523251239923-9969d2b4f95f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "v1KyF": {
-                  "content": "필름 카메라 나눔"
-                },
-                "dQGEO": {
-                  "content": "6일 4시간 남음"
-                },
-                "ORIkG": {
-                  "content": "사연 12"
-                }
-              }
-            },
-            {
-              "id": "SjP9S",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "원목 스툴 2개",
-              "width": "fill_container",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1769736436895-35382302565c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "v1KyF": {
-                  "content": "원목 스툴 2개"
-                },
-                "dQGEO": {
-                  "content": "2일 3시간 남음"
-                },
-                "ORIkG": {
-                  "content": "사연 6"
-                }
-              }
-            },
-            {
-              "id": "c4cMwD",
-              "type": "ref",
-              "ref": "tz4S6",
-              "name": "에스프레소 머신",
-              "width": "fill_container",
-              "fill": "$surface",
-              "descendants": {
-                "mAUq2": {
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "https://images.unsplash.com/photo-1744877478622-a78c7a3336f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzZ8&ixlib=rb-4.1.0&q=80&w=1080",
-                    "mode": "fill"
-                  }
-                },
-                "bJPkw": {
-                  "enabled": false
-                },
-                "wsm9b": {
-                  "fill": "$closed-subtle"
-                },
-                "wsm9b/mneRN": {
-                  "content": "마감됨",
-                  "fill": "$closed"
-                },
-                "v1KyF": {
-                  "content": "에스프레소 머신",
-                  "fill": "$text-tertiary"
-                },
-                "dQGEO": {
-                  "content": "3일 전 마감",
-                  "fill": "$text-tertiary"
-                },
-                "ORIkG": {
-                  "content": "사연 8",
-                  "fill": "$text-tertiary"
-                }
-              }
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "zPPDE",
-          "name": "FAB Row",
-          "width": "fill_container",
-          "padding": [
-            20,
-            20,
-            0,
-            20
-          ],
-          "justifyContent": "end",
-          "children": [
-            {
-              "id": "D6dbWy",
-              "type": "ref",
-              "ref": "tNjx5",
-              "name": "경매 등록"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "RUJ1U",
-          "name": "Bottom Space",
-          "width": "fill_container",
-          "height": 16
-        },
-        {
-          "id": "eQUl9",
-          "type": "ref",
-          "ref": "wRmqk",
-          "name": "Tab Bar",
-          "width": "fill_container",
-          "descendants": {
-            "p2HkM": {
-              "fill": "#FFFFFF00"
-            },
-            "YpeTy": {
-              "fill": "$text-tertiary"
-            },
-            "KslOZ": {
-              "fill": "$text-tertiary"
-            },
-            "Pv8U7": {
-              "fill": "$accent-subtle"
-            },
-            "RKash": {
-              "fill": "$accent"
-            },
-            "gOcim": {
-              "fill": "$accent"
-            },
-            "jST5W": {
-              "fill": "#FFFFFF00"
-            },
-            "f9aYw": {
-              "fill": "$text-tertiary"
-            },
-            "TNGrn": {
-              "fill": "$text-tertiary"
-            },
-            "E3SmKq": {
-              "fill": "#FFFFFF00"
-            },
-            "asb9Z": {
-              "fill": "$text-tertiary"
-            },
-            "b3URX": {
-              "fill": "$text-tertiary"
-            }
-          }
         }
       ]
     },
@@ -18066,586 +17353,6 @@
     },
     {
       "type": "frame",
-      "id": "eC5Ub",
-      "x": 1380,
-      "y": 7905,
-      "name": "S10 채팅",
-      "clip": true,
-      "width": 390,
-      "fill": "$bg",
-      "layout": "vertical",
-      "children": [
-        {
-          "id": "muK5z",
-          "type": "ref",
-          "ref": "h655AG",
-          "name": "Status Bar",
-          "width": "fill_container"
-        },
-        {
-          "id": "qWh2t",
-          "type": "ref",
-          "ref": "lVcLu",
-          "name": "App Bar",
-          "width": "fill_container",
-          "descendants": {
-            "TIXWG": {
-              "content": "지현"
-            },
-            "Uo49Q": {
-              "enabled": false
-            }
-          }
-        },
-        {
-          "type": "frame",
-          "id": "C3jJj5",
-          "name": "Notice",
-          "width": "fill_container",
-          "fill": "$surface",
-          "gap": 8,
-          "padding": [
-            12,
-            20
-          ],
-          "children": [
-            {
-              "type": "icon",
-              "id": "Jzvqs",
-              "name": "Icon",
-              "width": 15,
-              "height": 15,
-              "icon": "info",
-              "library": "lucide",
-              "fill": "$text-secondary"
-            },
-            {
-              "type": "text",
-              "id": "cCY3X",
-              "name": "T",
-              "fill": "$text-secondary",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "택배로 보낼지 직접 만날지, 배송지도 여기서 정하세요. ‘필름 카메라 나눔’ 경매",
-              "lineHeight": "$lh-normal",
-              "fontFamily": "$font-body",
-              "fontSize": "$text-label",
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "ocV2s",
-          "name": "Messages",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 14,
-          "padding": [
-            20,
-            20,
-            0,
-            20
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "LB474",
-              "name": "Date",
-              "width": "fill_container",
-              "padding": [
-                0,
-                0,
-                4,
-                0
-              ],
-              "justifyContent": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "W18aYp",
-                  "name": "D",
-                  "fill": "$text-tertiary",
-                  "content": "오늘",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "VUDof",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "WTeFI",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "ZpExR",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "YE7EG",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:12",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "P9psbu",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "xov1P",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "c1Dc8",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "lOIhA",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:20",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "iwI8f",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "PDfaG",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "AWwgD",
-              "name": "them",
-              "width": "fill_container",
-              "gap": 8,
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "U9xUE",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$surface-sunken",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    14,
-                    4
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "s2QB1V",
-                      "name": "T",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "H4uYp",
-                  "name": "Time",
-                  "fill": "$text-tertiary",
-                  "content": "오전 9:21",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-micro",
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "EsCGQ",
-              "name": "me",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "zt8o1",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "Uohbl",
-                      "name": "Read",
-                      "fill": "$accent",
-                      "content": "읽음",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "$w-semibold"
-                    },
-                    {
-                      "type": "text",
-                      "id": "VycLF",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:24",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "OA6ow",
-                  "name": "Bubble",
-                  "width": 250,
-                  "fill": "$accent",
-                  "cornerRadius": [
-                    14,
-                    14,
-                    4,
-                    14
-                  ],
-                  "padding": [
-                    12,
-                    14
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "BLDgi",
-                      "name": "T",
-                      "fill": "$text-on-accent",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "네, 배송 정보 보내드릴게요.",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "estHF",
-              "name": "me / 배송 정보",
-              "width": "fill_container",
-              "gap": 8,
-              "justifyContent": "end",
-              "alignItems": "end",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "c4XpO",
-                  "name": "Meta",
-                  "layout": "vertical",
-                  "gap": 1,
-                  "alignItems": "end",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "w9ews",
-                      "name": "Time",
-                      "fill": "$text-tertiary",
-                      "content": "오전 9:25",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-micro",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "YPcTH",
-                  "name": "Card",
-                  "width": 250,
-                  "fill": "$bg",
-                  "cornerRadius": 14,
-                  "stroke": "$border",
-                  "strokeWidth": 1,
-                  "strokeAlignment": "inner",
-                  "layout": "vertical",
-                  "gap": 8,
-                  "padding": 14,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "a8CIpd",
-                      "name": "Head",
-                      "gap": 6,
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon",
-                          "id": "Z4A77h",
-                          "name": "Icon",
-                          "width": 14,
-                          "height": 14,
-                          "icon": "package",
-                          "library": "lucide",
-                          "fill": "$accent"
-                        },
-                        {
-                          "type": "text",
-                          "id": "MeWn3",
-                          "name": "Label",
-                          "fill": "$text-primary",
-                          "content": "배송 정보",
-                          "fontFamily": "$font-body",
-                          "fontSize": "$text-label",
-                          "fontWeight": "$w-semibold"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "text",
-                      "id": "EWAby",
-                      "name": "Body",
-                      "fill": "$text-primary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "서연 · 010-2345-6789\n(04524) 서울 중구 세종대로 110\n302동 1401호",
-                      "lineHeight": "$lh-relaxed",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "Sfh6h",
-          "name": "Bottom Space",
-          "width": "fill_container",
-          "height": 24
-        },
-        {
-          "type": "frame",
-          "id": "etK03",
-          "name": "Input Bar",
-          "width": "fill_container",
-          "fill": "$bg",
-          "stroke": "$border",
-          "strokeWidth": {
-            "top": 1
-          },
-          "strokeAlignment": "inner",
-          "strokeLinejoin": "round",
-          "layout": "vertical",
-          "gap": 12,
-          "padding": [
-            12,
-            16,
-            22,
-            16
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "JHCcL",
-              "name": "Ship Button",
-              "width": "fill_container",
-              "cornerRadius": "$radius-pill",
-              "stroke": "$border-strong",
-              "strokeWidth": 1,
-              "strokeAlignment": "inner",
-              "gap": 6,
-              "padding": [
-                10,
-                0
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "icon",
-                  "id": "O03WBx",
-                  "name": "Icon",
-                  "width": 15,
-                  "height": 15,
-                  "icon": "package",
-                  "library": "lucide",
-                  "fill": "$text-primary"
-                },
-                {
-                  "type": "text",
-                  "id": "BJ26S",
-                  "name": "Label",
-                  "fill": "$text-primary",
-                  "content": "배송 정보 보내기",
-                  "fontFamily": "$font-body",
-                  "fontSize": "$text-caption",
-                  "fontWeight": "$w-semibold"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "l7SF6",
-              "name": "Input Row",
-              "width": "fill_container",
-              "gap": 9,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "F1pREw",
-                  "name": "Input",
-                  "width": "fill_container",
-                  "fill": "$surface",
-                  "cornerRadius": "$radius-pill",
-                  "padding": [
-                    12,
-                    15
-                  ],
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "HVUfF",
-                      "name": "P",
-                      "fill": "$text-tertiary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "메시지 입력",
-                      "fontFamily": "$font-body",
-                      "fontSize": "$text-caption",
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "vYYOy",
-                  "name": "Send",
-                  "width": 42,
-                  "height": 42,
-                  "fill": "$accent",
-                  "cornerRadius": "$radius-pill",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "icon",
-                      "id": "pThY5",
-                      "name": "Icon",
-                      "width": 19,
-                      "height": 19,
-                      "icon": "arrow-up",
-                      "library": "lucide",
-                      "fill": "$text-on-accent"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "Nx5ov",
       "x": 2300,
       "y": 9605,
@@ -19279,6 +17986,1392 @@
           "fontFamily": "$font-body",
           "fontSize": 32,
           "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Zlrkd",
+      "x": 1380,
+      "y": 7905,
+      "name": "S10 채팅",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "A2pnqZ",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "d7MMBr",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "지현"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "ZMSgO",
+          "name": "Notice",
+          "width": "fill_container",
+          "fill": "$surface",
+          "gap": 8,
+          "padding": [
+            12,
+            20
+          ],
+          "children": [
+            {
+              "type": "icon",
+              "id": "KO1Hv",
+              "name": "Icon",
+              "width": 15,
+              "height": 15,
+              "icon": "info",
+              "library": "lucide",
+              "fill": "$text-secondary"
+            },
+            {
+              "type": "text",
+              "id": "tfgL4",
+              "name": "T",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "택배로 보낼지 직접 만날지, 배송지도 여기서 정하세요. ‘필름 카메라 나눔’ 경매",
+              "lineHeight": "$lh-normal",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-label",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "MaQVV",
+          "name": "Messages",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "afjeM",
+              "name": "Date",
+              "width": "fill_container",
+              "padding": [
+                0,
+                0,
+                4,
+                0
+              ],
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "bVgl8",
+                  "name": "D",
+                  "fill": "$text-tertiary",
+                  "content": "오늘",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bxAhx",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ubMsS",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iSht9",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "사연 정말 잘 읽었어요. 아버지랑 좋은 사진 남기시길 바랄게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "IpSI0",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:12",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "doIXe",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pfIB4",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "INJMF",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c520F",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:20",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "SPxgF",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aTBEY",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "감사합니다! 정말 소중하게 쓰겠습니다.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "U8mGu",
+              "name": "them",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WWm2t",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$surface-sunken",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    14,
+                    4
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "igA74",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "택배로 보내드릴게요. 받으실 주소 확인만 부탁드려요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "h3qpt1",
+                  "name": "Time",
+                  "fill": "$text-tertiary",
+                  "content": "오전 9:21",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-micro",
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yKDAE",
+              "name": "me",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "C8E2n",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Ci0vU",
+                      "name": "Read",
+                      "fill": "$accent",
+                      "content": "읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rSiBX",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:24",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XMIbS",
+                  "name": "Bubble",
+                  "width": 250,
+                  "fill": "$accent",
+                  "cornerRadius": [
+                    14,
+                    14,
+                    4,
+                    14
+                  ],
+                  "padding": [
+                    12,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u3AiM",
+                      "name": "T",
+                      "fill": "$text-on-accent",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "네, 배송 정보 보내드릴게요.",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GVFWZ",
+              "name": "me / 배송 정보",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AkqpX",
+                  "name": "Meta",
+                  "layout": "vertical",
+                  "gap": 1,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nsvoZ",
+                      "name": "Unread",
+                      "fill": "$text-tertiary",
+                      "content": "안읽음",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KMOXs",
+                      "name": "Time",
+                      "fill": "$text-tertiary",
+                      "content": "오전 9:25",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-micro",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "t6s7y",
+                  "name": "Card",
+                  "width": 250,
+                  "fill": "$bg",
+                  "cornerRadius": 14,
+                  "stroke": "$border",
+                  "strokeWidth": 1,
+                  "strokeAlignment": "inner",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "bUS0H",
+                      "name": "Head",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon",
+                          "id": "mDoie",
+                          "name": "Icon",
+                          "width": 14,
+                          "height": 14,
+                          "icon": "package",
+                          "library": "lucide",
+                          "fill": "$accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cPNwP",
+                          "name": "Label",
+                          "fill": "$text-primary",
+                          "content": "배송 정보",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-semibold"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "gUm38",
+                      "name": "Body",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "서연 · 010-2345-6789\n(04524) 서울 중구 세종대로 110\n302동 1401호",
+                      "lineHeight": "$lh-relaxed",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "H3zBI",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "type": "frame",
+          "id": "b9dwYw",
+          "name": "Input Bar",
+          "width": "fill_container",
+          "fill": "$bg",
+          "stroke": "$border",
+          "strokeWidth": {
+            "top": 1
+          },
+          "strokeAlignment": "inner",
+          "strokeLinejoin": "round",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            12,
+            16,
+            22,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "peKFk",
+              "name": "Ship Button",
+              "width": "fill_container",
+              "cornerRadius": "$radius-pill",
+              "stroke": "$border-strong",
+              "strokeWidth": 1,
+              "strokeAlignment": "inner",
+              "gap": 6,
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Blizp",
+                  "name": "Icon",
+                  "width": 15,
+                  "height": 15,
+                  "icon": "package",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "NOsJC",
+                  "name": "Label",
+                  "fill": "$text-primary",
+                  "content": "배송 정보 보내기",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-caption",
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Kf6ea",
+              "name": "Input Row",
+              "width": "fill_container",
+              "gap": 9,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "A5qJTf",
+                  "name": "Input",
+                  "width": "fill_container",
+                  "fill": "$surface",
+                  "cornerRadius": "$radius-pill",
+                  "padding": [
+                    12,
+                    15
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kdei2",
+                      "name": "P",
+                      "fill": "$text-tertiary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "메시지 입력",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "e7RLK",
+                  "name": "Send",
+                  "width": 42,
+                  "height": 42,
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-pill",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "KtCKi",
+                      "name": "Icon",
+                      "width": 19,
+                      "height": 19,
+                      "icon": "arrow-up",
+                      "library": "lucide",
+                      "fill": "$text-on-accent"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "MqGKz",
+      "x": 0,
+      "y": 6205,
+      "name": "S01 홈",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "EjYs4",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "ZbUob",
+          "name": "Home Header",
+          "width": "fill_container",
+          "height": 52,
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "strokeAlignment": "inner",
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "Rhrda",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "Logo",
+              "width": 45,
+              "height": 23
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QLwfZ",
+          "name": "Intro",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 8,
+          "padding": [
+            16,
+            20,
+            28,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "QPpUA",
+              "name": "H",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "사연을 기다리는 물건",
+              "lineHeight": "$lh-tight",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-display",
+              "fontWeight": "$w-bold"
+            },
+            {
+              "type": "text",
+              "id": "R7sNoV",
+              "name": "P",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "가장 공감받은 이야기가 가져갑니다",
+              "lineHeight": "$lh-normal",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-caption",
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "aiz6f",
+          "name": "마감 임박",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 14,
+          "children": [
+            {
+              "type": "frame",
+              "id": "ukwSy",
+              "name": "Head Wrap",
+              "width": "fill_container",
+              "padding": [
+                0,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LZCk6",
+                  "name": "Section Head",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rWG7M",
+                      "name": "T",
+                      "fill": "$text-primary",
+                      "content": "마감 임박",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-title",
+                      "fontWeight": "$w-bold"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XK0IQ",
+                      "name": "More",
+                      "gap": 2,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "OB6gQ",
+                          "name": "L",
+                          "fill": "$accent",
+                          "content": "전체",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-caption",
+                          "fontWeight": "$w-semibold"
+                        },
+                        {
+                          "type": "icon",
+                          "id": "cTnf6",
+                          "name": "Chevron",
+                          "width": 15,
+                          "height": 15,
+                          "icon": "chevron-right",
+                          "library": "lucide",
+                          "fill": "$accent"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BTyzF",
+              "name": "Scroller",
+              "width": "fill_container",
+              "gap": 12,
+              "padding": [
+                0,
+                0,
+                0,
+                20
+              ],
+              "children": [
+                {
+                  "id": "zp6lI",
+                  "type": "ref",
+                  "ref": "nXn9K",
+                  "name": "캠핑 의자 2개",
+                  "descendants": {
+                    "qdshk": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "https://images.unsplash.com/photo-1708175530492-a873df8d5597?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NTF8&ixlib=rb-4.1.0&q=80&w=1080",
+                        "mode": "fill"
+                      }
+                    },
+                    "PoLxP": {
+                      "enabled": false
+                    },
+                    "LEa1B": {
+                      "content": "캠핑 의자 2개"
+                    },
+                    "Ovs9H": {
+                      "content": "2시간 41분"
+                    },
+                    "eNL7b": {
+                      "content": "사연 31"
+                    },
+                    "ED3yp": {
+                      "enabled": true
+                    }
+                  }
+                },
+                {
+                  "id": "z2e7n",
+                  "type": "ref",
+                  "ref": "nXn9K",
+                  "name": "도자기 화병",
+                  "descendants": {
+                    "qdshk": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "https://images.unsplash.com/photo-1723779229613-8c835de978f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0NzA2MzR8&ixlib=rb-4.1.0&q=80&w=1080",
+                        "mode": "fill"
+                      }
+                    },
+                    "PoLxP": {
+                      "enabled": false
+                    },
+                    "LEa1B": {
+                      "content": "도자기 화병"
+                    },
+                    "Ovs9H": {
+                      "content": "1시간 12분"
+                    },
+                    "eNL7b": {
+                      "content": "사연 9"
+                    },
+                    "ED3yp": {
+                      "enabled": true
+                    }
+                  }
+                },
+                {
+                  "id": "P9JNlc",
+                  "type": "ref",
+                  "ref": "nXn9K",
+                  "name": "자전거",
+                  "descendants": {
+                    "qdshk": {
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "https://images.unsplash.com/photo-1784399361319-fd25cc6ac614?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0NzA2MzV8&ixlib=rb-4.1.0&q=80&w=1080",
+                        "mode": "fill"
+                      }
+                    },
+                    "PoLxP": {
+                      "enabled": false
+                    },
+                    "LEa1B": {
+                      "content": "자전거"
+                    },
+                    "Ovs9H": {
+                      "content": "48분"
+                    },
+                    "eNL7b": {
+                      "content": "사연 4"
+                    },
+                    "ED3yp": {
+                      "enabled": true
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Cps0T",
+          "name": "최근 경매",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            32,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "S9VlLO",
+              "name": "Section Head",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NdDYL",
+                  "name": "T",
+                  "fill": "$text-primary",
+                  "content": "최근 올라온 경매",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-title",
+                  "fontWeight": "$w-bold"
+                },
+                {
+                  "type": "frame",
+                  "id": "WdajQ",
+                  "name": "More",
+                  "gap": 2,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dnh4H",
+                      "name": "L",
+                      "fill": "$accent",
+                      "content": "전체",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "JRB2i",
+                      "name": "Chevron",
+                      "width": 15,
+                      "height": 15,
+                      "icon": "chevron-right",
+                      "library": "lucide",
+                      "fill": "$accent"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "SvKVi",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "필름 카메라 나눔",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1695192699177-f98215c7bc4c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzJ8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "필름 카메라 나눔"
+                },
+                "dQGEO": {
+                  "content": "6일 4시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 12"
+                }
+              }
+            },
+            {
+              "id": "dx7qV",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "에스프레소 머신",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1432107294469-414527cb5c65?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzN8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "에스프레소 머신"
+                },
+                "dQGEO": {
+                  "content": "4일 9시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 8"
+                }
+              }
+            },
+            {
+              "id": "f20e7O",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "원목 스툴 2개",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1764590544169-c9f5b240c229?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzR8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "원목 스툴 2개"
+                },
+                "dQGEO": {
+                  "content": "2일 3시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 6"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "t3OcGc",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "id": "S0Jtpm",
+          "type": "ref",
+          "ref": "wRmqk",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "descendants": {
+            "p2HkM": {
+              "fill": "$accent-subtle"
+            },
+            "YpeTy": {
+              "fill": "$accent"
+            },
+            "KslOZ": {
+              "fill": "$accent"
+            },
+            "Pv8U7": {
+              "fill": "#FFFFFF00"
+            },
+            "RKash": {
+              "fill": "$text-tertiary"
+            },
+            "gOcim": {
+              "fill": "$text-tertiary"
+            },
+            "jST5W": {
+              "fill": "#FFFFFF00"
+            },
+            "f9aYw": {
+              "fill": "$text-tertiary"
+            },
+            "TNGrn": {
+              "fill": "$text-tertiary"
+            },
+            "E3SmKq": {
+              "fill": "#FFFFFF00"
+            },
+            "asb9Z": {
+              "fill": "$text-tertiary"
+            },
+            "b3URX": {
+              "fill": "$text-tertiary"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "AXuAY",
+      "x": 460,
+      "y": 6205,
+      "name": "S02 경매 탐색",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "S30DUR",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "VQJtF",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 52,
+          "stroke": "$border",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "strokeAlignment": "inner",
+          "padding": [
+            0,
+            20
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Inbor",
+              "name": "T",
+              "fill": "$text-primary",
+              "content": "경매 현황",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-title",
+              "fontWeight": "$w-bold"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "q0HiDj",
+          "name": "Search + Sort",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            10,
+            20,
+            20,
+            20
+          ],
+          "children": [
+            {
+              "id": "qbqjK",
+              "type": "ref",
+              "ref": "FWS6P",
+              "name": "Search",
+              "width": "fill_container"
+            },
+            {
+              "id": "B1cfx",
+              "type": "ref",
+              "ref": "ZT7ZJ",
+              "name": "Sort",
+              "width": "fill_container"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dxZKy",
+          "name": "목록",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            0,
+            20
+          ],
+          "children": [
+            {
+              "id": "h3X0yO",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "캠핑 의자 2개",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1770306924100-a619b6104948?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "wsm9b": {
+                  "fill": "$warning-subtle"
+                },
+                "wsm9b/mneRN": {
+                  "content": "마감 임박",
+                  "fill": "$warning-text"
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "캠핑 의자 2개"
+                },
+                "dQGEO": {
+                  "content": "2시간 41분 남음",
+                  "fill": "$warning",
+                  "fontWeight": "$w-semibold"
+                },
+                "ORIkG": {
+                  "content": "사연 31"
+                }
+              }
+            },
+            {
+              "id": "W8j4I",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "필름 카메라 나눔",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1523251239923-9969d2b4f95f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "필름 카메라 나눔"
+                },
+                "dQGEO": {
+                  "content": "6일 4시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 12"
+                }
+              }
+            },
+            {
+              "id": "cptHx",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "원목 스툴 2개",
+              "width": "fill_container",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1769736436895-35382302565c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzV8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "원목 스툴 2개"
+                },
+                "dQGEO": {
+                  "content": "2일 3시간 남음"
+                },
+                "ORIkG": {
+                  "content": "사연 6"
+                }
+              }
+            },
+            {
+              "id": "Bkl5V",
+              "type": "ref",
+              "ref": "tz4S6",
+              "name": "에스프레소 머신",
+              "width": "fill_container",
+              "fill": "$surface",
+              "descendants": {
+                "mAUq2": {
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1744877478622-a78c7a3336f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODU0Njk4NzZ8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  }
+                },
+                "bJPkw": {
+                  "enabled": false
+                },
+                "wsm9b": {
+                  "fill": "$closed-subtle"
+                },
+                "wsm9b/mneRN": {
+                  "content": "마감됨",
+                  "fill": "$closed"
+                },
+                "zvitD": {
+                  "enabled": true
+                },
+                "v1KyF": {
+                  "content": "에스프레소 머신",
+                  "fill": "$text-tertiary"
+                },
+                "dQGEO": {
+                  "content": "3일 전 마감",
+                  "fill": "$text-tertiary"
+                },
+                "ORIkG": {
+                  "content": "사연 8",
+                  "fill": "$text-tertiary"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Y8W5VV",
+          "name": "FAB Row",
+          "width": "fill_container",
+          "padding": [
+            20,
+            20,
+            0,
+            20
+          ],
+          "justifyContent": "end",
+          "children": [
+            {
+              "id": "NqafQ",
+              "type": "ref",
+              "ref": "tNjx5",
+              "name": "경매 등록"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Ge1VN",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 16
+        },
+        {
+          "id": "Rx5pi",
+          "type": "ref",
+          "ref": "wRmqk",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "descendants": {
+            "p2HkM": {
+              "fill": "#FFFFFF00"
+            },
+            "YpeTy": {
+              "fill": "$text-tertiary"
+            },
+            "KslOZ": {
+              "fill": "$text-tertiary"
+            },
+            "Pv8U7": {
+              "fill": "$accent-subtle"
+            },
+            "RKash": {
+              "fill": "$accent"
+            },
+            "gOcim": {
+              "fill": "$accent"
+            },
+            "jST5W": {
+              "fill": "#FFFFFF00"
+            },
+            "f9aYw": {
+              "fill": "$text-tertiary"
+            },
+            "TNGrn": {
+              "fill": "$text-tertiary"
+            },
+            "E3SmKq": {
+              "fill": "#FFFFFF00"
+            },
+            "asb9Z": {
+              "fill": "$text-tertiary"
+            },
+            "b3URX": {
+              "fill": "$text-tertiary"
+            }
+          }
         }
       ]
     }
