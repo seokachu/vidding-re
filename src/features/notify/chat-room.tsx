@@ -454,9 +454,22 @@ function Bubble({
           <span className="text-micro text-text-tertiary">보내는 중</span>
         ) : (
           <>
-            {read && (
-              <span className="text-micro font-semibold text-accent">읽음</span>
-            )}
+            {/*
+              **두 상태를 모두 적는다.** 읽었을 때만 `읽음` 을 띄우면, 안 읽은
+              메시지는 아무 표시가 없어 "아직 안 읽음"과 "표시가 없는 것"이
+              구분되지 않는다. 보낸 사람이 가장 궁금해하는 것이 그 차이다.
+
+              읽음은 강조색, 안읽음은 눌러 둔다 — 기다리는 상태가 결과보다
+              먼저 눈에 들어올 이유가 없다.
+            */}
+            <span
+              className={cn(
+                "text-micro",
+                read ? "font-semibold text-accent" : "text-text-tertiary",
+              )}
+            >
+              {read ? "읽음" : "안읽음"}
+            </span>
             {time && <span className="text-micro text-text-tertiary">{time}</span>}
           </>
         )}
