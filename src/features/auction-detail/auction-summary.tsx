@@ -1,7 +1,7 @@
 import { ImageIcon, Info } from "lucide-react";
 import Image from "next/image";
 
-import { Badge } from "@/components/ui";
+import { Avatar, Badge } from "@/components/ui";
 import { auctionDisplayStatus } from "@/lib/auction-status";
 import { cn } from "@/lib/cn";
 import { formatRelativeTime, formatTimeLeft } from "@/lib/format";
@@ -71,6 +71,7 @@ export function AuctionSummary({
 
         <HostLine
           nickName={auction.hostNickName}
+          avatarUrl={auction.hostAvatarUrl}
           relationship={relationship}
           isClosed={isClosed}
         />
@@ -125,10 +126,12 @@ function Hero({ images, dimmed }: { images: string[]; dimmed: boolean }) {
  */
 function HostLine({
   nickName,
+  avatarUrl,
   relationship,
   isClosed,
 }: {
   nickName: string;
+  avatarUrl: string | null;
   relationship: Relationship | null;
   isClosed: boolean;
 }) {
@@ -136,9 +139,13 @@ function HostLine({
 
   return (
     <div className="flex items-center gap-2">
-      <span className="flex size-[26px] items-center justify-center rounded-full bg-surface-sunken text-micro font-semibold text-text-secondary">
-        주
-      </span>
+      {/*
+        **주최자의 실제 프로필 사진을 쓴다.** 전에는 `주`(주최자) 글자를 고정으로
+        박아 뒀는데, 역할은 바로 옆 문구가 이미 말하고 있어서 같은 말을 두 번
+        하는 자리였다. 사연을 주고받는 서비스라 **누가 여는 경매인지** 얼굴이
+        보이는 편이 낫다. 사진이 없으면 `Avatar` 가 닉네임 첫 글자로 떨어뜨린다.
+      */}
+      <Avatar src={avatarUrl} nickName={nickName} size={26} />
       <span
         className={cn(
           "text-caption font-medium",

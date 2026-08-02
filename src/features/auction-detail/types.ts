@@ -14,6 +14,8 @@ export type AuctionDetail = {
   id: string;
   hostId: string;
   hostNickName: string;
+  /** 주최자 프로필 사진. 없으면 닉네임 첫 글자로 떨어진다 (F8 4) */
+  hostAvatarUrl: string | null;
   title: string;
   description: string;
   imageUrls: string[];

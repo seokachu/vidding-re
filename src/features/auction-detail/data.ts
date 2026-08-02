@@ -34,10 +34,11 @@ export async function loadAuctionDetail(
 
   if (error || !auction) return null;
 
-  // 닉네임은 공개 프로필 뷰에서만 온다. users 는 본인 행만 열려 있다 (supabase/README 1)
+  // 닉네임·아바타는 공개 프로필 뷰에서만 온다. users 는 본인 행만 열려 있다
+  // (supabase/README 1)
   const { data: host } = await supabase
     .from("v_user_profiles")
-    .select("nick_name")
+    .select("nick_name, avatar_url")
     .eq("id", auction.user_id)
     .maybeSingle();
 
@@ -45,6 +46,7 @@ export async function loadAuctionDetail(
     id: auction.id,
     hostId: auction.user_id,
     hostNickName: host?.nick_name ?? "이름없음",
+    hostAvatarUrl: host?.avatar_url ?? null,
     title: auction.title,
     description: auction.description,
     imageUrls: auction.image_urls,
