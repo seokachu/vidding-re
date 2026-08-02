@@ -1,4 +1,4 @@
-import { Gift, Info } from "lucide-react";
+import { ChevronLeft, Gift, Info } from "lucide-react";
 import Link from "next/link";
 
 import { Logo } from "@/components/ui/logo";
@@ -41,6 +41,21 @@ function destinationOf(next: string | undefined): string | undefined {
   return DESTINATION.find(([test]) => test.test(path))?.[1];
 }
 
+/**
+ * 되돌아갈 곳 (F10 3.5).
+ *
+ * **브라우저 뒤로가기를 흉내 내면 안 된다.** 왔던 곳은 로그인이 필요한 화면이라
+ * 프록시가 다시 여기로 튕긴다 — 뒤로가기와 로그인 화면 사이를 왕복하게 된다.
+ *
+ * 그래서 `next` 에서 **로그인 없이 볼 수 있는 가장 가까운 자리**를 계산한다.
+ * 사연 작성·경매 수정은 그 경매 상세가 공개되어 있으므로 그리로, 나머지는 홈이다.
+ */
+function backHref(next: string | undefined): string {
+  const path = next?.split("?")[0] ?? "";
+  const auction = path.match(/^\/auctions\/([^/]+)\/(?:edit|episodes)/)?.[1];
+  return auction ? ROUTES.auction(auction) : ROUTES.home;
+}
+
 /** 받침이 있으면 `은`, 없으면 `는`. `알림은` · `마이페이지는` */
 function withTopic(word: string): string {
   const code = word.charCodeAt(word.length - 1);
@@ -68,6 +83,26 @@ export function EntryScreen({
 
   return (
     <main className="flex flex-1 flex-col">
+      {/*
+        **되돌아갈 길을 남긴다.** 둘러보다 튕겨 온 사람에게 이 화면은 막다른
+        길이었다 — 로그인하거나 주소창을 건드리는 수밖에 없었다.
+        아래 `먼저 둘러보기` 가 있긴 하지만 이미 둘러보던 사람에게는 문구가
+        맞지 않고, 화면 맨 아래라 되돌아가는 길로 읽히지도 않는다.
+
+        직접 들어온 경우(`next` 없음)에는 그리지 않는다. 돌아갈 곳이 없다.
+      */}
+      {destination && (
+        <div className="px-2 pt-2">
+          <Link
+            href={backHref(next)}
+            aria-label="뒤로"
+            className="flex size-10 items-center justify-center rounded-sm text-text-primary hover:bg-surface"
+          >
+            <ChevronLeft size={24} />
+          </Link>
+        </div>
+      )}
+
       {/*
         **화면 맨 위에, 로고보다 먼저 놓는다.** 이 화면에 온 이유가 여기 적혀
         있는데 가운데에 두었더니 파란 혜택 배너에 묻혀 가장 늦게 읽혔다.
