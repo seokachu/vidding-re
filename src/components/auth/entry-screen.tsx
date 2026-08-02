@@ -74,8 +74,10 @@ export function EntryScreen({
         자리를 바꾸지 않고 색만 올리면 또 묻힌다.
 
         레드는 쓰지 않는다. 사용자가 잘못한 것이 없는데 오류로 읽힌다
-        (레드는 마감 임박·오류·필수 입력 전용, PRD B3). 잉크 블루를 채워
-        흰 글자를 얹으면 오해 없이 가장 먼저 눈에 들어온다.
+        (레드는 마감 임박·오류·필수 입력 전용, PRD B3). 잉크 블루로 채워도
+        봤지만 **소개보다 안내가 세지는** 역전이 생겼다. 자리가 이미 시선을
+        잡아 주므로 색은 한 단계 눌러 `surface-sunken` 으로 둔다 — 흰 배경과
+        경계는 또렷하되 목소리는 크지 않다.
 
         여백을 위에서 걷어내고 바가 그 자리를 차지한다 — 바 아래 본문은
         `pt-14`, 바가 없으면 원래대로 `pt-24` 다.
@@ -83,12 +85,14 @@ export function EntryScreen({
       {destination && (
         <p
           role="status"
-          className="flex items-start gap-2 bg-accent px-8 py-4 text-caption leading-normal text-text-on-accent"
+          className="flex items-start gap-2 bg-surface-sunken px-8 py-4 text-caption leading-normal text-text-secondary"
         >
           <Info size={16} className="mt-[3px] shrink-0" />
           <span>
-            <b className="font-bold">{withTopic(destination)}</b> 로그인해야 볼 수
-            있어요. 로그인하면 바로 이어집니다
+            <b className="font-bold text-text-primary">
+              {withTopic(destination)}
+            </b>{" "}
+            로그인해야 볼 수 있어요. 로그인하면 바로 이어집니다
           </span>
         </p>
       )}
