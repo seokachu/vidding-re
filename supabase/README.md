@@ -19,6 +19,7 @@
 | `20260801000001_fix_chat_rooms_select_policy.sql` | `chat_rooms` SELECT 정책의 컬럼 참조 수정 |
 | `20260802000001_address_optional.sql` | `auctions.address_id` nullable · `on delete set null` · 생성 정책에서 배송지 조건 제거 (F1 3.2 개정) |
 | `20260802000002_message_kind.sql` | `messages.kind` (`TEXT` / `ADDRESS`) — 배송 정보 카드 (F6 3.6) |
+| `20260803000001_onboarded_at.sql` | `users.onboarded_at` — 첫 로그인에 온보딩 1회 (F11 3.3). 기존 사용자는 본 것으로 채운다 |
 
 > **이미 적용된 마이그레이션은 고치지 않는다.** 바뀐 내용은 새 파일로 덧붙인다.
 > 기존 DB 는 이미 실행한 파일을 다시 읽지 않으므로, 파일을 고치면

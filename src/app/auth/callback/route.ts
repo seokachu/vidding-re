@@ -10,6 +10,10 @@ import { createClient } from "@/lib/supabase/server";
  *   성공        → 원래 보던 화면으로 복귀 (없으면 홈)
  *   사용자 취소 → **조용히** 진입 화면으로. 오류로 표시하지 않는다 (F10 4)
  *   실패        → 진입 화면 + 사유. 인증 중간 상태로 방치하지 않는다
+ *
+ * **첫 로그인이면 온보딩을 한 번 거친다** (F11 3.3). 판정은 `users.onboarded_at`
+ * 이다 — 기기가 아니라 계정에 남으므로 폰에서 보고 노트북에서 또 보는 일이 없다.
+ * 원래 가려던 곳(`next`)은 온보딩에 넘겨 이어지게 한다.
  */
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = request.nextUrl;
@@ -38,6 +42,28 @@ export async function GET(request: NextRequest) {
 
   if (error) {
     return NextResponse.redirect(failure(origin, reasonOf(error.message)));
+  }
+
+  /**
+   * 온보딩 판정이 실패해도 로그인은 성공한 것이다. 조회가 안 되면 그냥 보낸다 —
+   * **소개 화면 때문에 로그인을 막지 않는다.**
+   */
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    const { data: row } = await supabase
+      .from("users")
+      .select("onboarded_at")
+      .eq("id", user.id)
+      .maybeSingle();
+
+    if (row && row.onboarded_at === null) {
+      const url = new URL(ROUTES.onboarding, origin);
+      url.searchParams.set("next", next);
+      return NextResponse.redirect(url);
+    }
   }
 
   return NextResponse.redirect(new URL(next, origin));

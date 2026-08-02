@@ -159,3 +159,26 @@ export async function fetchChatMessages(
   if (error) return null;
   return data;
 }
+
+/**
+ * 온보딩을 봤다고 표시한다 (F11 3.3).
+ *
+ * **건너뛰기도 완료로 친다.** "안 볼래"라는 뜻인데 다음 로그인에 또 뜨면
+ * 무시당한 것이다.
+ *
+ * 실패해도 알리지 않는다 — 소개 화면을 닫는 일이 오류 문구로 끝나면 안 된다.
+ * 못 적으면 다음 로그인에 한 번 더 보게 될 뿐이다.
+ *
+ * 온보딩은 로그인 없이도 열리므로(F11 3.3) 비회원이면 조용히 지나간다.
+ */
+export async function completeOnboarding(): Promise<void> {
+  const user = await getAuthUser();
+  if (!user) return;
+
+  const supabase = await createClient();
+  await supabase
+    .from("users")
+    .update({ onboarded_at: new Date().toISOString() })
+    .eq("id", user.id)
+    .is("onboarded_at", null);
+}

@@ -16,7 +16,7 @@ import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/cn";
-import { ROUTES } from "@/lib/routes";
+import { completeOnboarding } from "./actions";
 
 /**
  * S12-1 ~ S12-3 — 첫 방문자 온보딩 (F11 · .pen S12).
@@ -111,16 +111,31 @@ const LAST = SLIDES.length - 1;
 /** 스크롤은 되지만 막대는 감춘다 — 캐러셀에 막대가 보이면 화면이 지저분해진다 */
 const NO_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 
-export function OnboardingSlides() {
+export function OnboardingSlides({ nextHref }: { nextHref: string }) {
   const router = useRouter();
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
+  const [leaving, setLeaving] = useState(false);
 
-  function goTo(next: number) {
+  /**
+   * 다 봤거나 건너뛰었다. **둘 다 완료로 친다** — 건너뛰기는 "안 볼래"라는 뜻인데
+   * 다음 로그인에 또 뜨면 무시당한 것이다 (F11 3.3).
+   *
+   * 표시를 기다렸다 이동한다. 먼저 옮기면 요청이 중간에 끊겨 다음 로그인에
+   * 온보딩이 한 번 더 뜬다.
+   */
+  async function finish() {
+    if (leaving) return;
+    setLeaving(true);
+    await completeOnboarding();
+    router.push(nextHref);
+  }
+
+  function goTo(to: number) {
     const track = trackRef.current;
     if (!track) return;
 
-    const clamped = Math.min(Math.max(next, 0), LAST);
+    const clamped = Math.min(Math.max(to, 0), LAST);
     // 애니메이션을 끈 환경에서도 이동은 정상 동작해야 한다 (F11 4)
     const reduced =
       typeof window !== "undefined" &&
@@ -135,7 +150,7 @@ export function OnboardingSlides() {
 
   /** 마지막에서 다음을 누르면 홈으로 보낸다. 빈 슬라이드를 보여주지 않는다 (F11 4) */
   function next() {
-    if (index >= LAST) router.push(ROUTES.home);
+    if (index >= LAST) void finish();
     else goTo(index + 1);
   }
 
@@ -158,7 +173,7 @@ export function OnboardingSlides() {
 
         <button
           type="button"
-          onClick={() => router.push(ROUTES.home)}
+          onClick={() => void finish()}
           className="px-1 text-caption font-medium text-text-tertiary hover:text-text-secondary"
         >
           건너뛰기

@@ -68,6 +68,8 @@ export type Database = {
           nick_name: string;
           avatar_url: string | null;
           point_balance: number;
+          /** 온보딩을 보거나 건너뛴 시각. NULL 이면 아직 보지 않았다 (F11 3.3) */
+          onboarded_at: string | null;
           created_at: string;
           updated_at: string | null;
         };
@@ -80,10 +82,11 @@ export type Database = {
           created_at?: string;
           updated_at?: string | null;
         };
-        // 컬럼 단위 GRANT 로 클라이언트는 nick_name · avatar_url 만 쓸 수 있다
+        // 컬럼 단위 GRANT 로 클라이언트는 아래 셋만 쓸 수 있다
         Update: {
           nick_name?: string;
           avatar_url?: string | null;
+          onboarded_at?: string | null;
         };
         Relationships: [];
       };
