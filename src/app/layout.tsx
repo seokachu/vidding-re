@@ -10,9 +10,41 @@ const pretendard = localFont({
   display: "swap",
 });
 
+const DESCRIPTION =
+  "가격을 부르지 않아요. 가장 공감받은 이야기를 쓴 사람이 낙찰받습니다.";
+
+/**
+ * 링크를 붙였을 때 보이는 것들.
+ *
+ * **`metadataBase` 가 있어야 한다.** OG 이미지 주소는 절대 경로여야 하는데,
+ * 없으면 상대 경로로 나가 크롤러가 읽지 못한다. 배포 도메인이 기준이고,
+ * 프리뷰 배포에서는 Vercel 이 넣어 주는 호스트를 쓴다.
+ *
+ * 대표 이미지는 `app/opengraph-image.png` 다 (파일 규약). `.pen` 의
+ * `OG 이미지 (1200×630)` 프레임을 내보낸 것이라 시안과 어긋나지 않는다.
+ * 경매 상세는 자기 사진으로 덮어쓴다 (`auctions/[id]`).
+ */
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "https://vidding-re.vercel.app"),
+  ),
   title: "Vidding",
-  description: "사연으로 입찰하는 경매 플랫폼",
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Vidding",
+    title: "Vidding — 사연으로 입찰하는 경매",
+    description: DESCRIPTION,
+    locale: "ko_KR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vidding — 사연으로 입찰하는 경매",
+    description: DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {

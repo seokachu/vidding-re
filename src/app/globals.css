@@ -113,6 +113,21 @@ body {
   font-family: var(--font-sans);
 }
 
+/*
+ * 누를 수 있는 것에는 손가락 커서를 준다.
+ *
+ * Tailwind v4 는 preflight 에서 버튼의 `cursor: pointer` 를 뺐다 (v3 까지는
+ * 있었다). 그래서 **앱의 모든 버튼이 화살표 커서**였다 — 링크만 손가락이었다.
+ * 버튼마다 클래스를 붙이는 대신 여기서 한 번에 되돌린다.
+ *
+ * 비활성은 제외한다. `Button` 이 `disabled:cursor-not-allowed` 로 따로 말하고
+ * 있어서, 여기서 덮으면 못 누르는 버튼이 눌리는 것처럼 보인다.
+ */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
 /* 숫자는 폭이 흔들리지 않게 고정폭으로 읽는다 (포인트·남은 시간) */
 .tabular {
   font-variant-numeric: tabular-nums;

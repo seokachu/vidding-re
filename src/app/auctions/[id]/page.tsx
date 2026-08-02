@@ -26,10 +26,28 @@ type Props = {
   searchParams: Promise<{ limit?: string }>;
 };
 
+/**
+ * 링크로 공유했을 때 **그 경매의 사진과 사연 요청글**이 보이게 한다.
+ *
+ * 지정하지 않아도 크롤러가 본문 `<img>` 를 주워 가기도 하지만, 무엇을 고를지는
+ * 크롤러 마음이다. 대표 이미지를 못 박아 첫 장이 나가게 한다.
+ */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const auction = await loadAuctionDetail(id);
-  return { title: auction ? `${auction.title} — Vidding` : "경매 — Vidding" };
+
+  if (!auction) return { title: "경매 — Vidding" };
+
+  const title = `${auction.title} — Vidding`;
+  const description = auction.description.trim().slice(0, 120);
+  const images = auction.imageUrls.slice(0, 1);
+
+  return {
+    title,
+    description,
+    openGraph: { type: "article", title, description, images },
+    twitter: { card: "summary_large_image", title, description, images },
+  };
 }
 
 /**
