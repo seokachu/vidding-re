@@ -7,6 +7,7 @@ import {
   getEndingSoonAuctions,
   getLatestAuctions,
 } from "@/features/explore/queries";
+import { FavoriteButton } from "@/features/explore";
 import { WriteFab } from "@/features/explore/write-fab";
 import {
   AUCTION_SORT_DEFAULT,
@@ -88,6 +89,15 @@ export default async function HomePage() {
             <AuctionCard
               key={auction.auction_id}
               auction={auction}
+              /* 목록에서 바로 찜한다. 주최자·비회원에게는 서버가 끄고 내려보낸다 (F7 3.5) */
+              trailing={
+                auction.canFavorite ? (
+                  <FavoriteButton
+                    auctionId={auction.auction_id}
+                    favorited={auction.favorited}
+                  />
+                ) : undefined
+              }
               className={
                 auctionDisplayStatus(auction).closed ? "bg-surface" : undefined
               }

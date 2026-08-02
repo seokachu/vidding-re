@@ -16,13 +16,14 @@ import type { AuctionSort } from "./sort";
  * 화면이 `EmptyState` 와 `ErrorState` 를 서로 다르게 그린다 (F2 4 · 완료 조건 5).
  */
 
-/** 카드 두 종류가 쓰는 컬럼의 합집합 */
+/** 카드 두 종류가 쓰는 컬럼의 합집합. `user_id` 는 주최자 판정에만 쓴다 */
 const LIST_COLUMNS =
-  "auction_id, title, thumbnail, end_at, status, winning_episode_id, episode_count, created_at";
+  "auction_id, user_id, title, thumbnail, end_at, status, winning_episode_id, episode_count, created_at";
 
 export type AuctionListItem = Pick<
   AuctionSummary,
   | "auction_id"
+  | "user_id"
   | "title"
   | "thumbnail"
   | "end_at"
@@ -30,11 +31,53 @@ export type AuctionListItem = Pick<
   | "winning_episode_id"
   | "episode_count"
   | "created_at"
->;
+> & {
+  /**
+   * 이 카드에 찜 버튼을 그릴지 (F7 3.1 · 3.5).
+   *
+   * **판정을 서버에서 끝낸다.** 목록은 클라이언트가 이어서 더 불러오므로,
+   * 화면에서 다시 판정하면 같은 규칙이 두 곳에 생긴다 — 상세 화면이
+   * `can.favorite` 하나로 정하는 것과 같은 이유다.
+   */
+  canFavorite: boolean;
+  /** 찜 상태. `null` 이면 **조회 실패**다 — '찜 안 함'과 구분한다 (F7 4) */
+  favorited: boolean | null;
+};
 
 export type AuctionListResult =
   | { ok: true; items: AuctionListItem[]; hasMore: boolean }
   | { ok: false };
+
+/**
+ * 목록 카드에 찜 상태를 입힌다 (F7 3.5).
+ *
+ * **주최자와 비회원에게는 그리지 않는다.** 자기 경매를 스스로 찜하는 것은 의미가
+ * 없고(F7 3.1), 비회원은 상세 화면에서도 보이지 않는데 목록에서만 보이면 어긋난다.
+ *
+ * 찜 조회가 실패해도 목록은 그대로 내보낸다. 버튼만 비활성으로 떨어질 뿐,
+ * **경매 목록이 찜 때문에 안 보이면 안 된다.**
+ */
+async function withFavorites<
+  T extends { auction_id: string; user_id: string },
+>(rows: T[]): Promise<(T & { canFavorite: boolean; favorited: boolean | null })[]> {
+  const user = await getAuthUser();
+
+  if (!user) {
+    return rows.map((row) => ({ ...row, canFavorite: false, favorited: null }));
+  }
+
+  const mine = rows.filter((row) => row.user_id !== user.id);
+  const favorited = await getMyFavoriteIds(mine.map((row) => row.auction_id));
+
+  return rows.map((row) => {
+    const canFavorite = row.user_id !== user.id;
+    return {
+      ...row,
+      canFavorite,
+      favorited: canFavorite ? (favorited?.has(row.auction_id) ?? null) : null,
+    };
+  });
+}
 
 /** 목록 한 쪽(page)의 크기. 더 보기로 이어 붙인다 */
 export const AUCTION_PAGE_SIZE = 10;
@@ -67,7 +110,7 @@ export async function getEndingSoonAuctions(
     .limit(limit);
 
   if (error) return { ok: false };
-  return { ok: true, items: data ?? [], hasMore: false };
+  return { ok: true, items: await withFavorites(data ?? []), hasMore: false };
 }
 
 /**
@@ -125,7 +168,7 @@ export async function getAuctions({
   const rows = data ?? [];
   return {
     ok: true,
-    items: rows.slice(0, limit),
+    items: await withFavorites(rows.slice(0, limit)),
     hasMore: rows.length > limit,
   };
 }
