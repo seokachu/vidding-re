@@ -16,7 +16,7 @@ import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui";
 import { cn } from "@/lib/cn";
-import { completeOnboarding } from "./actions";
+import { ROUTES } from "@/lib/routes";
 
 /**
  * S12-1 ~ S12-3 — 첫 방문자 온보딩 (F11 · .pen S12).
@@ -111,24 +111,19 @@ const LAST = SLIDES.length - 1;
 /** 스크롤은 되지만 막대는 감춘다 — 캐러셀에 막대가 보이면 화면이 지저분해진다 */
 const NO_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 
-export function OnboardingSlides({ nextHref }: { nextHref: string }) {
+export function OnboardingSlides() {
   const router = useRouter();
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const [leaving, setLeaving] = useState(false);
 
   /**
-   * 다 봤거나 건너뛰었다. **둘 다 완료로 친다** — 건너뛰기는 "안 볼래"라는 뜻인데
-   * 다음 로그인에 또 뜨면 무시당한 것이다 (F11 3.3).
+   * 다 봤거나 건너뛰었다. 둘 다 **로그인 화면으로** 이어진다 (F11 3.3).
    *
-   * 표시를 기다렸다 이동한다. 먼저 옮기면 요청이 중간에 끊겨 다음 로그인에
-   * 온보딩이 한 번 더 뜬다.
+   * 서비스 입구(`/`)로 되돌리지 않는다. 거기는 로그아웃 상태면 다시 여기로
+   * 보내므로 루프가 된다.
    */
-  async function finish() {
-    if (leaving) return;
-    setLeaving(true);
-    await completeOnboarding();
-    router.push(nextHref);
+  function finish() {
+    router.push(ROUTES.signin);
   }
 
   function goTo(to: number) {
@@ -150,7 +145,7 @@ export function OnboardingSlides({ nextHref }: { nextHref: string }) {
 
   /** 마지막에서 다음을 누르면 홈으로 보낸다. 빈 슬라이드를 보여주지 않는다 (F11 4) */
   function next() {
-    if (index >= LAST) void finish();
+    if (index >= LAST) finish();
     else goTo(index + 1);
   }
 
@@ -173,7 +168,7 @@ export function OnboardingSlides({ nextHref }: { nextHref: string }) {
 
         <button
           type="button"
-          onClick={() => void finish()}
+          onClick={finish}
           className="px-1 text-caption font-medium text-text-tertiary hover:text-text-secondary"
         >
           건너뛰기
