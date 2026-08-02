@@ -117,3 +117,21 @@ body {
 .tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/*
+ * 가로 캐러셀의 스크롤바를 감춘다 (홈 마감 임박 · 경매 상세 이미지 · 온보딩).
+ *
+ * 이 앱은 390px 모바일 화면을 그대로 재현한 것이고, 넓은 화면에서도 그 폭을
+ * 가운데 두고 좌우에 경계선을 긋는다. 그 안에 데스크톱 OS 의 스크롤바만
+ * 얹히면 시안에 없는 요소가 끼어든다. 모바일에서 보이지 않는 것이 기준이다.
+ *
+ * 옆으로 밀린다는 신호는 **카드가 오른쪽 끝에서 잘리는 것**과 섹션 우측의
+ * `전체 >` 가 대신한다.
+ */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -101,7 +101,7 @@ function Hero({ images, dimmed }: { images: string[]; dimmed: boolean }) {
   return (
     <div
       className={cn(
-        "flex h-60 w-full snap-x snap-mandatory overflow-x-auto",
+        "no-scrollbar flex h-60 w-full snap-x snap-mandatory overflow-x-auto",
         dimmed && "opacity-55",
       )}
     >

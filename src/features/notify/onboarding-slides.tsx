@@ -108,9 +108,6 @@ const SLIDES: {
 
 const LAST = SLIDES.length - 1;
 
-/** 스크롤은 되지만 막대는 감춘다 — 캐러셀에 막대가 보이면 화면이 지저분해진다 */
-const NO_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
-
 export function OnboardingSlides() {
   const router = useRouter();
   const trackRef = useRef<HTMLDivElement>(null);
@@ -189,8 +186,8 @@ export function OnboardingSlides() {
           **세로 넘침은 슬라이드 안에서 처리한다** — 아래 `section` 이 스크롤 영역이다.
         */
         className={cn(
-          "flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden",
-          NO_SCROLLBAR,
+          "no-scrollbar flex min-h-0 flex-1 snap-x snap-mandatory",
+          "overflow-x-auto overflow-y-hidden",
         )}
       >
         {SLIDES.map((slide, i) => (
@@ -199,8 +196,7 @@ export function OnboardingSlides() {
             aria-hidden={i !== index}
             aria-label={`${i + 1}번째 안내: ${slide.heading}`}
             className={cn(
-              "h-full w-full shrink-0 snap-center overflow-y-auto",
-              NO_SCROLLBAR,
+              "no-scrollbar h-full w-full shrink-0 snap-center overflow-y-auto",
             )}
           >
             <Slide {...slide} />

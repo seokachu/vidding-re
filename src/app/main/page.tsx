@@ -55,7 +55,7 @@ export default async function HomePage() {
             <MoreLink href={auctionSortHref(AUCTION_SORT_DEFAULT)} />
           </div>
 
-          <div className="flex gap-3 overflow-x-auto px-gutter">
+          <div className="no-scrollbar flex gap-3 overflow-x-auto px-gutter">
             {endingSoon.items.map((auction) => (
               <AuctionCardCompact
                 key={auction.auction_id}
