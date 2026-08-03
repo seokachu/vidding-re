@@ -140,6 +140,54 @@ export async function sendChatMessage(
 }
 
 /**
+ * 푸시 구독 저장 (F9 확장).
+ *
+ * 같은 endpoint 의 이전 행을 먼저 지우고 넣는다 — UPDATE 정책 없이
+ * upsert 를 대신하는 방법이다. 이전 행이 다른 계정 것일 수 있어(같은
+ * 브라우저에서 계정 전환) 삭제는 definer RPC 로 한다 (`claim_push_endpoint`).
+ */
+export async function savePushSubscription(sub: {
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+}): Promise<boolean> {
+  const user = await getAuthUser();
+  if (!user) return false;
+
+  const supabase = await createClient();
+
+  const { error: claimError } = await supabase.rpc("claim_push_endpoint", {
+    p_endpoint: sub.endpoint,
+  });
+  if (claimError) return false;
+
+  const { error } = await supabase.from("push_subscriptions").insert({
+    user_id: user.id,
+    endpoint: sub.endpoint,
+    p256dh: sub.p256dh,
+    auth: sub.auth,
+  });
+
+  return !error;
+}
+
+/** 푸시 구독 해제. 브라우저 쪽 구독을 끊은 뒤 행도 지운다 */
+export async function deletePushSubscription(
+  endpoint: string,
+): Promise<boolean> {
+  const user = await getAuthUser();
+  if (!user) return false;
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("push_subscriptions")
+    .delete()
+    .eq("endpoint", endpoint);
+
+  return !error;
+}
+
+/**
  * 실시간 연결이 끊겼다 붙었을 때 누락분을 다시 불러온다 (F6 4).
  * 조회 실패는 `null` 로 알려 **빈 대화로 위장하지 않게** 한다.
  */
