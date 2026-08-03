@@ -20422,6 +20422,106 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "TIKjp",
+      "x": 5970,
+      "y": -1290,
+      "name": "앱 아이콘",
+      "gap": 64,
+      "alignItems": "end",
+      "children": [
+        {
+          "type": "frame",
+          "id": "g8GGd",
+          "name": "App Icon / iOS",
+          "width": 512,
+          "height": 512,
+          "fill": "$accent",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "ALD1I",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "VID",
+              "fill": "#FFFFFF",
+              "width": 280,
+              "height": 142
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "XAgN1",
+          "name": "App Icon / Android BG",
+          "width": 512,
+          "height": 512,
+          "fill": "$accent"
+        },
+        {
+          "type": "frame",
+          "id": "OSxno",
+          "name": "App Icon / Android FG",
+          "width": 512,
+          "height": 512,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "nd88W",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "VID",
+              "fill": "#FFFFFF",
+              "width": 256,
+              "height": 130
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "J27IZ",
+          "name": "App Icon / Android Mono",
+          "width": 512,
+          "height": 512,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "pqpr6",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "VID",
+              "fill": "#FFFFFF",
+              "width": 256,
+              "height": 130
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "iG81V",
+          "name": "Splash Icon",
+          "width": 512,
+          "height": 512,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "oTsCD",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "VID",
+              "fill": "$accent",
+              "width": 320,
+              "height": 163
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
