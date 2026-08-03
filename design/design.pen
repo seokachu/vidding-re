@@ -10159,6 +10159,53 @@
                   "fontWeight": "$w-bold"
                 },
                 {
+                  "type": "frame",
+                  "id": "D7oXR",
+                  "name": "Account",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "bHFxz",
+                      "name": "Provider / Kakao",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "#FEE500",
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "LNfby",
+                          "name": "Kakao Mark",
+                          "geometry": "M12 3c-5.52 0-10 3.48-10 7.8 0 2.78 1.86 5.22 4.66 6.6-0.15 0.53-0.96 3.32-1.1 3.94 0 0-0.02 0.18 0.09 0.25 0.11 0.07 0.25 0.02 0.25 0.02 0.33-0.05 3.83-2.5 4.43-2.93 0.55 0.08 1.11 0.12 1.67 0.12 5.52 0 10-3.48 10-7.8s-4.48-8-10-8z",
+                          "viewBox": [
+                            0,
+                            0,
+                            24,
+                            24
+                          ],
+                          "fill": "#191600",
+                          "width": 10,
+                          "height": 10
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "m1NYj1",
+                      "name": "Email",
+                      "fill": "$text-secondary",
+                      "content": "seoyeon@kakao.com",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "g2epW",
                   "name": "Sub",
@@ -12121,6 +12168,119 @@
                   "fontFamily": "$font-body",
                   "fontSize": "$text-title",
                   "fontWeight": "$w-bold"
+                },
+                {
+                  "type": "frame",
+                  "id": "dqw1g",
+                  "name": "Account",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LVjXN",
+                      "name": "Provider / Google",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$bg",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border-strong",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "qfjGV",
+                          "name": "Google Mark",
+                          "width": 10,
+                          "height": 10,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "path",
+                              "id": "WIqmx",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#4285F4",
+                              "geometry": "M45.12 24.5c0-1.56-0.14-3.06-0.4-4.5h-20.72v8.51h11.84c-0.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#4285F4",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "lGEai",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#34A853",
+                              "geometry": "M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07h-7.35v5.7c3.62 7.19 11.06 12.12 19.66 12.12z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#34A853",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "i4okxN",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#FBBC05",
+                              "geometry": "M11.69 28.18c-0.44-1.32-0.69-2.73-0.69-4.18s0.25-2.86 0.69-4.18v-5.7h-7.35c-1.49 2.97-2.34 6.33-2.34 9.88s0.85 6.91 2.34 9.88l7.35-5.7z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#FBBC05",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "EBQJg",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#EA4335",
+                              "geometry": "M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31c-3.81-3.55-8.79-5.73-14.72-5.73-8.6 0-16.04 4.93-19.66 12.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#EA4335",
+                              "width": 10,
+                              "height": 10
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "jB94I",
+                      "name": "Email",
+                      "fill": "$text-secondary",
+                      "content": "seoyeon@gmail.com",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
                 },
                 {
                   "type": "text",
@@ -15684,6 +15844,119 @@
                   "fontWeight": "$w-bold"
                 },
                 {
+                  "type": "frame",
+                  "id": "vtkh2",
+                  "name": "Account",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DQLLW",
+                      "name": "Provider / Google",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "$bg",
+                      "cornerRadius": "$radius-pill",
+                      "stroke": "$border-strong",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "tMvkI",
+                          "name": "Google Mark",
+                          "width": 10,
+                          "height": 10,
+                          "layout": "none",
+                          "children": [
+                            {
+                              "type": "path",
+                              "id": "M81ZxN",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#4285F4",
+                              "geometry": "M45.12 24.5c0-1.56-0.14-3.06-0.4-4.5h-20.72v8.51h11.84c-0.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#4285F4",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "isqna",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#34A853",
+                              "geometry": "M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07h-7.35v5.7c3.62 7.19 11.06 12.12 19.66 12.12z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#34A853",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "L2Trx",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#FBBC05",
+                              "geometry": "M11.69 28.18c-0.44-1.32-0.69-2.73-0.69-4.18s0.25-2.86 0.69-4.18v-5.7h-7.35c-1.49 2.97-2.34 6.33-2.34 9.88s0.85 6.91 2.34 9.88l7.35-5.7z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#FBBC05",
+                              "width": 10,
+                              "height": 10
+                            },
+                            {
+                              "type": "path",
+                              "id": "ThQ5j",
+                              "x": 0,
+                              "y": 0,
+                              "name": "#EA4335",
+                              "geometry": "M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31c-3.81-3.55-8.79-5.73-14.72-5.73-8.6 0-16.04 4.93-19.66 12.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z",
+                              "viewBox": [
+                                0,
+                                0,
+                                48,
+                                48
+                              ],
+                              "fill": "#EA4335",
+                              "width": 10,
+                              "height": 10
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "q28CoR",
+                      "name": "Email",
+                      "fill": "$text-secondary",
+                      "content": "seoyeon@gmail.com",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "xQZA3",
                   "name": "Sub",
@@ -16456,6 +16729,53 @@
                   "fontWeight": "$w-bold"
                 },
                 {
+                  "type": "frame",
+                  "id": "dGYLX",
+                  "name": "Account",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "KswAL",
+                      "name": "Provider / Kakao",
+                      "width": 16,
+                      "height": 16,
+                      "fill": "#FEE500",
+                      "cornerRadius": "$radius-pill",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "TsTgs",
+                          "name": "Kakao Mark",
+                          "geometry": "M12 3c-5.52 0-10 3.48-10 7.8 0 2.78 1.86 5.22 4.66 6.6-0.15 0.53-0.96 3.32-1.1 3.94 0 0-0.02 0.18 0.09 0.25 0.11 0.07 0.25 0.02 0.25 0.02 0.33-0.05 3.83-2.5 4.43-2.93 0.55 0.08 1.11 0.12 1.67 0.12 5.52 0 10-3.48 10-7.8s-4.48-8-10-8z",
+                          "viewBox": [
+                            0,
+                            0,
+                            24,
+                            24
+                          ],
+                          "fill": "#191600",
+                          "width": 10,
+                          "height": 10
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "WnIQk",
+                      "name": "Email",
+                      "fill": "$text-secondary",
+                      "content": "seoyeon@kakao.com",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                },
+                {
                   "type": "text",
                   "id": "TrPrv",
                   "name": "Sub",
@@ -16678,7 +16998,7 @@
           "name": "Scrim",
           "fill": "#0C1C4080",
           "width": 390,
-          "height": 675
+          "height": 691
         },
         {
           "id": "Yjgjz",
