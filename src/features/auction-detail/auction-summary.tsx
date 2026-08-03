@@ -1,5 +1,4 @@
 import { ImageIcon, Info } from "lucide-react";
-import Image from "next/image";
 
 import { Avatar, Badge } from "@/components/ui";
 import { auctionDisplayStatus } from "@/lib/auction-status";
@@ -7,6 +6,7 @@ import { cn } from "@/lib/cn";
 import { formatRelativeTime, formatTimeLeft } from "@/lib/format";
 import type { Relationship } from "@/lib/relationship";
 
+import { HeroCarousel } from "./hero-carousel";
 import type { AuctionDetail } from "./types";
 
 /**
@@ -90,6 +90,10 @@ export function AuctionSummary({
 
 /* -------------------------------------------------------------------------- */
 
+/**
+ * 스와이프만 되던 트랙에 **여러 장임을 알리는 표시가 없어서**, 3장을 올려도
+ * 1장짜리 화면처럼 읽혔다. 칩·셰브런을 얹은 캐러셀로 넘긴다 (.pen S03).
+ */
 function Hero({ images, dimmed }: { images: string[]; dimmed: boolean }) {
   if (images.length === 0) {
     return (
@@ -99,25 +103,7 @@ function Hero({ images, dimmed }: { images: string[]; dimmed: boolean }) {
     );
   }
 
-  return (
-    <div
-      className={cn(
-        "no-scrollbar flex h-60 w-full snap-x snap-mandatory overflow-x-auto",
-        dimmed && "opacity-55",
-      )}
-    >
-      {images.map((src) => (
-        <Image
-          key={src}
-          src={src}
-          alt=""
-          width={390}
-          height={240}
-          className="h-60 w-full shrink-0 snap-center object-cover"
-        />
-      ))}
-    </div>
-  );
+  return <HeroCarousel images={images} dimmed={dimmed} />;
 }
 
 /**
