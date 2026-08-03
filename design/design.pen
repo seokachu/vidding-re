@@ -8343,6 +8343,86 @@
               "icon": "image",
               "library": "lucide",
               "fill": "$text-tertiary"
+            },
+            {
+              "type": "frame",
+              "id": "Curt0",
+              "layoutPosition": "absolute",
+              "x": 339,
+              "y": 12,
+              "name": "Photo Counter",
+              "fill": "#13172099",
+              "cornerRadius": "$radius-pill",
+              "padding": [
+                4,
+                10
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "simRv",
+                  "name": "Count",
+                  "fill": "#FFFFFF",
+                  "content": "2/3",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-medium"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "HN5kH",
+              "layoutPosition": "absolute",
+              "x": 12,
+              "y": 106,
+              "name": "Prev",
+              "width": 28,
+              "height": 28,
+              "fill": "#13172059",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "UV1Kf",
+                  "name": "Chevron Left",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-left",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "rhEck",
+              "layoutPosition": "absolute",
+              "x": 350,
+              "y": 106,
+              "name": "Next",
+              "width": 28,
+              "height": 28,
+              "fill": "#13172059",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Z1hH6",
+                  "name": "Chevron Right",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-right",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
             }
           ]
         },
@@ -8755,6 +8835,60 @@
               "icon": "image",
               "library": "lucide",
               "fill": "$text-tertiary"
+            },
+            {
+              "type": "frame",
+              "id": "V1vheq",
+              "layoutPosition": "absolute",
+              "x": 339,
+              "y": 12,
+              "name": "Photo Counter",
+              "fill": "#13172099",
+              "cornerRadius": "$radius-pill",
+              "padding": [
+                4,
+                10
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PY1X0",
+                  "name": "Count",
+                  "fill": "#FFFFFF",
+                  "content": "1/3",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-medium"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "h63Npf",
+              "layoutPosition": "absolute",
+              "x": 350,
+              "y": 106,
+              "name": "Next",
+              "width": 28,
+              "height": 28,
+              "fill": "#13172059",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "y5Czf",
+                  "name": "Chevron Right",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-right",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
             }
           ]
         },
@@ -15094,6 +15228,60 @@
               "icon": "image",
               "library": "lucide",
               "fill": "$text-tertiary"
+            },
+            {
+              "type": "frame",
+              "id": "afJDw",
+              "layoutPosition": "absolute",
+              "x": 339,
+              "y": 12,
+              "name": "Photo Counter",
+              "fill": "#13172099",
+              "cornerRadius": "$radius-pill",
+              "padding": [
+                4,
+                10
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "P1S8SW",
+                  "name": "Count",
+                  "fill": "#FFFFFF",
+                  "content": "1/3",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-medium"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sat6m",
+              "layoutPosition": "absolute",
+              "x": 350,
+              "y": 106,
+              "name": "Next",
+              "width": 28,
+              "height": 28,
+              "fill": "#13172059",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Q00Z1f",
+                  "name": "Chevron Right",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-right",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
             }
           ]
         },
@@ -16223,6 +16411,60 @@
               "icon": "image",
               "library": "lucide",
               "fill": "$text-tertiary"
+            },
+            {
+              "type": "frame",
+              "id": "x91DL7",
+              "layoutPosition": "absolute",
+              "x": 339,
+              "y": 12,
+              "name": "Photo Counter",
+              "fill": "#13172099",
+              "cornerRadius": "$radius-pill",
+              "padding": [
+                4,
+                10
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ZhVra",
+                  "name": "Count",
+                  "fill": "#FFFFFF",
+                  "content": "1/3",
+                  "fontFamily": "$font-data",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-medium"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "dhA15",
+              "layoutPosition": "absolute",
+              "x": 350,
+              "y": 106,
+              "name": "Next",
+              "width": 28,
+              "height": 28,
+              "fill": "#13172059",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "LJ9p6",
+                  "name": "Chevron Right",
+                  "width": 16,
+                  "height": 16,
+                  "icon": "chevron-right",
+                  "library": "lucide",
+                  "fill": "#FFFFFF"
+                }
+              ]
             }
           ]
         },
