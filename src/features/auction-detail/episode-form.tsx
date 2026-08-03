@@ -1,7 +1,8 @@
 "use client";
 
 import { Info } from "lucide-react";
-import { useActionState, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
 
 import { BottomBar, Button, ButtonLink, PointStepper, TextAreaField, TextField } from "@/components/ui";
 import {
@@ -48,11 +49,21 @@ export function EpisodeForm({
   balance: number;
 }) {
   const editing = episode !== null;
+  const router = useRouter();
 
   const [state, formAction, pending] = useActionState<
     EpisodeFormState,
     FormData
   >(editing ? updateEpisodeAction : createEpisodeAction, {});
+
+  // 저장 성공. 상세가 이미 히스토리에 있으므로 새로 쌓지 않고 '뒤로' 돌아간다.
+  // 액션의 revalidate 가 히스토리에 반영되기 전에 back 을 부르면 Next 가
+  // 작성 화면을 한 번 더 밀어 넣는다. 전환이 끝난 다음 틱까지 기다린다
+  useEffect(() => {
+    if (!state.done || pending) return;
+    const id = setTimeout(() => router.back(), 0);
+    return () => clearTimeout(id);
+  }, [state.done, pending, router]);
 
   const [title, setTitle] = useState(state.values?.title ?? episode?.title ?? "");
   const [content, setContent] = useState(

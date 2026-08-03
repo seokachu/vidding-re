@@ -3,7 +3,7 @@
 import { ImageOff, Loader2, Plus, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import { Button, TextAreaField, TextField } from "@/components/ui";
 import { cn } from "@/lib/cn";
@@ -95,6 +95,17 @@ export function AuctionForm({
   const [fieldErrors, setFieldErrors] = useState<AuctionFieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [saved, setSaved] = useState(false);
+
+  // 수정 저장 뒤 상세로 '뒤로' 간다. 상세는 이미 히스토리에 있으므로 새로 쌓지
+  // 않는다 — 쌓으면 상세가 두 번 남아 뒤로가기가 헛돈다.
+  // 단, 액션의 revalidate 가 히스토리에 반영되기 전에 back 을 부르면 Next 가
+  // /edit 을 한 번 더 밀어 넣는다. 전환이 끝난 다음 틱까지 기다린다.
+  useEffect(() => {
+    if (!saved || pending) return;
+    const id = setTimeout(() => router.back(), 0);
+    return () => clearTimeout(id);
+  }, [saved, pending, router]);
 
   const fileInput = useRef<HTMLInputElement>(null);
   const slotRow = useRef<HTMLDivElement>(null);
@@ -290,7 +301,12 @@ export function AuctionForm({
         ? await updateAuction(auction.id, input)
         : await createAuction(input);
 
-      // 성공하면 서버가 상세로 보내므로, 여기 오는 것은 실패뿐이다
+      // 등록 성공은 서버가 상세로 보낸다(replace). 여기 오는 것은 수정 성공과 실패다
+      if (result.ok) {
+        setSaved(true);
+        return;
+      }
+
       switch (result.reason) {
         case "INVALID":
           setFieldErrors(result.fieldErrors);

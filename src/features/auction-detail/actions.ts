@@ -148,6 +148,11 @@ export type EpisodeFormState = {
   /** 사연은 저장됐는데 입찰만 실패했다. 사연을 되돌리지 않는다 (F3 4.4) */
   bidFailed?: boolean;
   values?: { title: string; content: string };
+  /**
+   * 저장 성공. 리다이렉트하지 않는다 — 상세는 이미 히스토리에 있으므로
+   * 클라이언트가 back 으로 돌아간다. 새 항목을 쌓으면 상세가 두 번 남는다
+   */
+  done?: boolean;
 };
 
 function validate(title: string, content: string) {
@@ -233,8 +238,7 @@ export async function createEpisodeAction(
   }
 
   revalidatePath(ROUTES.auction(auctionId));
-  // 작성 폼을 히스토리에서 지운다. 상세에서 뒤로가면 폼이 아니라 오던 화면이다
-  redirect(ROUTES.auction(auctionId), RedirectType.replace);
+  return { done: true };
 }
 
 /** 사연 수정. 작성자만, 진행중인 경매에서만 (F3 3.4 · RLS episodes_update_author) */
@@ -260,7 +264,7 @@ export async function updateEpisodeAction(
   if (error) return { message: messageOf(error), values };
 
   revalidatePath(ROUTES.auction(auctionId));
-  redirect(ROUTES.auction(auctionId), RedirectType.replace);
+  return { done: true };
 }
 
 /* --- 경매 수정 · 삭제 (F1 3.5 · 3.6) -------------------------------------- */

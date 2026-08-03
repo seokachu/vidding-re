@@ -27,6 +27,8 @@ import {
  */
 
 export type AuctionSubmitResult =
+  /** 수정 성공. 등록은 서버가 상세로 보내므로 이 값을 돌려주지 않는다 */
+  | { ok: true }
   | { ok: false; reason: "INVALID"; fieldErrors: AuctionFieldErrors }
   | { ok: false; reason: "UNAUTHENTICATED" }
   /** 내 경매가 아니거나 이미 마감됐다 (F1 4.1) */
@@ -141,9 +143,11 @@ export async function updateAuction(
 
   revalidatePath(ROUTES.home);
   revalidatePath(ROUTES.auctions);
+  revalidatePath(ROUTES.auction(auctionId));
 
-  // 수정 폼도 마찬가지다. 상세에서 뒤로가기가 낡은 폼으로 돌아가지 않는다
-  redirect(ROUTES.auction(auctionId), RedirectType.replace);
+  // 리다이렉트하지 않는다. 상세는 이미 히스토리에 있으므로 클라이언트가
+  // back 으로 돌아간다 — 새 항목을 쌓으면 상세가 두 번 남는다
+  return { ok: true };
 }
 
 /**
