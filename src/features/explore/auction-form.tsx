@@ -37,6 +37,9 @@ import {
  *
  * 이미지는 고른 즉시 Storage 로 올린다. **실패한 장만 다시 시도**할 수 있고
  * 나머지 입력값은 그대로 남는다 (F1 4.3).
+ *
+ * **첫 장이 대표 사진이다.** 모바일 갤러리처럼 썸네일을 옆으로 끌어 순서를
+ * 바꾼다. 세로 손짓은 페이지 스크롤로 남긴다 (`touch-action: pan-y`).
  */
 
 type Slot = {
@@ -48,6 +51,16 @@ type Slot = {
   path?: string;
   /** 재시도용 원본 */
   file?: File;
+};
+
+/** 드래그 중인 슬롯의 이동 상태. `dx` 는 손가락을 따라간 픽셀 거리다 */
+type Drag = {
+  key: string;
+  from: number;
+  to: number;
+  dx: number;
+  /** 슬롯 한 칸의 폭 + 간격. 몇 칸 움직였는지 계산하는 기준이다 */
+  step: number;
 };
 
 export function AuctionForm({
@@ -84,9 +97,30 @@ export function AuctionForm({
   const [pending, startTransition] = useTransition();
 
   const fileInput = useRef<HTMLInputElement>(null);
+  const slotRow = useRef<HTMLDivElement>(null);
 
   /** 업로드 대상 폴더. 수정이면 경매 폴더, 등록이면 이 폼 세션 폴더다 */
   const folderRef = useRef(auction?.id ?? crypto.randomUUID());
+
+  /** 드래그 판정 전, 누른 지점. 세로로 움직이면 스크롤에 양보하고 버린다 */
+  const press = useRef<{
+    key: string;
+    index: number;
+    pointerId: number;
+    x: number;
+    y: number;
+    step: number;
+  } | null>(null);
+  /** 리렌더를 기다리지 않고 최신 드래그 상태를 읽기 위한 거울 */
+  const dragLive = useRef<Drag | null>(null);
+  /** 드래그로 끝난 손짓이 X 버튼 클릭으로 새지 않게 막는 표식 */
+  const draggedOnce = useRef(false);
+  const [drag, setDragState] = useState<Drag | null>(null);
+
+  function setDrag(next: Drag | null) {
+    dragLive.current = next;
+    setDragState(next);
+  }
 
   const uploading = slots.some((slot) => slot.status === "uploading");
   const readyUrls = slots
@@ -156,6 +190,74 @@ export function AuctionForm({
     if (fileInput.current) fileInput.current.value = "";
   }
 
+  function onSlotPointerDown(
+    event: React.PointerEvent,
+    slot: Slot,
+    index: number,
+  ) {
+    // 새 손짓이 시작되면 지난 드래그의 클릭 무시 표식부터 지운다
+    draggedOnce.current = false;
+    if (slots.length < 2 || !event.isPrimary) return;
+    const row = slotRow.current;
+    if (!row || row.children.length < 2) return;
+    // 칸은 전부 flex-1 로 같은 폭이라, 이웃한 두 칸의 간격이 곧 한 칸이다
+    const step =
+      (row.children[1] as HTMLElement).offsetLeft -
+      (row.children[0] as HTMLElement).offsetLeft;
+    press.current = {
+      key: slot.key,
+      index,
+      pointerId: event.pointerId,
+      x: event.clientX,
+      y: event.clientY,
+      step,
+    };
+  }
+
+  function onSlotPointerMove(event: React.PointerEvent) {
+    const start = press.current;
+    // 처음 누른 손가락만 따라간다. 나중에 닿은 손가락은 무시한다
+    if (!start || event.pointerId !== start.pointerId) return;
+
+    const rawDx = event.clientX - start.x;
+    if (!draggedOnce.current) {
+      // 가로로 확실히 움직일 때만 드래그다. 세로면 페이지 스크롤이 가져간다
+      if (Math.abs(rawDx) < 8 || Math.abs(rawDx) < Math.abs(event.clientY - start.y))
+        return;
+      draggedOnce.current = true;
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+
+    // 줄 밖으로는 못 나간다. 끌린 거리만큼 내려앉을 칸도 같이 정한다
+    const last = slots.length - 1;
+    const dx = Math.max(
+      -start.index * start.step,
+      Math.min(rawDx, (last - start.index) * start.step),
+    );
+    const to = Math.max(
+      0,
+      Math.min(last, start.index + Math.round(dx / start.step)),
+    );
+    setDrag({ key: start.key, from: start.index, to, dx, step: start.step });
+  }
+
+  /** 손을 뗐다. `commit` 이 false 면(브라우저가 스크롤을 가져감) 제자리로 돌린다 */
+  function onSlotPointerEnd(event: React.PointerEvent, commit: boolean) {
+    if (press.current && event.pointerId !== press.current.pointerId) return;
+    press.current = null;
+    const active = dragLive.current;
+    if (!active) return;
+    setDrag(null);
+    if (commit && active.to !== active.from) {
+      setSlots((current) => {
+        const next = [...current];
+        const [moved] = next.splice(active.from, 1);
+        next.splice(active.to, 0, moved);
+        return next;
+      });
+    }
+  }
+
   function removeSlot(slot: Slot) {
     setSlots((current) => current.filter((item) => item.key !== slot.key));
     // 지운 사진의 파일까지 정리한다. 실패해도 폼은 계속 쓸 수 있어야 하므로 기다리지 않는다
@@ -205,6 +307,15 @@ export function AuctionForm({
     });
   }
 
+  // 대표 배지가 붙을 슬롯. 드래그 중에는 첫 칸을 차지하게 될 슬롯에 미리 옮겨 붙인다
+  const coverKey = drag
+    ? drag.to === 0
+      ? drag.key
+      : drag.from === 0
+        ? slots[1]?.key
+        : slots[0]?.key
+    : slots[0]?.key;
+
   return (
     <>
       <div className="flex flex-1 flex-col pb-6">
@@ -216,21 +327,67 @@ export function AuctionForm({
             over={false}
           />
 
-          <div className="flex gap-2.5">
+          <div ref={slotRow} className="flex gap-2.5">
             {[...Array(AUCTION_IMAGE_MAX).keys()].map((index) => {
               const slot = slots[index];
               if (slot) {
+                const active = drag?.key === slot.key;
+                // 드래그가 지나간 슬롯은 한 칸씩 비켜 준다
+                let shift = 0;
+                if (drag && !active) {
+                  if (drag.from < index && index <= drag.to) shift = -drag.step;
+                  else if (drag.to <= index && index < drag.from)
+                    shift = drag.step;
+                }
                 return (
-                  <SlotView
+                  <div
                     key={slot.key}
-                    slot={slot}
-                    onRemove={() => removeSlot(slot)}
-                    onRetry={() => {
-                      if (!slot.file) return;
-                      patchSlot(slot.key, { status: "uploading" });
-                      void upload(slot.key, slot.file);
+                    className={cn(
+                      "relative h-[106px] flex-1 touch-pan-y select-none",
+                      slots.length > 1 && "cursor-grab",
+                      active && "z-10 cursor-grabbing rounded-md shadow-lg",
+                    )}
+                    style={
+                      active
+                        ? {
+                            transform: `translateX(${drag.dx}px) scale(1.04)`,
+                            transition: "none",
+                          }
+                        : drag
+                          ? {
+                              transform: `translateX(${shift}px)`,
+                              transition: "transform 150ms ease",
+                            }
+                          : undefined
+                    }
+                    onPointerDown={(event) =>
+                      onSlotPointerDown(event, slot, index)
+                    }
+                    onPointerMove={onSlotPointerMove}
+                    onPointerUp={(event) => onSlotPointerEnd(event, true)}
+                    onPointerCancel={(event) => onSlotPointerEnd(event, false)}
+                    onClickCapture={(event) => {
+                      if (!draggedOnce.current) return;
+                      draggedOnce.current = false;
+                      event.preventDefault();
+                      event.stopPropagation();
                     }}
-                  />
+                  >
+                    <SlotView
+                      slot={slot}
+                      onRemove={() => removeSlot(slot)}
+                      onRetry={() => {
+                        if (!slot.file) return;
+                        patchSlot(slot.key, { status: "uploading" });
+                        void upload(slot.key, slot.file);
+                      }}
+                    />
+                    {slot.key === coverKey && (
+                      <span className="pointer-events-none absolute inset-x-0 bottom-0 rounded-b-md bg-text-primary/70 py-[3px] text-center text-label font-semibold text-text-on-accent">
+                        대표 사진
+                      </span>
+                    )}
+                  </div>
                 );
               }
 
@@ -427,7 +584,7 @@ function SlotView({
 }) {
   if (slot.status === "uploading") {
     return (
-      <div className="flex h-[106px] flex-1 items-center justify-center rounded-md bg-surface-sunken text-text-tertiary">
+      <div className="flex h-full w-full items-center justify-center rounded-md bg-surface-sunken text-text-tertiary">
         <Loader2 size={20} className="animate-spin" />
       </div>
     );
@@ -438,7 +595,7 @@ function SlotView({
       <button
         type="button"
         onClick={onRetry}
-        className="flex h-[106px] flex-1 flex-col items-center justify-center gap-1 rounded-md border border-warning bg-warning-subtle text-warning-text"
+        className="flex h-full w-full flex-col items-center justify-center gap-1 rounded-md border border-warning bg-warning-subtle text-warning-text"
       >
         <ImageOff size={18} />
         <span className="text-label font-semibold">다시 시도</span>
@@ -447,13 +604,15 @@ function SlotView({
   }
 
   return (
-    <div className="relative h-[106px] flex-1 overflow-hidden rounded-md bg-surface-sunken">
+    <div className="relative h-full w-full overflow-hidden rounded-md bg-surface-sunken">
       {slot.url && (
         <Image
           src={slot.url}
           alt=""
           fill
           sizes="110px"
+          // 브라우저 기본 이미지 드래그가 우리 드래그를 가로채지 않게 한다
+          draggable={false}
           className="object-cover"
         />
       )}
