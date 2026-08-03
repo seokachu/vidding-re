@@ -21,6 +21,7 @@
 | `20260802000002_message_kind.sql` | `messages.kind` (`TEXT` / `ADDRESS`) — 배송 정보 카드 (F6 3.6) |
 | `20260803000001_onboarded_at.sql` | `users.onboarded_at` — 첫 로그인에 온보딩 1회 (F11 3.3) |
 | `20260803000002_drop_onboarded_at.sql` | 위를 되돌린다. 온보딩을 **로그인 전**으로 옮기며 판정 자체가 필요 없어졌다 (F11 3.3 재개정) |
+| `20260803000003_push.sql` | 웹 푸시 — `push_subscriptions` · `notifications` INSERT 트리거가 pg_net 으로 `/api/push` 호출. 발송 주소·시크릿은 **Vault** (`push_webhook_url` · `push_webhook_secret`, 2026-08-03 등록 완료), VAPID 키는 `.env.local`·Vercel 에 있다 |
 
 > **이미 적용된 마이그레이션은 고치지 않는다.** 바뀐 내용은 새 파일로 덧붙인다.
 > 기존 DB 는 이미 실행한 파일을 다시 읽지 않으므로, 파일을 고치면
