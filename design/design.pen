@@ -10604,6 +10604,105 @@
         },
         {
           "type": "frame",
+          "id": "t3yEYu",
+          "name": "Push Banner",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            16,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "qCNCk",
+              "name": "Card",
+              "width": "fill_container",
+              "fill": "$accent-subtle",
+              "cornerRadius": "$radius-md",
+              "gap": 12,
+              "padding": [
+                12,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "WA5cX",
+                  "name": "Bell",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "bell-ring",
+                  "library": "lucide",
+                  "fill": "$accent"
+                },
+                {
+                  "type": "frame",
+                  "id": "usWsE",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PYSYS",
+                      "name": "Title",
+                      "fill": "$accent-text",
+                      "content": "푸시 알림 받기",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wpOwG",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "마감·낙찰 소식을 브라우저 알림으로 알려드려요",
+                      "lineHeight": "$lh-normal",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "q3KUc",
+                  "name": "Enable",
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-sm",
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qUlTD",
+                      "name": "Label",
+                      "fill": "$text-on-accent",
+                      "content": "켜기",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
           "id": "XxsV2",
           "name": "목록",
           "width": "fill_container",
@@ -15823,6 +15922,105 @@
               "fontFamily": "$font-body",
               "fontSize": "$text-title",
               "fontWeight": "$w-bold"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TRc7L",
+          "name": "Push Banner",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            16,
+            20,
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "efEKI",
+              "name": "Card",
+              "width": "fill_container",
+              "fill": "$accent-subtle",
+              "cornerRadius": "$radius-md",
+              "gap": 12,
+              "padding": [
+                12,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "YAHks",
+                  "name": "Bell",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "bell-ring",
+                  "library": "lucide",
+                  "fill": "$accent"
+                },
+                {
+                  "type": "frame",
+                  "id": "jMwxI",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "a8UkSr",
+                      "name": "Title",
+                      "fill": "$accent-text",
+                      "content": "푸시 알림 받기",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J8T6X",
+                      "name": "Desc",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "마감·낙찰 소식을 브라우저 알림으로 알려드려요",
+                      "lineHeight": "$lh-normal",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-label",
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IBQSR",
+                  "name": "Enable",
+                  "fill": "$accent",
+                  "cornerRadius": "$radius-sm",
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XHPGf",
+                      "name": "Label",
+                      "fill": "$text-on-accent",
+                      "content": "켜기",
+                      "fontFamily": "$font-body",
+                      "fontSize": "$text-caption",
+                      "fontWeight": "$w-semibold"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
