@@ -51,7 +51,12 @@ export type PointItem = {
   createdAt: string;
 };
 
-/** 프로필 영역. 이메일은 담지 않는다 — 화면에서 하는 일이 없다 (F8 3.2) */
+/**
+ * 프로필 영역이 `public.users` 에서 조회하는 것.
+ *
+ * 이메일·로그인 제공자는 여기 담지 않는다 — DB 가 아니라 인증 유저가 원본이라,
+ * 페이지가 `requireAuthUser()` 결과에서 바로 꺼내 넘긴다.
+ */
 export type MyProfile = {
   nickName: string;
   avatarUrl: string | null;

@@ -55,6 +55,8 @@ export default async function MyPage(props: {
       <ProfileSection
         profile={profile}
         address={address}
+        email={user.email ?? null}
+        provider={signinProvider(user)}
         auctionCount={auctions.ok ? auctions.data.length : null}
         episodeCount={episodes.ok ? episodes.data.length : null}
       />
@@ -158,6 +160,24 @@ export default async function MyPage(props: {
  * 빈 상태에는 다음 행동 경로를 함께 준다. 실패에는 재시도를 준다.
  * 둘을 같은 화면으로 그리면 사용자가 "없는 것"과 "못 본 것"을 구분하지 못한다.
  */
+/**
+ * 마지막으로 로그인한 소셜 제공자.
+ *
+ * `app_metadata.provider` 는 **처음 가입한** 제공자라, 같은 이메일로 계정이
+ * 연결된 사용자가 다른 쪽으로 로그인하면 어긋난다. identity 의 마지막 로그인
+ * 시각을 비교해 실제로 방금 쓴 쪽을 고른다.
+ */
+function signinProvider(
+  user: Awaited<ReturnType<typeof requireAuthUser>>,
+): "google" | "kakao" | null {
+  const latest = [...(user.identities ?? [])].sort((a, b) =>
+    (b.last_sign_in_at ?? "").localeCompare(a.last_sign_in_at ?? ""),
+  )[0]?.provider;
+
+  const provider = latest ?? user.app_metadata.provider;
+  return provider === "google" || provider === "kakao" ? provider : null;
+}
+
 function Panel<T>({
   result,
   empty,
