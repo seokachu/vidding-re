@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { requireAuthUser } from "@/lib/auth";
+import { formatPhoneInput } from "@/lib/format";
 import { ROUTES, resolveReturnTo } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
 
@@ -54,9 +55,15 @@ export async function saveAddress(
     errors.recipient = `${MAX_NAME}자까지 쓸 수 있어요`;
   }
 
+  // 화면이 숫자만 걸러 하이픈을 끼우지만, 서버 함수는 화면 없이도 호출되므로
+  // 여기서 다시 검사한다. 잘못된 번호는 배송 연락 실패로 이어진다 (F12 4)
+  const phoneDigits = phone.replace(/\D/g, "");
+
+  // 휴대폰에 배정된 번호대(010·011·016·017·018·019)의 11자리만 받는다.
+  // 배송 기사가 걸 번호라, 존재할 수 없는 번호를 받아주면 전달이 실패한다
   if (!phone) errors.phone = "연락처를 입력해주세요";
-  else if (phone.length > MAX_NAME) {
-    errors.phone = `${MAX_NAME}자까지 쓸 수 있어요`;
+  else if (!/^01[016789]\d{8}$/.test(phoneDigits)) {
+    errors.phone = "휴대폰 번호를 010-0000-0000 형식으로 입력해주세요";
   }
 
   // 우편번호·기본 주소는 주소 검색 결과로만 채워진다. 비어 있다는 것은
@@ -82,7 +89,8 @@ export async function saveAddress(
 
   const values = {
     recipient,
-    phone,
+    // 어떤 모양으로 들어왔든 `010-1234-5678` 로 통일해 저장한다
+    phone: formatPhoneInput(phoneDigits),
     zipcode,
     address1,
     address2: address2 || null,
