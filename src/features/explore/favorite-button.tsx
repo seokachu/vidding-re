@@ -102,7 +102,9 @@ export function FavoriteButton({
         onClick={onClick}
         title={unknown ? "잠시 후 다시 시도해주세요" : undefined}
         className={cn(
-          "flex items-center justify-center rounded-sm transition-colors",
+          // 하트는 원형 심볼이라 호버 배경도 원이어야 어울린다. 네모 배경은
+          // 아이콘과 모양이 어긋나 도드라진다
+          "flex items-center justify-center rounded-full transition-colors",
           small ? "size-8" : "size-10",
           active ? "text-accent" : "text-text-primary",
           unknown && "text-text-tertiary",

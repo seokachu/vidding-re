@@ -11,6 +11,7 @@ import {
   TopAppBar,
 } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { formatPhoneInput } from "@/lib/format";
 import type { Address } from "@/lib/supabase/database.types";
 import { deleteAddress, saveAddress, type AddressFormState } from "./actions";
 import { AddressSearch, type SelectedAddress } from "./address-search";
@@ -42,7 +43,10 @@ export function AddressForm({
   );
 
   const [recipient, setRecipient] = useState(address?.recipient ?? "");
-  const [phone, setPhone] = useState(address?.phone ?? "");
+  // 형식화 이전에 저장된 번호도 열 때부터 하이픈을 끼워 보여준다
+  const [phone, setPhone] = useState(() =>
+    formatPhoneInput(address?.phone ?? "", true),
+  );
   const [address2, setAddress2] = useState(address?.address2 ?? "");
   const [picked, setPicked] = useState<SelectedAddress>({
     zipcode: address?.zipcode ?? "",
@@ -126,13 +130,22 @@ export function AddressForm({
             inputMode="tel"
             label="연락처"
             required
-            maxLength={50}
+            maxLength={13}
             autoComplete="tel"
             placeholder="010-0000-0000"
             helper="배송 때 연락할 번호예요"
             error={state.errors?.phone}
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            // 숫자만 받아 치는 대로 하이픈을 끼운다. 지우는 중인지를 넘겨야
+            // `010-` 아래로 내려갈 수 있다 (formatPhoneInput 주석)
+            onChange={(e) =>
+              setPhone(
+                formatPhoneInput(
+                  e.target.value,
+                  e.target.value.length < phone.length,
+                ),
+              )
+            }
           />
 
           <FieldShell
@@ -199,7 +212,14 @@ export function AddressForm({
             // 처리 중에는 다시 누를 수 없다 (F12 4 중복 제출)
             disabled={saving || deleting}
           >
-            {saving ? "저장 중…" : "저장하기"}
+            {/* 이미 등록된 배송지를 고치는 중이라는 것을 버튼이 말해 준다 */}
+            {address
+              ? saving
+                ? "수정 중…"
+                : "수정하기"
+              : saving
+                ? "저장 중…"
+                : "저장하기"}
           </Button>
         </div>
       </form>

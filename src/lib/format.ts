@@ -71,6 +71,28 @@ export function initialOf(nickName: string | null | undefined): string {
 }
 
 /**
+ * 연락처 입력을 치는 대로 하이픈으로 끊는다. `010-1234-5678` (S11).
+ *
+ * 숫자 외 입력은 버리고 11자리까지만 받는다. 마디가 차는 순간(3·7자리)
+ * 하이픈을 미리 붙여 다음 마디를 안내하되, **지우는 중에는 붙이지 않는다** —
+ * 붙이면 `010-` 에서 백스페이스가 하이픈만 지우고 형식화가 다시 붙여,
+ * 그 아래로 내려갈 수 없다.
+ */
+export function formatPhoneInput(value: string, deleting = false): string {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+
+  const parts =
+    digits.length <= 3
+      ? [digits]
+      : digits.length <= 7
+        ? [digits.slice(0, 3), digits.slice(3)]
+        : [digits.slice(0, 3), digits.slice(3, 7), digits.slice(7)];
+
+  const boundary = digits.length === 3 || digits.length === 7;
+  return parts.join("-") + (!deleting && boundary ? "-" : "");
+}
+
+/**
  * 배송 정보 한 덩어리. 낙찰자가 채팅으로 보낼 때와 미리보기에 같은 것을 쓴다 (F6 3.6).
  *
  * **줄 나눔이 곧 카드의 행이다.** 이름·연락처 / 주소 / 상세 주소 순서로 세 줄까지
