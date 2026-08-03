@@ -3,6 +3,7 @@ import { BellOff } from "lucide-react";
 import { TabShell } from "@/components/layout/tab-shell";
 import { ButtonLink, EmptyState, ErrorState } from "@/components/ui";
 import { NotificationList } from "@/features/notify/notification-list";
+import { PushBanner } from "@/features/notify/push-banner";
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES } from "@/lib/routes";
 import { createClient } from "@/lib/supabase/server";
@@ -30,6 +31,9 @@ export default async function NotificationsPage() {
 
   return (
     <TabShell title="알림">
+      {/* 켤 수 있을 때만 나타난다. 빈 목록·실패 화면 위에서도 유효한 제안이다 */}
+      <PushBanner />
+
       {error ? (
         <ErrorState description={"알림을 불러오지 못했어요.\n잠시 후 다시 시도해주세요"} />
       ) : data.length === 0 ? (

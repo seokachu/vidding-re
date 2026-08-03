@@ -39,6 +39,10 @@ const PUBLIC_EXACT = new Set<string>([
   ROUTES.onboarding,
   ROUTES.home,
   ROUTES.auctions,
+  // 푸시 발송 웹훅 — 세션이 아니라 시크릿 헤더로 인증한다 (api/push/route.ts)
+  "/api/push",
+  // 서비스 워커 — 브라우저의 갱신 요청이 로그인 리다이렉트를 받으면 안 된다
+  "/sw.js",
 ]);
 
 /** 로그인 없이 열리는 경로 (접두어) */

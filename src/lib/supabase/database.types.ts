@@ -425,6 +425,35 @@ export type Database = {
           },
         ];
       };
+
+      /** 웹 푸시 구독. 브라우저·기기마다 한 행이다 (20260803000003_push) */
+      push_subscriptions: {
+        Row: {
+          id: string;
+          user_id: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          created_at?: string;
+        };
+        Update: Record<string, never>;
+        Relationships: [
+          {
+            foreignKeyName: "push_subscriptions_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
 
     Views: {
@@ -492,6 +521,11 @@ export type Database = {
       mark_messages_read: {
         Args: { p_chat_room_id: string };
         Returns: number;
+      };
+      /** 푸시 endpoint 의 이전 주인 행을 지운다. 재구독 직전에 부른다 (20260803000003_push) */
+      claim_push_endpoint: {
+        Args: { p_endpoint: string };
+        Returns: undefined;
       };
 
       /* --- service_role 전용. 브라우저에서 부를 수 없다 -------------------- */
