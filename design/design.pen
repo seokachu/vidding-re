@@ -20134,6 +20134,294 @@
           }
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "N2hy2",
+      "x": 4650,
+      "y": -500,
+      "name": "OG 이미지 v2 (1200×630)",
+      "clip": true,
+      "width": 1200,
+      "height": 630,
+      "fill": {
+        "type": "gradient",
+        "gradientType": "linear",
+        "enabled": true,
+        "rotation": 45,
+        "size": {
+          "height": 1
+        },
+        "colors": [
+          {
+            "color": "#2A56C9",
+            "position": 0
+          },
+          {
+            "color": "#112960",
+            "position": 1
+          }
+        ]
+      },
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "i8r5a",
+          "x": 880,
+          "y": -260,
+          "name": "Deco Circle TR",
+          "fill": "#FFFFFF0D",
+          "width": 640,
+          "height": 640
+        },
+        {
+          "type": "ellipse",
+          "id": "bAyNN",
+          "x": -180,
+          "y": 430,
+          "name": "Deco Ring BL",
+          "innerRadius": 0.86,
+          "fill": "#FFFFFF14",
+          "width": 420,
+          "height": 420
+        },
+        {
+          "type": "text",
+          "id": "YwfCG",
+          "x": 620,
+          "y": 30,
+          "name": "Deco Quote",
+          "fill": "#FFFFFF1A",
+          "content": "“",
+          "fontFamily": "$font-body",
+          "fontSize": 260,
+          "fontWeight": "$w-bold"
+        },
+        {
+          "type": "frame",
+          "id": "aLk47",
+          "x": 96,
+          "y": 96,
+          "name": "Left Block",
+          "layout": "vertical",
+          "gap": 36,
+          "children": [
+            {
+              "id": "DvEQ7",
+              "type": "ref",
+              "ref": "Y0Vcs3",
+              "name": "Logo White",
+              "fill": "#FFFFFF",
+              "width": 158,
+              "height": 80
+            },
+            {
+              "type": "text",
+              "id": "J1NTt",
+              "name": "Title",
+              "fill": "#FFFFFF",
+              "content": "사연으로\n입찰하는 경매",
+              "lineHeight": 1.25,
+              "fontFamily": "$font-body",
+              "fontSize": 72,
+              "fontWeight": "$w-bold"
+            },
+            {
+              "type": "text",
+              "id": "ljsNJ",
+              "name": "Lead",
+              "fill": "#C6D2F4",
+              "content": "가격을 부르지 않아요.\n가장 공감받은 이야기를 쓴 사람이\n낙찰받습니다.",
+              "lineHeight": 1.5,
+              "fontFamily": "$font-body",
+              "fontSize": 27,
+              "fontWeight": "$w-regular"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ehxGX",
+          "x": 762,
+          "y": 96,
+          "name": "Story Card Back",
+          "rotation": 5,
+          "width": 380,
+          "fill": "#FFFFFF2E",
+          "cornerRadius": 24,
+          "layout": "vertical",
+          "gap": 18,
+          "padding": 30,
+          "children": [
+            {
+              "type": "rectangle",
+              "cornerRadius": 8,
+              "id": "f4eEmI",
+              "name": "Skel 1",
+              "fill": "#FFFFFF66",
+              "width": 200,
+              "height": 16
+            },
+            {
+              "type": "rectangle",
+              "cornerRadius": 8,
+              "id": "l0XKTf",
+              "name": "Skel 2",
+              "fill": "#FFFFFF4D",
+              "width": 300,
+              "height": 16
+            },
+            {
+              "type": "rectangle",
+              "cornerRadius": 8,
+              "id": "U1dfU",
+              "name": "Skel 3",
+              "fill": "#FFFFFF33",
+              "width": 250,
+              "height": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "rOQ3l",
+          "x": 672,
+          "y": 196,
+          "name": "Story Card Front",
+          "rotation": -3.0000000000000004,
+          "width": 440,
+          "fill": "#FFFFFF",
+          "cornerRadius": 24,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0C1C4066",
+            "offset": {
+              "x": 0,
+              "y": 24
+            },
+            "blur": 60
+          },
+          "layout": "vertical",
+          "gap": 22,
+          "padding": 34,
+          "children": [
+            {
+              "type": "frame",
+              "id": "XMoIn",
+              "name": "Badge",
+              "fill": "$accent-subtle",
+              "cornerRadius": "$radius-pill",
+              "gap": 8,
+              "padding": [
+                9,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "yIOF6",
+                  "name": "Gavel",
+                  "width": 19,
+                  "height": 19,
+                  "icon": "gavel",
+                  "library": "lucide",
+                  "fill": "$accent"
+                },
+                {
+                  "type": "text",
+                  "id": "G8IJn",
+                  "name": "Badge Label",
+                  "fill": "$accent-text",
+                  "content": "가장 공감받은 사연",
+                  "fontFamily": "$font-body",
+                  "fontSize": 17,
+                  "fontWeight": "$w-semibold"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "GjvC3",
+              "name": "Story",
+              "fill": "$neutral-800",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "10년을 함께한 강아지가 쓰던 담요와 꼭 닮았어요. 마지막 선물로 데려가고 싶습니다.",
+              "lineHeight": 1.55,
+              "fontFamily": "$font-body",
+              "fontSize": 23,
+              "fontWeight": "$w-medium"
+            },
+            {
+              "type": "frame",
+              "id": "JK02t",
+              "name": "Footer",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "UblSU",
+                  "name": "Heart",
+                  "width": 24,
+                  "height": 24,
+                  "icon": "heart",
+                  "library": "lucide",
+                  "fill": "#D9433A"
+                },
+                {
+                  "type": "text",
+                  "id": "m7MXE0",
+                  "name": "Likes",
+                  "fill": "$neutral-700",
+                  "content": "공감 214",
+                  "fontFamily": "$font-body",
+                  "fontSize": 19,
+                  "fontWeight": "$w-semibold"
+                },
+                {
+                  "type": "frame",
+                  "id": "iOX4l",
+                  "name": "Spacer",
+                  "width": "fill_container",
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "qNf3S",
+                  "name": "Who",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "uoroR",
+                      "name": "Avatar",
+                      "fill": "$primary-200",
+                      "width": 30,
+                      "height": 30
+                    },
+                    {
+                      "type": "text",
+                      "id": "nYxPP",
+                      "name": "Nick",
+                      "fill": "$neutral-500",
+                      "content": "달빛서점",
+                      "fontFamily": "$font-body",
+                      "fontSize": 17,
+                      "fontWeight": "$w-regular"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

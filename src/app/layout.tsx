@@ -17,18 +17,22 @@ const DESCRIPTION =
  * 링크를 붙였을 때 보이는 것들.
  *
  * **`metadataBase` 가 있어야 한다.** OG 이미지 주소는 절대 경로여야 하는데,
- * 없으면 상대 경로로 나가 크롤러가 읽지 못한다. 배포 도메인이 기준이고,
- * 프리뷰 배포에서는 Vercel 이 넣어 주는 호스트를 쓴다.
+ * 없으면 상대 경로로 나가 크롤러가 읽지 못한다.
+ *
+ * **기준은 항상 프로덕션 도메인이다 (`VERCEL_PROJECT_PRODUCTION_URL`).**
+ * `VERCEL_URL` 은 배포마다 다른 주소(`vidding-xxxx-….vercel.app`)라서
+ * 여기에 걸면 og:image 가 인증 보호가 걸린 배포 URL 을 가리키고,
+ * 크롤러가 401 을 받아 미리보기 이미지가 회색으로 뜬다.
  *
  * 대표 이미지는 `app/opengraph-image.png` 다 (파일 규약). `.pen` 의
- * `OG 이미지 (1200×630)` 프레임을 내보낸 것이라 시안과 어긋나지 않는다.
+ * `OG 이미지 v2 (1200×630)` 프레임을 내보낸 것이라 시안과 어긋나지 않는다.
  * 경매 상세는 자기 사진으로 덮어쓴다 (`auctions/[id]`).
  */
 export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ??
-      (process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}`
+      (process.env.VERCEL_PROJECT_PRODUCTION_URL
+        ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
         : "https://vidding-re.vercel.app"),
   ),
   title: "Vidding",
