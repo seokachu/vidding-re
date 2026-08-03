@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
 import { requireAuthUser } from "@/lib/auth";
 import { ROUTES, resolveReturnTo } from "@/lib/routes";
@@ -103,8 +103,10 @@ export async function saveAddress(
   // 값이 수상하면 홈으로 보낸다 (`resolveReturnTo`). 경매 등록은 더 이상
   // 이 경로로 오지 않지만, 복귀 규격 자체는 남겨 둔다 (F12 3.4)
   const next = formData.get("next");
+  // 배송지 폼을 히스토리에서 지운다. 저장 뒤 뒤로가기가 폼으로 돌아가지 않는다
   redirect(
     typeof next === "string" && next ? resolveReturnTo(next) : ROUTES.mypage,
+    RedirectType.replace,
   );
 }
 
@@ -132,5 +134,5 @@ export async function deleteAddress(): Promise<AddressFormState> {
 
   revalidatePath(ROUTES.address);
   revalidatePath(ROUTES.mypage);
-  redirect(ROUTES.mypage);
+  redirect(ROUTES.mypage, RedirectType.replace);
 }

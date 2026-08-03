@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
 import { AUCTION_IMAGE_BUCKET } from "@/lib/constants";
 import { ROUTES } from "@/lib/routes";
@@ -97,7 +97,8 @@ export async function createAuction(
   revalidatePath(ROUTES.home);
   revalidatePath(ROUTES.auctions);
 
-  redirect(ROUTES.auction(data.id));
+  // 폼 화면을 히스토리에서 지운다. 상세에서 뒤로가면 폼이 아니라 오던 화면이다
+  redirect(ROUTES.auction(data.id), RedirectType.replace);
 }
 
 /**
@@ -141,7 +142,8 @@ export async function updateAuction(
   revalidatePath(ROUTES.home);
   revalidatePath(ROUTES.auctions);
 
-  redirect(ROUTES.auction(auctionId));
+  // 수정 폼도 마찬가지다. 상세에서 뒤로가기가 낡은 폼으로 돌아가지 않는다
+  redirect(ROUTES.auction(auctionId), RedirectType.replace);
 }
 
 /**
@@ -198,7 +200,8 @@ export async function deleteAuction(
   revalidatePath(ROUTES.home);
   revalidatePath(ROUTES.auctions);
 
-  redirect(ROUTES.home);
+  // 지워진 상세를 히스토리에서 빼서, 홈에서 뒤로가기가 오류 화면으로 가지 않게 한다
+  redirect(ROUTES.home, RedirectType.replace);
 }
 
 /** 공개 URL 에서 버킷 안 경로만 떼어낸다. 우리 버킷이 아니면 `null` */

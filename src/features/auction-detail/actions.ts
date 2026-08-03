@@ -1,7 +1,7 @@
 "use server";
 
 import { refresh, revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
+import { redirect, RedirectType } from "next/navigation";
 
 import {
   EPISODE_CONTENT_MAX,
@@ -233,7 +233,8 @@ export async function createEpisodeAction(
   }
 
   revalidatePath(ROUTES.auction(auctionId));
-  redirect(ROUTES.auction(auctionId));
+  // 작성 폼을 히스토리에서 지운다. 상세에서 뒤로가면 폼이 아니라 오던 화면이다
+  redirect(ROUTES.auction(auctionId), RedirectType.replace);
 }
 
 /** 사연 수정. 작성자만, 진행중인 경매에서만 (F3 3.4 · RLS episodes_update_author) */
@@ -259,7 +260,7 @@ export async function updateEpisodeAction(
   if (error) return { message: messageOf(error), values };
 
   revalidatePath(ROUTES.auction(auctionId));
-  redirect(ROUTES.auction(auctionId));
+  redirect(ROUTES.auction(auctionId), RedirectType.replace);
 }
 
 /* --- 경매 수정 · 삭제 (F1 3.5 · 3.6) -------------------------------------- */
@@ -301,7 +302,7 @@ export async function updateAuctionAction(
   if (error) return { message: messageOf(error), values };
 
   revalidatePath(ROUTES.auction(auctionId));
-  redirect(ROUTES.auction(auctionId));
+  redirect(ROUTES.auction(auctionId), RedirectType.replace);
 }
 
 /**
@@ -334,5 +335,6 @@ export async function deleteAuctionAction(
   if (error) return { ok: false, message: messageOf(error) };
 
   revalidatePath(ROUTES.auctions);
-  redirect(ROUTES.home);
+  // 지워진 상세를 히스토리에서 빼서, 홈에서 뒤로가기가 오류 화면으로 가지 않게 한다
+  redirect(ROUTES.home, RedirectType.replace);
 }
