@@ -169,6 +169,17 @@ export function ChatRoom({
     endRef.current?.scrollIntoView({ block: "end" });
   }, [messages, outgoing.length]);
 
+  /**
+   * 키보드가 열리면 뷰포트가 줄어드는데(`interactive-widget=resizes-content`)
+   * 스크롤 위치는 그대로라 최신 메시지가 접힌 만큼 아래로 숨는다.
+   * 뷰포트가 변하면 다시 맨 아래(최신)에 붙인다.
+   */
+  useEffect(() => {
+    const toEnd = () => endRef.current?.scrollIntoView({ block: "end" });
+    window.addEventListener("resize", toEnd);
+    return () => window.removeEventListener("resize", toEnd);
+  }, []);
+
   /* --- 전송 -------------------------------------------------------------- */
   const deliver = useCallback(async (localId: string, content: string) => {
     const result = await sendChatMessage(roomId, content);

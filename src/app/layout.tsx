@@ -58,6 +58,14 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: "#ffffff",
+  /**
+   * **키보드가 뜨면 레이아웃 뷰포트를 줄인다.** Chrome(과 앱 웹뷰)의 기본은
+   * visual viewport 만 줄이는 것이라, 하단 고정 입력줄(채팅 등)이 키보드에
+   * 가려지고 페이지가 캐럿만 보이게 밀려 올라간다. 앱은 엣지투엣지(Expo
+   * SDK 54+ 강제)라 창 크기 조절(adjustResize)도 일어나지 않으므로,
+   * 뷰포트를 줄이는 이 선언이 브라우저와 앱을 함께 고치는 유일한 지점이다.
+   */
+  interactiveWidget: "resizes-content",
 };
 
 /**
