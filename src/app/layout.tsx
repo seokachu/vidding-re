@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import { AppPushBridge } from "@/features/notify/app-push-bridge";
+
 import "./globals.css";
 
 const pretendard = localFont({
@@ -82,6 +84,8 @@ export default function RootLayout({
         <div className="relative mx-auto flex min-h-dvh w-full max-w-[var(--shell-width)] flex-col border-border bg-bg min-[391px]:pointer-fine:border-x">
           {children}
         </div>
+        {/* 앱 셸 안에서만 동작한다 — 브라우저에서는 아무것도 그리지 않는다 */}
+        <AppPushBridge />
       </body>
     </html>
   );
