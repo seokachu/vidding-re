@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import { AppPushBridge } from "@/features/notify/app-push-bridge";
+import { NotificationRealtime } from "@/features/notify/notification-realtime";
 
 import "./globals.css";
 
@@ -86,6 +87,8 @@ export default function RootLayout({
         </div>
         {/* 앱 셸 안에서만 동작한다 — 브라우저에서는 아무것도 그리지 않는다 */}
         <AppPushBridge />
+        {/* 새 알림이 오면 새로고침 없이 하단 탭 배지·목록을 갱신한다 */}
+        <NotificationRealtime />
       </body>
     </html>
   );
