@@ -22,6 +22,9 @@
 | `20260803000001_onboarded_at.sql` | `users.onboarded_at` — 첫 로그인에 온보딩 1회 (F11 3.3) |
 | `20260803000002_drop_onboarded_at.sql` | 위를 되돌린다. 온보딩을 **로그인 전**으로 옮기며 판정 자체가 필요 없어졌다 (F11 3.3 재개정) |
 | `20260803000003_push.sql` | 웹 푸시 — `push_subscriptions` · `notifications` INSERT 트리거가 pg_net 으로 `/api/push` 호출. 발송 주소·시크릿은 **Vault** (`push_webhook_url` · `push_webhook_secret`, 2026-08-03 등록 완료), VAPID 키는 `.env.local`·Vercel 에 있다 |
+| `20260804000001_avatar_follows_login.sql` | 프로필(닉네임·아바타)이 마지막 로그인 제공자를 따라간다 — `sync_profile_on_login()` (아래 설명) |
+| `20260804000002_chat_message_preview.sql` | 새 메시지 알림 body 에 내용 미리보기 40자. **배송 정보(ADDRESS)는 미리보기하지 않는다** — 이름·연락처·주소가 잠금 화면에 노출되기 때문 |
+| `20260804000003_chat_notifications_collapse.sql` | 대화 알림은 **방마다 최신 한 줄**로 합치고(delete + insert 라 푸시는 메시지마다 발송), **방에 들어가면 읽음 처리 대신 삭제**한다. `chat_room_id` 가 걸린 다른 종류(`AUCTION_RESULT`)는 기록이라 그대로 읽음 처리 |
 
 > **이미 적용된 마이그레이션은 고치지 않는다.** 바뀐 내용은 새 파일로 덧붙인다.
 > 기존 DB 는 이미 실행한 파일을 다시 읽지 않으므로, 파일을 고치면

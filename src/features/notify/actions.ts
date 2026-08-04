@@ -45,8 +45,9 @@ export async function markNotificationsRead(): Promise<boolean> {
  * 방을 열면 받은 메시지를 읽음으로 바꾼다 (F6 3.4).
  *
  * **RPC 로만 한다.** `messages` 의 UPDATE 정책은 발신자 전용이라 수신자는 직접
- * 고칠 수 없다 (supabase/README.md 7). 이 RPC 는 그 방의 `CHAT_MESSAGE` 알림도
- * 함께 읽음 처리하므로, 뒤이은 `refresh()` 로 배지까지 정리된다.
+ * 고칠 수 없다 (supabase/README.md 7). 이 RPC 는 그 방의 `CHAT_MESSAGE` 알림을
+ * **삭제**하므로(대화 알림은 읽고 나면 남을 이유가 없다 — 마이그레이션
+ * `20260804000003`), 뒤이은 `refresh()` 로 배지까지 정리된다.
  */
 export async function markChatRead(roomId: string): Promise<boolean> {
   const user = await getAuthUser();
