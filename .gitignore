@@ -53,3 +53,7 @@ next-env.d.ts
 design/exports/
 # Pencil 캔버스가 쓰는 폰트 사본
 design/*.woff2
+
+# storybook
+/storybook-static
+*storybook.log

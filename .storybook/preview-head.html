@@ -1,0 +1,17 @@
+<style>
+  /* 앱은 next/font/local 로 넣지만 스토리북에는 레이아웃이 없다. 직접 선언한다 */
+  @font-face {
+    font-family: "Pretendard Variable";
+    src: url("/fonts/PretendardVariable.woff2") format("woff2-variations");
+    font-weight: 45 920;
+    font-display: swap;
+  }
+
+  :root {
+    --font-pretendard: "Pretendard Variable", "Apple SD Gothic Neo", sans-serif;
+  }
+
+  body {
+    font-family: var(--font-pretendard);
+  }
+</style>
