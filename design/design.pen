@@ -10224,23 +10224,68 @@
             },
             {
               "type": "frame",
-              "id": "R1i6uK",
-              "name": "Sign Out",
-              "width": 40,
-              "height": 40,
-              "cornerRadius": "$radius-sm",
-              "justifyContent": "center",
+              "id": "x6yqFm",
+              "name": "Actions",
+              "gap": 4,
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "XZ527",
-                  "name": "Icon",
-                  "width": 22,
-                  "height": 22,
-                  "icon": "log-out",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "R1i6uK",
+                  "name": "Sign Out",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "XZ527",
+                      "name": "Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XxRqb",
+                  "name": "Chat Button",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "O8lCLq",
+                      "name": "Chat Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "message-circle",
+                      "library": "lucide",
+                      "fill": "$text-primary"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "s9AqL3",
+                      "layoutPosition": "absolute",
+                      "x": 26,
+                      "y": 7,
+                      "name": "Unread Dot",
+                      "fill": "$accent",
+                      "width": 7,
+                      "height": 7,
+                      "stroke": "$bg",
+                      "strokeWidth": 1.5,
+                      "strokeAlignment": "outer"
+                    }
+                  ]
                 }
               ]
             }
@@ -10588,6 +10633,7 @@
             0,
             20
           ],
+          "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
             {
@@ -10599,6 +10645,42 @@
               "fontFamily": "$font-body",
               "fontSize": "$text-title",
               "fontWeight": "$w-bold"
+            },
+            {
+              "type": "frame",
+              "id": "JIuAI",
+              "name": "Chat Button",
+              "width": 40,
+              "height": 40,
+              "cornerRadius": "$radius-sm",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "C9BVT",
+                  "name": "Chat Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "QrkTR",
+                  "layoutPosition": "absolute",
+                  "x": 26,
+                  "y": 7,
+                  "name": "Unread Dot",
+                  "fill": "$accent",
+                  "width": 7,
+                  "height": 7,
+                  "stroke": "$bg",
+                  "strokeWidth": 1.5,
+                  "strokeAlignment": "outer"
+                }
+              ]
             }
           ]
         },
@@ -12334,23 +12416,54 @@
             },
             {
               "type": "frame",
-              "id": "u1Xpd",
-              "name": "Sign Out",
-              "width": 40,
-              "height": 40,
-              "cornerRadius": "$radius-sm",
-              "justifyContent": "center",
+              "id": "df4fj",
+              "name": "Actions",
+              "gap": 4,
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "An7fT",
-                  "name": "Icon",
-                  "width": 22,
-                  "height": 22,
-                  "icon": "log-out",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "u1Xpd",
+                  "name": "Sign Out",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "An7fT",
+                      "name": "Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RxeJu",
+                  "name": "Chat Button",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "cDN4u",
+                      "name": "Chat Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "message-circle",
+                      "library": "lucide",
+                      "fill": "$text-primary"
+                    }
+                  ]
                 }
               ]
             }
@@ -13261,7 +13374,7 @@
                           "fill": "$text-secondary",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "모바일 390px · 24화면 (기본 17 + 상태 변형 7)",
+                          "content": "모바일 390px · 26화면 (기본 18 + 상태 변형 8)",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-caption",
                           "fontWeight": "normal"
@@ -13287,7 +13400,7 @@
               "id": "yBNyL",
               "name": "T",
               "fill": "$text-primary",
-              "content": "화면 15종",
+              "content": "화면 16종",
               "fontFamily": "$font-body",
               "fontSize": "$text-subtitle",
               "fontWeight": "$w-semibold"
@@ -13723,6 +13836,33 @@
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "S15 포인트 내역",
+                          "lineHeight": "$lh-normal",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-medium"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZuHLf",
+                      "name": "S16 채팅 목록",
+                      "width": "fill_container",
+                      "fill": "$surface",
+                      "cornerRadius": "$radius-sm",
+                      "padding": [
+                        12,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "opODv",
+                          "name": "V",
+                          "fill": "$text-primary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "S16 채팅 목록 / S16b 빈 상태",
                           "lineHeight": "$lh-normal",
                           "fontFamily": "$font-body",
                           "fontSize": "$text-label",
@@ -15911,6 +16051,7 @@
             0,
             20
           ],
+          "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
             {
@@ -15922,6 +16063,28 @@
               "fontFamily": "$font-body",
               "fontSize": "$text-title",
               "fontWeight": "$w-bold"
+            },
+            {
+              "type": "frame",
+              "id": "jpF3c",
+              "name": "Chat Button",
+              "width": 40,
+              "height": 40,
+              "cornerRadius": "$radius-sm",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "J3t3cf",
+                  "name": "Chat Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                }
+              ]
             }
           ]
         },
@@ -16161,23 +16324,54 @@
             },
             {
               "type": "frame",
-              "id": "gnDj8",
-              "name": "Sign Out",
-              "width": 40,
-              "height": 40,
-              "cornerRadius": "$radius-sm",
-              "justifyContent": "center",
+              "id": "fcRqX",
+              "name": "Actions",
+              "gap": 4,
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "vgG0L",
-                  "name": "Icon",
-                  "width": 22,
-                  "height": 22,
-                  "icon": "log-out",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "gnDj8",
+                  "name": "Sign Out",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "vgG0L",
+                      "name": "Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nOHdt",
+                  "name": "Chat Button",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "w6ssS",
+                      "name": "Chat Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "message-circle",
+                      "library": "lucide",
+                      "fill": "$text-primary"
+                    }
+                  ]
                 }
               ]
             }
@@ -17100,23 +17294,68 @@
             },
             {
               "type": "frame",
-              "id": "ZXelE",
-              "name": "Sign Out",
-              "width": 40,
-              "height": 40,
-              "cornerRadius": "$radius-sm",
-              "justifyContent": "center",
+              "id": "aPoaQ",
+              "name": "Actions",
+              "gap": 4,
               "alignItems": "center",
               "children": [
                 {
-                  "type": "icon",
-                  "id": "YHtAk",
-                  "name": "Icon",
-                  "width": 22,
-                  "height": 22,
-                  "icon": "log-out",
-                  "library": "lucide",
-                  "fill": "$text-secondary"
+                  "type": "frame",
+                  "id": "ZXelE",
+                  "name": "Sign Out",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "YHtAk",
+                      "name": "Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "log-out",
+                      "library": "lucide",
+                      "fill": "$text-secondary"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j0vAJC",
+                  "name": "Chat Button",
+                  "width": 40,
+                  "height": 40,
+                  "cornerRadius": "$radius-sm",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "mxwWM",
+                      "name": "Chat Icon",
+                      "width": 22,
+                      "height": 22,
+                      "icon": "message-circle",
+                      "library": "lucide",
+                      "fill": "$text-primary"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "Ctcw0",
+                      "layoutPosition": "absolute",
+                      "x": 26,
+                      "y": 7,
+                      "name": "Unread Dot",
+                      "fill": "$accent",
+                      "width": 7,
+                      "height": 7,
+                      "stroke": "$bg",
+                      "strokeWidth": 1.5,
+                      "strokeAlignment": "outer"
+                    }
+                  ]
                 }
               ]
             }
@@ -19382,6 +19621,42 @@
               "name": "Logo",
               "width": 45,
               "height": 23
+            },
+            {
+              "type": "frame",
+              "id": "vqegv",
+              "name": "Chat Button",
+              "width": 40,
+              "height": 40,
+              "cornerRadius": "$radius-sm",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Z4NcO",
+                  "name": "Chat Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "z6BDf",
+                  "layoutPosition": "absolute",
+                  "x": 26,
+                  "y": 7,
+                  "name": "Unread Dot",
+                  "fill": "$accent",
+                  "width": 7,
+                  "height": 7,
+                  "stroke": "$bg",
+                  "strokeWidth": 1.5,
+                  "strokeAlignment": "outer"
+                }
+              ]
             }
           ]
         },
@@ -19854,6 +20129,7 @@
             0,
             20
           ],
+          "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
             {
@@ -19865,6 +20141,42 @@
               "fontFamily": "$font-body",
               "fontSize": "$text-title",
               "fontWeight": "$w-bold"
+            },
+            {
+              "type": "frame",
+              "id": "q0u4De",
+              "name": "Chat Button",
+              "width": 40,
+              "height": 40,
+              "cornerRadius": "$radius-sm",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "i05gM4",
+                  "name": "Chat Icon",
+                  "width": 22,
+                  "height": 22,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$text-primary"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "Kb1Ky",
+                  "layoutPosition": "absolute",
+                  "x": 26,
+                  "y": 7,
+                  "name": "Unread Dot",
+                  "fill": "$accent",
+                  "width": 7,
+                  "height": 7,
+                  "stroke": "$bg",
+                  "strokeWidth": 1.5,
+                  "strokeAlignment": "outer"
+                }
+              ]
             }
           ]
         },
@@ -20520,6 +20832,465 @@
               "height": 163
             }
           ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "qJN82",
+      "x": 4600,
+      "y": 9605,
+      "name": "S16 채팅 목록",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "Z5AqB",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "I9fea",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "채팅"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "E7ETtS",
+          "name": "목록",
+          "width": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            0,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "a7zLv",
+              "name": "정원 · 테스트",
+              "width": "fill_container",
+              "gap": 12,
+              "padding": [
+                14,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "zVUop",
+                  "type": "ref",
+                  "ref": "I8qKQ",
+                  "name": "Avatar",
+                  "width": 48,
+                  "height": 48,
+                  "descendants": {
+                    "r5CcN": {
+                      "content": "정"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "X6vYtp",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "fitxj",
+                      "name": "Line1",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "PdxZb",
+                          "name": "Nick",
+                          "fill": "$text-primary",
+                          "content": "정원",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-body",
+                          "fontWeight": "$w-semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "FnrwJ",
+                          "name": "Auction",
+                          "fill": "$text-tertiary",
+                          "content": "· 테스트",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        },
+                        {
+                          "type": "text",
+                          "id": "fuNwU",
+                          "name": "Time",
+                          "fill": "$text-tertiary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "방금 전",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zWF7f",
+                      "name": "Line2",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wIe8e",
+                          "name": "Preview",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "감사합니다! 배송지 보내드릴게요",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-caption",
+                          "fontWeight": "$w-regular"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wXZQ7",
+                          "name": "Unread",
+                          "fill": "$accent",
+                          "cornerRadius": "$radius-pill",
+                          "padding": [
+                            2,
+                            7
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GvR4p",
+                              "name": "N",
+                              "fill": "$text-on-accent",
+                              "content": "1",
+                              "fontFamily": "$font-body",
+                              "fontSize": "$text-micro",
+                              "fontWeight": "$w-semibold"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XpVmY",
+              "name": "두부 · 강아지 나눔",
+              "width": "fill_container",
+              "gap": 12,
+              "padding": [
+                14,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "dl4JC",
+                  "type": "ref",
+                  "ref": "I8qKQ",
+                  "name": "Avatar",
+                  "width": 48,
+                  "height": 48,
+                  "descendants": {
+                    "r5CcN": {
+                      "content": "두"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "cnw1S",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "BjACM",
+                      "name": "Line1",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fjjGh",
+                          "name": "Nick",
+                          "fill": "$text-primary",
+                          "content": "두부",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-body",
+                          "fontWeight": "$w-semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "TMeOT",
+                          "name": "Auction",
+                          "fill": "$text-tertiary",
+                          "content": "· 강아지 나눔",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        },
+                        {
+                          "type": "text",
+                          "id": "D40Ew4",
+                          "name": "Time",
+                          "fill": "$text-tertiary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "어제",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "i4qBpE",
+                      "name": "Line2",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Kb9QG",
+                          "name": "Preview",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "배송 정보를 보냈어요",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-caption",
+                          "fontWeight": "$w-regular"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GHoZJ",
+              "name": "마루 · 필름 카메라",
+              "width": "fill_container",
+              "gap": 12,
+              "padding": [
+                14,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "FN2X8",
+                  "type": "ref",
+                  "ref": "I8qKQ",
+                  "name": "Avatar",
+                  "width": 48,
+                  "height": 48,
+                  "descendants": {
+                    "r5CcN": {
+                      "content": "마"
+                    }
+                  }
+                },
+                {
+                  "type": "frame",
+                  "id": "Mq7HK",
+                  "name": "Texts",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "h1MKF",
+                      "name": "Line1",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xEcG7",
+                          "name": "Nick",
+                          "fill": "$text-primary",
+                          "content": "마루",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-body",
+                          "fontWeight": "$w-semibold"
+                        },
+                        {
+                          "type": "text",
+                          "id": "aIQgI",
+                          "name": "Auction",
+                          "fill": "$text-tertiary",
+                          "content": "· 필름 카메라",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        },
+                        {
+                          "type": "text",
+                          "id": "k79sd",
+                          "name": "Time",
+                          "fill": "$text-tertiary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "2일 전",
+                          "textAlign": "right",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-label",
+                          "fontWeight": "$w-regular"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YhvZK",
+                      "name": "Line2",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lzu45",
+                          "name": "Preview",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "직거래도 가능할까요?",
+                          "fontFamily": "$font-body",
+                          "fontSize": "$text-caption",
+                          "fontWeight": "$w-regular"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Zl60F",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 28
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "osggd",
+      "x": 5060,
+      "y": 9605,
+      "name": "S16b 채팅 목록 · 빈 상태",
+      "clip": true,
+      "width": 390,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "IzsdY",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "id": "yqYHW",
+          "type": "ref",
+          "ref": "lVcLu",
+          "name": "App Bar",
+          "width": "fill_container",
+          "descendants": {
+            "TIXWG": {
+              "content": "채팅"
+            },
+            "Uo49Q": {
+              "enabled": false
+            }
+          }
+        },
+        {
+          "type": "frame",
+          "id": "jOWrO",
+          "name": "Empty Wrap",
+          "width": "fill_container",
+          "padding": [
+            40,
+            20
+          ],
+          "justifyContent": "center",
+          "children": [
+            {
+              "id": "q7jXr",
+              "type": "ref",
+              "ref": "PAFsr",
+              "name": "Empty",
+              "width": "fill_container",
+              "descendants": {
+                "Su3A1": {
+                  "icon": "message-circle"
+                },
+                "B8X5f": {
+                  "content": "아직 대화가 없어요"
+                },
+                "MHLNL": {
+                  "content": "낙찰이 이뤄지면 주최자와 낙찰자의\n채팅방이 여기에 열려요"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "HgIsK",
+          "name": "Bottom Space",
+          "width": "fill_container",
+          "height": 28
         }
       ]
     }
