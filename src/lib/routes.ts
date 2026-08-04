@@ -30,6 +30,8 @@ export const ROUTES = {
   points: "/mypage/points",
   address: "/mypage/address",
 
+  /** 채팅 목록 — 탭 4곳 헤더의 채팅 아이콘으로 들어온다 */
+  chatList: "/chat",
   chat: (id: string) => `/chat/${id}`,
 } as const;
 

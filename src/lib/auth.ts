@@ -75,3 +75,23 @@ export async function getUnreadNotificationCount(): Promise<number> {
   if (error) return 0;
   return count ?? 0;
 }
+
+/**
+ * 읽지 않은 채팅 메시지가 있는가. 헤더 채팅 아이콘의 점이 쓴다.
+ * RLS 가 내 방의 메시지만 보여주므로 상대가 보낸 미읽음만 세면 된다 (F6 3.4).
+ */
+export async function hasUnreadChatMessages(): Promise<boolean> {
+  const user = await getAuthUser();
+  if (!user) return false;
+
+  const supabase = await createClient();
+  const { count, error } = await supabase
+    .from("messages")
+    .select("id", { count: "exact", head: true })
+    .is("read_at", null)
+    .neq("sender_id", user.id);
+
+  // 점 하나 못 그린다고 화면이 죽으면 안 된다 (F9 4 와 같은 원칙)
+  if (error) return false;
+  return (count ?? 0) > 0;
+}

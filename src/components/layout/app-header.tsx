@@ -1,4 +1,4 @@
-import { Bell } from "lucide-react";
+import { Bell, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
@@ -49,6 +49,26 @@ export function AppHeader({
 
       {trailing}
     </header>
+  );
+}
+
+/**
+ * 채팅 목록 진입점. 탭 4곳 헤더의 **맨 오른쪽** 자리다 (.pen S01·S02·S07·S08) —
+ * 위치가 탭마다 같아야 손버릇으로 눌러도 로그아웃 같은 다른 버튼을 잘못
+ * 누르지 않는다. 비회원에게는 노출하지 않는다 (채팅은 낙찰 관계에서만 생긴다).
+ */
+export function ChatButton({ hasUnread }: { hasUnread: boolean }) {
+  return (
+    <Link
+      href={ROUTES.chatList}
+      aria-label={hasUnread ? "채팅 — 새 메시지 있음" : "채팅"}
+      className="relative flex size-10 items-center justify-center rounded-sm text-text-primary hover:bg-surface"
+    >
+      <MessageCircle size={22} />
+      {hasUnread && (
+        <span className="absolute right-2 top-2 size-2 rounded-full bg-accent ring-[1.5px] ring-bg" />
+      )}
+    </Link>
   );
 }
 

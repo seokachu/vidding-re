@@ -47,7 +47,7 @@ export default async function ChatPage({
   }
 
   // 없는 방이거나 내가 참여자가 아니다. 어느 쪽인지 알려주지 않고 내보낸다 (F6 4)
-  if (!room) redirect(ROUTES.notifications);
+  if (!room) redirect(ROUTES.chatList);
 
   const { data: auction } = await supabase
     .from("auctions")
@@ -55,7 +55,7 @@ export default async function ChatPage({
     .eq("id", room.auction_id)
     .maybeSingle();
 
-  if (!auction) redirect(ROUTES.notifications);
+  if (!auction) redirect(ROUTES.chatList);
 
   // 낙찰자는 저장하지 않고 낙찰 사연에서 도출한다 (P2)
   let winnerId: string | null = null;
