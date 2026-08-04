@@ -41,6 +41,9 @@ export function PushBanner() {
     setPending(true);
     setError(null);
 
+    // 실패 문구에 단계를 남긴다 — "잠시 후 다시" 만으로는 브라우저 쪽
+    // (푸시 서비스 연결)인지 우리 쪽(서버 저장)인지 알 수 없어 진단이 안 된다
+    let step = "준비";
     try {
       const permission = await Notification.requestPermission();
       if (permission !== "granted") {
@@ -49,9 +52,11 @@ export function PushBanner() {
         return;
       }
 
+      step = "서비스 워커 등록";
       const registration = await navigator.serviceWorker.register("/sw.js");
       await navigator.serviceWorker.ready;
 
+      step = "푸시 서비스 연결";
       const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
@@ -59,6 +64,7 @@ export function PushBanner() {
         ),
       });
 
+      step = "서버 저장";
       const keys = subscription.toJSON().keys;
       if (!keys?.p256dh || !keys?.auth) throw new Error("keys missing");
 
@@ -74,8 +80,9 @@ export function PushBanner() {
       }
 
       setVisible(false);
-    } catch {
-      setError("알림을 켜지 못했어요. 잠시 후 다시 시도해주세요");
+    } catch (cause) {
+      console.error(`푸시 켜기 실패 (${step})`, cause);
+      setError(`알림을 켜지 못했어요 (${step} 단계). 잠시 후 다시 시도해주세요`);
     } finally {
       setPending(false);
     }
