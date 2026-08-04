@@ -36,10 +36,12 @@ export function LikeButton({
       onClick={onToggle}
       className={cn(
         "inline-flex shrink-0 items-center gap-[6px] rounded-full px-[13px] py-2 text-label font-semibold transition-colors",
+        // hover 는 enabled 에만 건다 — hover:bg-inherit 로 지우면 흰 배경 위에서
+        // 흰 글자만 남아 버튼이 사라져 보인다
         liked
-          ? "bg-accent text-text-on-accent hover:bg-accent-pressed"
-          : "bg-surface-sunken text-text-secondary hover:bg-border",
-        disabled && "cursor-not-allowed opacity-60 hover:bg-inherit",
+          ? "bg-accent text-text-on-accent enabled:hover:bg-accent-pressed"
+          : "bg-surface-sunken text-text-secondary enabled:hover:bg-border",
+        disabled && "cursor-not-allowed opacity-60",
         className,
       )}
     >
