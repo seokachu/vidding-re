@@ -232,7 +232,7 @@ export function AddressForm({
         open={confirming}
         busy={deleting}
         title="배송지를 삭제할까요?"
-        description="다음에 경매를 열 때 다시 등록해야 해요."
+        description="낙찰 후 배송 정보를 보내려면 다시 등록해야 해요."
         onCancel={() => setConfirming(false)}
         confirm={
           <Button className="flex-1" disabled={deleting} onClick={remove}>
