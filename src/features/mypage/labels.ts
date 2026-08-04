@@ -27,12 +27,16 @@ export function pointLabel(type: PointType): string {
  *
  * 경매 배지(`auctionDisplayStatus`)와 다르다. 저기는 경매가 어떻게 됐는지를,
  * 여기는 **내 사연이 어떻게 됐는지**를 말한다. 같은 경매라도 사람마다 다르다.
+ *
+ * `LOST` 를 `탈락` 이라고 하지 않는다 — 사연을 꺼낸 사람에게 시험 낙방처럼
+ * 읽힌다. 사람이 아니라 결과를 말한다(낙찰이 아니었다). 떨어진 쪽 알림이
+ * "결과가 나왔어요" 라고만 하는 것과 같은 결이다.
  */
 export function episodeOutcome(outcome: MyEpisodeItem["outcome"]): {
   label: string;
   tone: BadgeTone;
 } {
   if (outcome === "WON") return { label: "낙찰", tone: "won" };
-  if (outcome === "LOST") return { label: "탈락", tone: "void" };
+  if (outcome === "LOST") return { label: "미낙찰", tone: "void" };
   return { label: "참여중", tone: "ongoing" };
 }

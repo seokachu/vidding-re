@@ -38,7 +38,7 @@ export type MyEpisodeItem = {
   title: string;
   thumbnail: string | null;
   endAt: string;
-  /** 참여중 · 낙찰 · 탈락 */
+  /** 참여중 · 낙찰 · 미낙찰 */
   outcome: "JOINED" | "WON" | "LOST";
 };
 
