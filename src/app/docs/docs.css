@@ -1,0 +1,145 @@
+/* /docs 전용 — 마크다운 본문 타이포그래피. 디자인 토큰만 쓴다 (globals.css) */
+
+.docs-prose {
+  color: var(--color-text-primary);
+  font-size: var(--text-caption);
+  line-height: 1.7;
+}
+
+.docs-prose h1 {
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 4px 0 14px;
+}
+
+.docs-prose h2 {
+  font-size: var(--text-subtitle);
+  font-weight: 700;
+  margin: 36px 0 10px;
+}
+
+.docs-prose h3 {
+  font-size: var(--text-body);
+  font-weight: 600;
+  margin: 26px 0 8px;
+}
+
+.docs-prose h4 {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  margin: 20px 0 6px;
+}
+
+.docs-prose p {
+  margin: 0 0 12px;
+}
+
+.docs-prose a {
+  color: var(--color-accent-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.docs-prose strong {
+  font-weight: 700;
+}
+
+.docs-prose ul,
+.docs-prose ol {
+  margin: 0 0 12px;
+  padding-left: 18px;
+}
+
+.docs-prose ul {
+  list-style: disc;
+}
+
+.docs-prose ol {
+  list-style: decimal;
+}
+
+.docs-prose li {
+  margin: 4px 0;
+}
+
+.docs-prose blockquote {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+}
+
+.docs-prose blockquote p {
+  margin: 0;
+}
+
+.docs-prose blockquote p + p {
+  margin-top: 6px;
+}
+
+.docs-prose code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--color-surface-sunken);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+}
+
+.docs-prose pre {
+  margin: 0 0 12px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--color-surface-sunken);
+  overflow-x: auto;
+}
+
+.docs-prose pre code {
+  padding: 0;
+  background: none;
+  font-size: var(--text-label);
+  line-height: 1.6;
+}
+
+.docs-prose hr {
+  margin: 28px 0;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* 표는 390px 셸보다 넓어질 수 있다 — 표만 가로 스크롤하고 본문은 고정한다 */
+.docs-prose .table-wrap {
+  margin: 0 0 14px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.docs-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-label);
+  line-height: 1.5;
+}
+
+.docs-prose th,
+.docs-prose td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  min-width: 64px;
+}
+
+.docs-prose th {
+  background: var(--color-surface);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.docs-prose tbody tr:last-child td {
+  border-bottom: 0;
+}

@@ -48,7 +48,8 @@ const PUBLIC_EXACT = new Set<string>([
 ]);
 
 /** 로그인 없이 열리는 경로 (접두어) */
-const PUBLIC_PREFIX = ["/auth/"];
+// /docs — 기획 문서 아카이브. 과제·포트폴리오 열람용이라 로그인을 요구하지 않는다
+const PUBLIC_PREFIX = ["/auth/", "/docs"];
 
 /**
  * 접두어는 공개지만 **하위 일부는 로그인이 필요한** 경로.
