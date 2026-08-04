@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { initialOf } from "@/lib/format";
@@ -6,8 +9,9 @@ import { initialOf } from "@/lib/format";
 /**
  * 프로필 이미지. 없거나 로드에 실패하면 **닉네임 첫 글자**로 대체한다 (F8 4).
  *
- * `next/image` 의 `onError` 는 클라이언트 훅이 필요하다. 서버에서 그리는 목록에
- * 그만한 값은 없으므로, URL 이 없을 때만 글자로 떨어뜨린다.
+ * `onError` 는 함수 prop 이라 클라이언트 컴포넌트여야 한다. 실패를 src 째로
+ * 기억해 두면 src 가 바뀌는 순간 자동으로 다시 시도하고, 새로고침이면
+ * 상태가 통째로 리셋되므로 같은 URL 도 다시 시도한다.
  */
 export function Avatar({
   src,
@@ -20,6 +24,8 @@ export function Avatar({
   size?: number;
   className?: string;
 }) {
+  const [failedSrc, setFailedSrc] = useState<string | null>(null);
+
   return (
     <span
       className={cn(
@@ -28,7 +34,7 @@ export function Avatar({
       )}
       style={{ width: size, height: size }}
     >
-      {src ? (
+      {src && src !== failedSrc ? (
         <Image
           src={src}
           alt=""
@@ -36,6 +42,7 @@ export function Avatar({
           height={size}
           className="h-full w-full object-cover"
           unoptimized
+          onError={() => setFailedSrc(src)}
         />
       ) : (
         <span
