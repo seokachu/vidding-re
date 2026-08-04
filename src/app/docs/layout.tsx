@@ -11,5 +11,10 @@ export default function DocsLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className="flex-1 pb-16">{children}</div>;
+  // data-docs-shell — docs.css 가 이 표식으로 앱 셸(390px)을 문서 폭으로 넓힌다
+  return (
+    <div data-docs-shell className="flex-1 pb-16">
+      {children}
+    </div>
+  );
 }

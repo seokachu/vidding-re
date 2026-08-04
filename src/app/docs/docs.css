@@ -1,5 +1,48 @@
 /* /docs 전용 — 마크다운 본문 타이포그래피. 디자인 토큰만 쓴다 (globals.css) */
 
+/*
+ * 문서는 앱 화면이 아니라 **웹 문서**다 — 390px 앱 셸에 가두지 않고 문서 폭으로 읽는다.
+ *
+ * 셸 래퍼(max-width)는 루트 레이아웃의 `body > div` 에 있어 자식 레이아웃이
+ * 직접 고칠 수 없다. 그래서 `/docs` 화면이 안에 있을 때만 `:has()` 로 래퍼의
+ * 최대 폭을 올린다 — 루트 레이아웃을 건드리지 않고 문서 라우트만 넓어진다.
+ * 폰에서는 어차피 화면 폭이 상한이라 아무것도 달라지지 않는다.
+ */
+body:has([data-docs-shell]) > div {
+  max-width: 860px;
+}
+
+/* 넓은 화면에서는 문서답게 글자도 한 단계 키운다 */
+@media (min-width: 640px) {
+  .docs-prose {
+    font-size: var(--text-body);
+  }
+
+  .docs-prose h1 {
+    font-size: var(--text-display);
+  }
+
+  .docs-prose h2 {
+    font-size: var(--text-title);
+  }
+
+  .docs-prose h3 {
+    font-size: var(--text-subtitle);
+  }
+
+  .docs-prose h4 {
+    font-size: var(--text-body);
+  }
+
+  .docs-prose table {
+    font-size: var(--text-caption);
+  }
+
+  .docs-prose pre code {
+    font-size: var(--text-caption);
+  }
+}
+
 .docs-prose {
   color: var(--color-text-primary);
   font-size: var(--text-caption);
