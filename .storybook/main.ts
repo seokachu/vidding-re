@@ -9,6 +9,9 @@ import type { StorybookConfig } from "@storybook/nextjs-vite";
  */
 const config: StorybookConfig = {
   stories: ["../src/components/ui/**/*.stories.@(ts|tsx)"],
+  // autodocs("전체" 페이지)는 이 애드온이 있어야 만들어진다
+  addons: ["@storybook/addon-docs"],
+  docs: { defaultName: "전체" },
   framework: { name: "@storybook/nextjs-vite", options: {} },
   // Pretendard 를 프리뷰에서도 쓴다 (preview-head.html 의 @font-face 가 참조)
   staticDirs: [{ from: "../src/app/fonts", to: "/fonts" }],

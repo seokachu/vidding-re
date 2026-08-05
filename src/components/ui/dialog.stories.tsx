@@ -11,7 +11,11 @@ import { ConfirmDialog } from "./dialog";
 const meta = {
   title: "공통 UI/ConfirmDialog",
   component: ConfirmDialog,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    // 다이얼로그는 position:fixed — "전체" 페이지를 덮지 않게 iframe 에 가둔다
+    docs: { story: { inline: false, iframeHeight: 380 } },
+  },
 } satisfies Meta<typeof ConfirmDialog>;
 
 export default meta;

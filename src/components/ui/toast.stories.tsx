@@ -10,7 +10,11 @@ import { Toast, useToast } from "./toast";
 const meta = {
   title: "공통 UI/Toast",
   component: Toast,
-  parameters: { layout: "fullscreen" },
+  parameters: {
+    layout: "fullscreen",
+    // 토스트는 position:fixed — "전체" 페이지를 덮지 않게 iframe 에 가둔다
+    docs: { story: { inline: false, iframeHeight: 360 } },
+  },
 } satisfies Meta<typeof Toast>;
 
 export default meta;

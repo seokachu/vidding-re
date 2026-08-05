@@ -12,6 +12,8 @@ import "../src/app/globals.css";
  *   전체 폭이 필요한 스토리는 `parameters.layout: "fullscreen"` 으로 푼다.
  */
 const preview: Preview = {
+  // 컴포넌트마다 모든 스토리를 한 페이지에 모은 "전체" 문서를 만든다
+  tags: ["autodocs"],
   parameters: {
     // 이 앱은 App Router 다 — next/navigation 의 useRouter 목이 여기에 달려 있다
     nextjs: { appDirectory: true },
