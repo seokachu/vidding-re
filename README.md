@@ -10,7 +10,7 @@
 | 낙찰 기준 | 최고가 | 사연이 받은 공감 |
 | 참여 경험 | 가격 경쟁 | 이야기 공유·공감 |
 
-**바로 보기** — [서비스](https://vidding-re.vercel.app) · [기능명세서](https://vidding-re.vercel.app/docs) · [스토리북](https://vidding-storybook.vercel.app)
+**바로 보기** — [서비스](https://vidding-re.vercel.app) · [기능명세서](https://vidding-re.vercel.app/docs) · [디자인 시안](https://vidding-re.vercel.app/docs/design) · [스토리북](https://vidding-storybook.vercel.app)
 
 ---
 
@@ -70,6 +70,7 @@
 | 문서 | 내용 |
 |---|---|
 | [기능명세서 (웹)](https://vidding-re.vercel.app/docs) | 아래 기획 문서를 배포된 화면에서 읽는다 |
+| [디자인 시안 (웹)](https://vidding-re.vercel.app/docs/design) | `.pen` 화면 27장 · 디자인 시스템 4장 |
 | [스토리북](https://vidding-storybook.vercel.app) | UI 컴포넌트 카탈로그 |
 | [기획 전체](./docs/README.md) | 인덱스 · 핵심 규칙 · 단순화 원칙 |
 | [PRD](./docs/PRD.md) | 배경 · 문제 · 목표 · 사용자 · 기능 · 시나리오 · MVP 범위 |

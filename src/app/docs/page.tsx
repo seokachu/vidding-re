@@ -1,4 +1,4 @@
-import { ArrowUpRight, FileText } from "lucide-react";
+import { ArrowUpRight, FileText, Palette } from "lucide-react";
 import Link from "next/link";
 
 import { DOCS } from "@/lib/docs";
@@ -16,7 +16,7 @@ const VERSIONS = [
   { v: "v1.2", date: "08-02", status: "검증", note: "시안 21화면 배포본 1:1 대조" },
   { v: "v2.0", date: "08-03", status: "확장", note: "웹 푸시 (VAPID · Vault · 트리거)" },
   { v: "v2.1", date: "08-04", status: "확장", note: "하이브리드 앱 · 실시간 배지 · 채팅 목록" },
-  { v: "v2.2", date: "08-05", status: "현행", note: "As-Built 기능명세서 · /docs 공개" },
+  { v: "v2.2", date: "08-05", status: "현행", note: "As-Built 기능명세서 · /docs 공개 · 디자인 시안" },
 ] as const;
 
 /**
@@ -64,6 +64,23 @@ export default function DocsPage() {
             </span>
             <span className="mt-2 text-caption font-semibold">문서 보기 →</span>
           </span>
+        </Link>
+
+        {/* 시안은 마크다운 문서가 아니라 이미지 갤러리라 전용 페이지로 간다 */}
+        <Link
+          href="/docs/design"
+          className="-mt-4 flex items-start justify-between gap-3 rounded-md border border-border p-[14px] hover:bg-surface"
+        >
+          <span className="flex min-w-0 flex-col gap-[3px]">
+            <span className="flex items-center gap-2 text-caption font-semibold text-text-primary">
+              <Palette size={16} className="text-accent-text" />
+              디자인 시안
+            </span>
+            <span className="text-label leading-normal text-text-secondary">
+              화면 27장 · 디자인 시스템 4장 — Pencil .pen 에서 내보낸 이미지
+            </span>
+          </span>
+          <ArrowUpRight size={16} className="shrink-0 text-text-tertiary" />
         </Link>
 
         <section className="flex flex-col gap-3">
