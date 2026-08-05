@@ -4,13 +4,118 @@
 
 가장 높은 금액을 부른 사람이 아니라, 가장 공감받은 이야기를 쓴 사람이 낙찰받는다.
 
+![Next.js 16](https://img.shields.io/badge/Next.js%2016-000000?logo=nextdotjs&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS 4](https://img.shields.io/badge/Tailwind%20CSS%204-06B6D4?logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3FCF8E?logo=supabase&logoColor=white)
+![Expo](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=white)
+[![Android APK](https://img.shields.io/badge/Android%20APK-다운로드-1D48B0?logo=android&logoColor=white)](https://github.com/seokachu/vidding-re/releases/latest/download/vidding.apk)
+
 | 구분 | 일반 경매 | Vidding |
 |---|---|---|
 | 입찰 수단 | 금액 | 사연(스토리) |
 | 낙찰 기준 | 최고가 | 사연이 받은 공감 |
 | 참여 경험 | 가격 경쟁 | 이야기 공유·공감 |
 
-**바로 보기** — [서비스](https://vidding-re.vercel.app) · [기능명세서](https://vidding-re.vercel.app/docs) · [디자인 시안](https://vidding-re.vercel.app/docs/design) · [스토리북](https://vidding-storybook.vercel.app)
+**바로 보기** — [서비스](https://vidding-re.vercel.app) · [기능명세서](https://vidding-re.vercel.app/docs) · [디자인 시안](https://vidding-re.vercel.app/docs/design) · [스토리북](https://vidding-storybook.vercel.app) · [앱 다운로드](#앱-다운로드)
+
+---
+
+## 화면
+
+<p>
+  <img src="./public/design/s01-home.webp" width="19%" alt="홈" />
+  <img src="./public/design/s03-detail-visitor.webp" width="19%" alt="경매 상세" />
+  <img src="./public/design/s05-story-bid.webp" width="19%" alt="사연 입찰" />
+  <img src="./public/design/s10-chat.webp" width="19%" alt="1:1 채팅" />
+  <img src="./public/design/s08-notifications.webp" width="19%" alt="알림" />
+</p>
+
+전체 시안은 [디자인 시안 (웹)](https://vidding-re.vercel.app/docs/design)에서 —
+화면 27장과 디자인 시스템 4장을 배포된 서비스 안에서 그대로 열람할 수 있다.
+
+---
+
+## 주요 기능
+
+**경매 · 사연 · 포인트**
+- 사연으로 입찰하고, 공감(주최자 +50 P · 그 외 +10 P)이 낙찰을 가른다
+- 포인트는 입찰에 걸고, 미낙찰·유찰·사연 삭제 시 전액 반환된다
+- `pg_cron` 이 1분마다 마감을 집행한다 — 낙찰 산정·유찰·포인트 정산이 자동이다
+- 마감 임박 알림은 경매 기간에 비례한 3단계로 온다
+
+**실시간 (Supabase Realtime)**
+- 낙찰자↔주최자 1:1 채팅 — 읽음/안읽음 표시, 재연결 시 놓친 메시지 자동 복구,
+  전송 실패 시 재전송, 배송 정보는 말풍선이 아닌 카드로
+- 실시간 이벤트에도 RLS 가 그대로 적용된다 — 참여자만 수신한다
+- 새 알림이 오면 새로고침 없이 하단 탭 배지가 켜진다
+
+**푸시 알림 (웹 + 앱)**
+- 브라우저는 Web Push(VAPID), 하이브리드 앱은 FCM(Expo) — 같은 알림이 두 경로로 나간다
+- DB INSERT 트리거가 `pg_net` 으로 발송 API 를 호출한다 — 클라이언트를 거치지 않는다
+- 지금 보고 있는 채팅방의 알림은 무음, 대화 알림은 방마다 최신 한 줄로 합쳐진다
+- 알림을 누르면 웹·앱 모두 해당 화면으로 바로 열린다
+
+**하이브리드 앱 (Expo)**
+- 배포된 웹을 그대로 담는 WebView 셸 — 네이티브가 해야만 하는 일만 셸이 맡는다
+- 세션 유지, 외부 앱 스킴 열기, 당겨서 새로고침(채팅방은 예외), 로드 실패 재시도
+- Android 뒤로가기는 웹 히스토리를 따라가고, 첫 화면에서는 두 번 눌러 종료한다
+- 키보드가 뜨면 셸이 WebView 를 직접 줄인다 — 엣지투엣지에서도 입력줄이 가려지지 않는다
+
+**관계 기반 UI**
+- 사용자를 역할로 나누지 않는다. 경매마다 **주최자 / 참여자 / 방문자 / 비회원** 관계를
+  판정해 버튼과 화면이 달라진다 — 토글 전환이 없다
+
+**인증 · 보안**
+- 카카오/구글 소셜 로그인, 아바타·닉네임은 마지막 로그인 제공자를 따라간다
+- 모든 테이블에 RLS — 권한 판정은 클라이언트가 아니라 DB 가 한다
+
+**디자인 시스템**
+- 잉크 블루 단일 테마 · Pretendard · 390px 기준, `.pen` 시안과 코드가 1:1 로 맞다
+- 공통 UI 20종을 [스토리북](https://vidding-storybook.vercel.app)으로 문서화했다
+
+---
+
+## 구조
+
+```mermaid
+flowchart LR
+  subgraph client["클라이언트"]
+    web["웹 · Next.js 16 (Vercel)"]
+    app["앱 · Expo WebView 셸"]
+  end
+  subgraph supa["Supabase"]
+    db[("Postgres + RLS")]
+    rt["Realtime"]
+    auth["Auth (카카오 · 구글)"]
+    cron["pg_cron — 마감 집행"]
+  end
+  push["/api/push — Web Push · FCM"]
+
+  app -->|"배포 웹을 그대로 담는다"| web
+  web <--> db
+  web <--> rt
+  web <--> auth
+  cron --> db
+  db -->|"INSERT 트리거 + pg_net"| push
+  push -->|"VAPID"| web
+  push -->|"FCM"| app
+```
+
+---
+
+## 앱 다운로드
+
+<img src="./.github/assets/apk-qr.png" width="180" align="right" alt="APK 다운로드 QR" />
+
+Android 폰 카메라로 QR 을 찍거나, 아래 링크로 받는다.
+
+**[⬇ vidding.apk 다운로드](https://github.com/seokachu/vidding-re/releases/latest/download/vidding.apk)**
+
+- 배포된 웹을 담는 하이브리드 앱이라, 웹이 갱신되면 앱도 재설치 없이 함께 갱신된다
+- 설치 시 "출처를 알 수 없는 앱" 허용이 필요하다 (스토어 외 배포)
+
+<br clear="right" />
 
 ---
 
@@ -88,7 +193,10 @@
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS 4 |
-| Backend | Supabase (DB · 인증) |
+| Backend | Supabase (DB · 인증 · Realtime · pg_cron) |
+| Push | Web Push(VAPID) · FCM(Expo) |
+| App | Expo (React Native WebView 셸) |
+| Docs | Storybook · Pencil(.pen) |
 
 ---
 
