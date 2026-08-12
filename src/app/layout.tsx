@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
+import { InstallBanner } from "@/features/install/install-banner";
 import { AppPushBridge } from "@/features/notify/app-push-bridge";
 import { NotificationRealtime } from "@/features/notify/notification-realtime";
+import { appleStartupImages } from "./apple-splash";
 
 import "./globals.css";
 
@@ -52,6 +54,17 @@ export const metadata: Metadata = {
     title: "Vidding — 사연으로 입찰하는 경매",
     description: DESCRIPTION,
   },
+  /**
+   * iOS 홈 화면 웹앱 설정. 안드로이드는 `manifest.ts` 가 담당하지만
+   * iOS 는 매니페스트의 스플래시를 읽지 않아 여기서 따로 선언한다.
+   * `startupImage` 는 기기 해상도별 한 장씩이다 — `apple-splash.ts` 참고.
+   */
+  appleWebApp: {
+    capable: true,
+    title: "Vidding",
+    statusBarStyle: "default",
+    startupImage: appleStartupImages,
+  },
 };
 
 export const viewport: Viewport = {
@@ -97,6 +110,8 @@ export default function RootLayout({
         <AppPushBridge />
         {/* 새 알림이 오면 새로고침 없이 하단 탭 배지·목록을 갱신한다 */}
         <NotificationRealtime />
+        {/* 모바일 브라우저에서만 — 앱 설치(홈 화면 추가) 유도 띠배너 */}
+        <InstallBanner />
       </body>
     </html>
   );

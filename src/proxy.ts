@@ -69,8 +69,10 @@ export const config = {
      * 아래를 제외한 모든 경로에서 실행한다.
      * - _next/static, _next/image  정적 자산
      * - favicon.ico, 이미지 파일    자산
+     * - manifest.webmanifest       PWA 매니페스트 — 크롬이 쿠키 없이 받아가므로
+     *                              인증 판정에 걸리면 설치 자체가 안 된다
      * matcher 를 두지 않으면 정적 파일까지 인증 판정을 거쳐 CSS·JS 가 막힌다.
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|woff2)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|woff2|webmanifest)$).*)",
   ],
 };
