@@ -17,10 +17,10 @@ import { ROUTES } from "@/lib/routes";
  * 닫은 사용자에게는 조용히 빠진다 (`PushBanner` 와 같은 원칙).
  *
  * 갈림길은 설치 방식이다:
- * - **안드로이드(크로미움)**: `beforeinstallprompt` 를 잡아뒀다가 버튼을
- *   누르면 `prompt()` — 네이티브 설치 다이얼로그가 바로 뜬다. 이벤트가
- *   **온 뒤에만** 배너를 보이므로, 설치가 안 되는 브라우저(파이어폭스,
- *   인앱 등)에서는 저절로 안 뜬다.
+ * - **크로미움(안드로이드·데스크톱 크롬/엣지)**: `beforeinstallprompt` 를
+ *   잡아뒀다가 버튼을 누르면 `prompt()` — 네이티브 설치 다이얼로그가 바로
+ *   뜬다. 이벤트가 **온 뒤에만** 배너를 보이므로, 설치가 안 되는
+ *   브라우저(파이어폭스, 데스크톱 사파리, 인앱 등)에서는 저절로 안 뜬다.
  * - **iOS**: 프로그래매틱 설치가 없다. 버튼을 누르면 바텀시트로
  *   "공유 → 홈 화면에 추가" 순서를 보여준다.
  *
@@ -33,6 +33,13 @@ type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
+
+declare global {
+  interface Window {
+    /** 하이드레이션 전에 온 beforeinstallprompt — layout 인라인 스크립트가 잡아둔다 */
+    __bipEvent?: BeforeInstallPromptEvent;
+  }
+}
 
 const DISMISS_KEY = "vidding:install-banner-dismissed-at";
 const DISMISS_DAYS = 7;
@@ -56,15 +63,14 @@ function snoozed() {
 
 export function InstallBanner() {
   const pathname = usePathname();
-  const [mode, setMode] = useState<"android" | "ios" | null>(null);
+  const [mode, setMode] = useState<"chromium" | "ios" | null>(null);
+  const [desktop, setDesktop] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const promptRef = useRef<BeforeInstallPromptEvent | null>(null);
 
   useEffect(() => {
     if (window.ReactNativeWebView) return; // 앱 셸 — 이미 앱이다
     if (window.matchMedia("(display-mode: standalone)").matches) return;
-    // 데스크톱 크롬도 beforeinstallprompt 를 쏘지만 이 배너는 모바일 것이다
-    if (!window.matchMedia("(pointer: coarse)").matches) return;
     if (snoozed()) return;
 
     const ua = navigator.userAgent;
@@ -85,10 +91,15 @@ export function InstallBanner() {
       return () => clearTimeout(timer);
     }
 
+    function show(event: BeforeInstallPromptEvent) {
+      promptRef.current = event;
+      // 데스크톱은 "홈 화면"이 없다 — 설치 흐름은 같고 문구만 가른다
+      setDesktop(!window.matchMedia("(pointer: coarse)").matches);
+      setMode("chromium");
+    }
     function onPrompt(event: Event) {
       event.preventDefault(); // 크롬 자체 설치 유도 대신 우리 배너로 받는다
-      promptRef.current = event as BeforeInstallPromptEvent;
-      setMode("android");
+      show(event as BeforeInstallPromptEvent);
     }
     function onInstalled() {
       setMode(null);
@@ -96,7 +107,14 @@ export function InstallBanner() {
 
     window.addEventListener("beforeinstallprompt", onPrompt);
     window.addEventListener("appinstalled", onInstalled);
+
+    // 이벤트가 하이드레이션보다 먼저 왔으면 리스너로는 영영 못 받는다 —
+    // layout 의 인라인 스크립트가 잡아둔 것을 회수한다
+    const stashed = window.__bipEvent;
+    const timer = stashed ? setTimeout(() => show(stashed), 0) : undefined;
+
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("beforeinstallprompt", onPrompt);
       window.removeEventListener("appinstalled", onInstalled);
     };
@@ -145,12 +163,14 @@ export function InstallBanner() {
               Vidding 앱 설치
             </p>
             <p className="text-label leading-normal text-text-secondary">
-              홈 화면에 추가하고 앱처럼 쓰세요
+              {desktop
+                ? "설치하면 별도 창에서 앱처럼 열려요"
+                : "홈 화면에 추가하고 앱처럼 쓰세요"}
             </p>
           </div>
 
           <Button
-            onClick={mode === "android" ? install : () => setSheetOpen(true)}
+            onClick={mode === "chromium" ? install : () => setSheetOpen(true)}
             className="shrink-0 px-3 py-2 text-caption"
           >
             설치

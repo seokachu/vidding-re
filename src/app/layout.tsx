@@ -103,6 +103,15 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${pretendard.variable} antialiased`}>
       <body className="bg-surface">
+        {/* 크로미움은 설치 가능 판정이 끝나는 대로 beforeinstallprompt 를
+            쏘는데, 하이드레이션보다 빠를 수 있다 — 여기서 잡아뒀다가
+            InstallBanner 가 회수한다 */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__bipEvent=e})',
+          }}
+        />
         <div className="relative mx-auto flex min-h-dvh w-full max-w-[var(--shell-width)] flex-col border-border bg-bg min-[391px]:pointer-fine:border-x">
           {children}
         </div>
@@ -110,7 +119,7 @@ export default function RootLayout({
         <AppPushBridge />
         {/* 새 알림이 오면 새로고침 없이 하단 탭 배지·목록을 갱신한다 */}
         <NotificationRealtime />
-        {/* 모바일 브라우저에서만 — 앱 설치(홈 화면 추가) 유도 띠배너 */}
+        {/* 브라우저에서만 — 앱 설치(홈 화면 추가) 유도 띠배너 */}
         <InstallBanner />
       </body>
     </html>
