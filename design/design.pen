@@ -1,5 +1,5 @@
 {
-  "version": "2.15",
+  "version": "2.17",
   "children": [
     {
       "type": "frame",
@@ -21882,6 +21882,41 @@
               "fill": "$accent"
             }
           }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KAhHp",
+      "x": -460,
+      "y": 6205,
+      "name": "S00 스플래시",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$accent",
+      "layout": "vertical",
+      "gap": "$space-5",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "id": "h68kR",
+          "type": "ref",
+          "ref": "Y0Vcs3",
+          "name": "Logo / VID",
+          "fill": "$text-on-accent"
+        },
+        {
+          "type": "text",
+          "id": "wL94c",
+          "name": "태그라인",
+          "fill": "#FFFFFFE6",
+          "content": "사연으로 입찰하는 경매",
+          "fontFamily": "$font-body",
+          "fontSize": "$text-subtitle",
+          "fontWeight": "$w-medium",
+          "letterSpacing": -0.2
         }
       ]
     }

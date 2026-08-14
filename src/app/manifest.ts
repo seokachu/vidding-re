@@ -27,7 +27,8 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     // 웹 셸(390px 모바일 기준)과 앱(Expo portrait 고정)에 맞춘다
     orientation: "portrait",
-    background_color: "#ffffff",
+    // 스플래시 배경 — iOS 이미지(잉크 블루)와 같은 색으로 맞춘다
+    background_color: "#1d48b0",
     theme_color: "#ffffff",
     icons: [
       { src: "/icon-192.png", sizes: "192x192", type: "image/png" },

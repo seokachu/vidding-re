@@ -5,13 +5,15 @@
  * `apple-touch-startup-image` 링크와 **기기 해상도가 정확히 일치하는**
  * 이미지만 쓰고, 없으면 흰 화면이다. 그래서 기기마다 한 장씩 나열한다.
  *
- * 이미지는 `public/splash/` 에 있고 Expo 스플래시와 같은 모양(흰 배경 +
- * 중앙 로고)이다. 새 기기 해상도가 나오면 여기와 생성 스크립트에 한 줄씩
- * 늘리면 된다. 가로 모드는 만들지 않는다 — 앱이 세로(390px) 기준이다.
+ * 이미지는 `public/splash/` 에 있고 design.pen 의 "S00 스플래시"와 같은
+ * 모양(잉크 블루 배경 + 중앙 흰 로고 + 태그라인)이다. `pnpm splash` 로
+ * 다시 만든다(scripts/gen-splash.mjs). 새 기기 해상도가 나오면 여기에 한
+ * 줄 추가하고 스크립트를 돌리면 된다. 가로 모드는 만들지 않는다 — 앱이
+ * 세로(390px) 기준이다.
  */
 
-// [논리 폭(pt), 논리 높이(pt), 배율]
-const SCREENS: ReadonlyArray<readonly [number, number, number]> = [
+// [논리 폭(pt), 논리 높이(pt), 배율] — gen-splash.mjs 가 이 목록을 읽는다
+export const SCREENS: ReadonlyArray<readonly [number, number, number]> = [
   [440, 956, 3], // iPhone 16 Pro Max
   [430, 932, 3], // 14/15 Pro Max, 15/16 Plus
   [428, 926, 3], // 12/13 Pro Max, 14 Plus
