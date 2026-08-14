@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { ROUTES, resolveReturnTo } from "@/lib/routes";
@@ -19,6 +19,16 @@ import { GoogleMark, KakaoMark } from "./provider-marks";
 export function SigninButtons({ next }: { next?: string }) {
   const [pending, setPending] = useState<"kakao" | "google" | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // 제공자 페이지로 떠났다가 뒤로가기로 돌아오면 bfcache 가 "이동 중…"
+  // 상태까지 통째로 복원한다 — 두 버튼이 영영 잠긴다. 복원 신호에서 푼다
+  useEffect(() => {
+    function onPageShow(event: PageTransitionEvent) {
+      if (event.persisted) setPending(null);
+    }
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
 
   async function signIn(provider: "kakao" | "google") {
     setPending(provider);
