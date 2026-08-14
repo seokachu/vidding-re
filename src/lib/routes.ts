@@ -45,6 +45,8 @@ const PUBLIC_EXACT = new Set<string>([
   "/api/push",
   // 서비스 워커 — 브라우저의 갱신 요청이 로그인 리다이렉트를 받으면 안 된다
   "/sw.js",
+  // APK 다운로드 — QR 로 처음 들어오는 사람이 로그인에 막히면 안 된다
+  "/download",
 ]);
 
 /** 로그인 없이 열리는 경로 (접두어) */

@@ -115,10 +115,12 @@ flowchart LR
 
 Android 폰 카메라로 QR 을 찍거나, 아래 링크로 받는다.
 
-**[⬇ vidding.apk 다운로드](https://github.com/seokachu/vidding-re/releases/latest/download/vidding.apk)**
+**[⬇ vidding.apk 다운로드](https://vidding-re.vercel.app/download)**
 
 - 배포된 웹을 담는 하이브리드 앱이라, 웹이 갱신되면 앱도 재설치 없이 함께 갱신된다
 - 설치 시 "출처를 알 수 없는 앱" 허용이 필요하다 (스토어 외 배포)
+- 링크는 다운로드 페이지(`/download`)를 거친다 — 카카오톡 등 **인앱 브라우저는 APK 설치가
+  막히므로** 감지해서 외부 브라우저로 자동 전환한다
 
 <br clear="right" />
 
