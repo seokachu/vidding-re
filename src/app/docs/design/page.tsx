@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata = {
   title: "디자인 시안 · Vidding 문서",
   description:
-    "Pencil .pen 시안 — 화면 27장을 서비스 여정 순서로, 디자인 시스템 4장과 함께",
+    "Pencil .pen 시안 — 화면 29장을 서비스 여정 순서로, 디자인 시스템 4장과 함께",
 };
 
 /** 화면 시안은 전부 390px 기준을 2배로 내보낸 것이라 폭이 같다 */
@@ -21,6 +21,14 @@ type Shot = {
 
 /** 서비스 여정 순서. 화면 코드는 기능명세서 §4 화면 목록과 같다 */
 const FLOWS: { title: string; note: string; shots: Shot[] }[] = [
+  {
+    title: "0. 설치 · 스플래시",
+    note: "웹을 홈 화면에 설치하도록 배너로 이끌고, 설치된 앱은 스플래시로 뜬다",
+    shots: [
+      { file: "s01b-home-install-banner", height: 1966, code: "S01b", title: "홈 · 설치 배너" },
+      { file: "s00-splash", height: 1688, code: "S00", title: "스플래시" },
+    ],
+  },
   {
     title: "1. 온보딩 · 로그인",
     note: "로그인 전 3장으로 규칙을 익히고, 구글 · 카카오로 들어온다",
@@ -146,7 +154,7 @@ export default function DesignPreviewPage() {
           Pencil <code className="rounded-sm bg-surface-sunken px-1">.pen</code>{" "}
           단일 파일로 그린 시안 — 잉크 블루{" "}
           <code className="rounded-sm bg-surface-sunken px-1">#1D48B0</code> ·
-          Pretendard · 390px 기준. 화면 27장을 서비스 여정 순서로 싣고, 뒤에
+          Pretendard · 390px 기준. 화면 29장을 서비스 여정 순서로 싣고, 뒤에
           디자인 시스템 4장을 붙인다. 이미지를 누르면 원본 크기로 열린다.
         </p>
 
