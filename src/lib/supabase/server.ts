@@ -32,3 +32,18 @@ export async function createClient() {
     },
   });
 }
+
+/**
+ * 쿠키를 보지 않는 Supabase 클라이언트 — **공개 데이터 전용**.
+ *
+ * 항상 `anon` 권한으로 나간다. 쓰는 자리는 하나다: 세션이 얹힌 조회가 401 로
+ * 돌아왔을 때(토큰 만료·갱신 경합), 누구에게나 열려 있는 목록만이라도 살리는 것.
+ *
+ * **로그인해야 보이는 것을 이걸로 읽지 않는다.** RLS 가 조용히 0건을 돌려주므로
+ * 실패가 "없음"으로 위장된다 — 이 코드베이스가 내내 피해 온 바로 그 모양이다.
+ */
+export function createAnonClient() {
+  return createServerClient<Database>(supabaseUrl(), supabaseAnonKey(), {
+    cookies: { getAll: () => [], setAll: () => {} },
+  });
+}
