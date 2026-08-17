@@ -1,12 +1,10 @@
 import { ChevronRight, PackageOpen } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { TabShell } from "@/components/layout/tab-shell";
 import { AuctionCard, AuctionCardCompact, EmptyState, ErrorState } from "@/components/ui";
-import {
-  getEndingSoonAuctions,
-  getLatestAuctions,
-} from "@/features/explore/queries";
+import { getHomeAuctions } from "@/features/explore/queries";
 import { FavoriteButton } from "@/features/explore";
 import { WriteFab } from "@/features/explore/write-fab";
 import {
@@ -15,6 +13,8 @@ import {
 } from "@/features/explore/sort";
 import { auctionDisplayStatus } from "@/lib/auction-status";
 import { getAuthUser } from "@/lib/auth";
+
+import { HomeSectionsSkeleton } from "./sections-skeleton";
 
 export const metadata = { title: "Vidding" };
 
@@ -26,17 +26,17 @@ export const metadata = { title: "Vidding" };
  *
  * 로그인 없이 열린다 (F2 3.5 · 완료 조건 1). 관계에 따라 달라지는 것은
  * ＋ 버튼 하나뿐이다 (완료 조건 2).
+ *
+ * **목록을 기다렸다 그리지 않는다.** 여기서 `await` 하면 껍데기(`TabShell`)가
+ * 그 뒤에 줄을 서고, 헤더·하단 네비까지 목록 조회만큼 늦게 나온다. 조회는 먼저
+ * 던져 두고 제목과 껍데기를 곧장 내보낸 뒤, 목록은 `Suspense` 로 흘려보낸다.
  */
 export default async function HomePage() {
-  const [user, endingSoon, latest] = await Promise.all([
-    getAuthUser(),
-    getEndingSoonAuctions(),
-    getLatestAuctions(),
-  ]);
+  // 기다리지 않는다. 아래 `await` 와 껍데기의 조회가 이 왕복과 겹쳐 돈다
+  const auctions = getHomeAuctions();
 
-  // 마감 임박은 0건이어도, 조회에 실패해도 영역을 아예 숨긴다.
-  // 빈 상태를 따로 그리지 않고, 전체 목록은 정상 노출한다 (F2 4)
-  const showEndingSoon = endingSoon.ok && endingSoon.items.length > 0;
+  // 요청 안에서 캐시된다 — `getHomeAuctions` 가 이미 부른 그 약속이다
+  const user = await getAuthUser();
 
   return (
     <TabShell>
@@ -49,6 +49,30 @@ export default async function HomePage() {
         </p>
       </section>
 
+      <Suspense fallback={<HomeSectionsSkeleton />}>
+        <HomeSections auctions={auctions} />
+      </Suspense>
+
+      {/* 로그인한 사용자 전원에게 보인다. 유형 조건이 없다 (F1 완료 조건 1) */}
+      {user && <WriteFab />}
+    </TabShell>
+  );
+}
+
+/** 두 목록. 도착하는 대로 제목 아래에 끼워 넣는다 */
+async function HomeSections({
+  auctions,
+}: {
+  auctions: ReturnType<typeof getHomeAuctions>;
+}) {
+  const { endingSoon, latest } = await auctions;
+
+  // 마감 임박은 0건이어도, 조회에 실패해도 영역을 아예 숨긴다.
+  // 빈 상태를 따로 그리지 않고, 전체 목록은 정상 노출한다 (F2 4)
+  const showEndingSoon = endingSoon.ok && endingSoon.items.length > 0;
+
+  return (
+    <>
       {showEndingSoon && (
         <section className="flex flex-col gap-3.5">
           <div className="flex items-center justify-between px-gutter">
@@ -115,10 +139,7 @@ export default async function HomePage() {
           ))
         )}
       </section>
-
-      {/* 로그인한 사용자 전원에게 보인다. 유형 조건이 없다 (F1 완료 조건 1) */}
-      {user && <WriteFab />}
-    </TabShell>
+    </>
   );
 }
 
