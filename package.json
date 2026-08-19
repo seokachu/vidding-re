@@ -9,6 +9,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "seed": "node --env-file=.env.local scripts/seed.mjs",
+    "auction:daily": "node --env-file=.env.local scripts/auction-daily.mjs",
     "splash": "node scripts/gen-splash.mjs",
     "db:types": "supabase gen types typescript --project-id vtkeruqexphuvritwkyt --schema public > src/lib/supabase/database.types.ts",
     "storybook": "storybook dev -p 6006",

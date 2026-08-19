@@ -1,0 +1,32 @@
+#경매 자동 활성화 — 하루 1건 새 경매를 올리고, 진행중 경매에 사연·입찰·공감을
+#며칠에 걸쳐 나눠 채운다 (scripts/auction-daily.mjs)
+#풀이 소진되면 마감된 지 7일 지난 경매를 재등록하므로 무한히 돈다.
+#새 품목을 섞고 싶으면 scripts/data/auction-daily-pool.mjs 에 추가.
+#(경매 마감 처리는 Supabase pg_cron 이 하므로 여기서 하지 않는다)
+name: auction-daily
+
+on:
+  schedule:
+    - cron: "20 0,3,7,11 * * *" #매일 09:20 · 12:20 · 16:20 · 20:20 KST
+  workflow_dispatch:
+
+concurrency:
+  group: auction-daily
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      #의존성 없는 스크립트라 pnpm install 불필요 — 바로 실행
+      - name: 경매·사연·반응 갱신
+        run: node scripts/auction-daily.mjs
