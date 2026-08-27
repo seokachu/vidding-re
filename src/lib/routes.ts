@@ -45,6 +45,9 @@ const PUBLIC_EXACT = new Set<string>([
   "/api/push",
   // 서비스 워커 — 브라우저의 갱신 요청이 로그인 리다이렉트를 받으면 안 된다
   "/sw.js",
+  // 오프라인 폴백 화면 — 워커가 설치 시점에 받아 두는 파일이다.
+  // 여기서 로그인으로 리다이렉트되면 캐시에 담기는 것이 로그인 화면이 된다
+  "/offline.html",
   // APK 다운로드 — QR 로 처음 들어오는 사람이 로그인에 막히면 안 된다
   "/download",
 ]);
@@ -65,8 +68,67 @@ const PROTECTED_EXACT = new Set<string>([
 
 const PROTECTED_PREFIX = ["/mypage/", "/chat"];
 
+/**
+ * **실제로 있는 경로.** `:id` 는 아무 세그먼트나 받는다.
+ *
+ * 접근 판정은 "있는 화면"에만 한다. 없는 주소까지 판정에 넣으면 오타 하나가
+ * 로그인 화면으로 이어지는데, **로그인해도 그 주소는 여전히 없다** — 사용자를
+ * 두 번 헛걸음시키고 404(S17)는 비회원에게 영영 보이지 않는다.
+ *
+ * **새 화면을 만들면 여기에 함께 적는다.** 빠뜨리면 그 화면이 비회원에게
+ * 404 로 보인다 — 조용히 뚫리는 것이 아니라 눈에 띄게 막히는 쪽으로 실패한다.
+ * 목록 안에서는 지금처럼 deny-by-default 가 그대로 적용된다.
+ */
+const KNOWN_ROUTES = [
+  ROUTES.entry,
+  ROUTES.onboarding,
+  ROUTES.home,
+  ROUTES.auctions,
+  ROUTES.auctionWrite,
+  "/auctions/:id",
+  "/auctions/:id/edit",
+  "/auctions/:id/episodes/write",
+  ROUTES.notifications,
+  ROUTES.mypage,
+  ROUTES.points,
+  ROUTES.address,
+  ROUTES.chatList,
+  "/chat/:id",
+  ROUTES.signin,
+  ROUTES.callback,
+  "/auth/signout",
+  "/docs",
+  "/docs/design",
+  "/docs/:slug",
+  "/download",
+  "/api/push",
+  // 라우트는 아니지만 프록시를 지나가는 정적 파일 둘 (matcher 가 안 걸러낸다)
+  "/sw.js",
+  "/offline.html",
+];
+
+/** 위 목록에 있는 주소인가. 없으면 접근 판정을 하지 않고 404 로 흘려보낸다 */
+function isKnownRoute(pathname: string): boolean {
+  const path =
+    pathname.length > 1 && pathname.endsWith("/")
+      ? pathname.slice(0, -1)
+      : pathname;
+  const segments = path.split("/");
+
+  return KNOWN_ROUTES.some((route) => {
+    const pattern = route.split("/");
+    if (pattern.length !== segments.length) return false;
+    return pattern.every((part, index) =>
+      part.startsWith(":") ? segments[index].length > 0 : part === segments[index],
+    );
+  });
+}
+
 /** 이 경로에 미로그인으로 들어오면 진입 화면으로 보낸다 */
 export function requiresAuth(pathname: string): boolean {
+  // 없는 주소는 막을 것도 없다 — 그대로 통과시켜 404 를 띄운다
+  if (!isKnownRoute(pathname)) return false;
+
   if (PROTECTED_EXACT.has(pathname)) return true;
   if (PROTECTED_PREFIX.some((p) => pathname.startsWith(p))) return true;
 
@@ -78,7 +140,8 @@ export function requiresAuth(pathname: string): boolean {
   if (PUBLIC_EXACT.has(pathname)) return false;
   if (PUBLIC_PREFIX.some((p) => pathname.startsWith(p))) return false;
 
-  // 알 수 없는 경로는 막는 쪽으로 판단한다 — 불확실하면 열지 않는다 (00-관계-판정 4)
+  // 있는 화면인데 위 어디에도 안 걸렸다면 막는 쪽으로 판단한다 —
+  // 불확실하면 열지 않는다 (00-관계-판정 4)
   return true;
 }
 

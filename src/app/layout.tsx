@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import { InstallBanner } from "@/features/install/install-banner";
 import { AppPushBridge } from "@/features/notify/app-push-bridge";
 import { NotificationRealtime } from "@/features/notify/notification-realtime";
+import { ServiceWorkerRegistrar } from "@/features/offline/service-worker";
 import { appleStartupImages } from "./apple-splash";
 
 import "./globals.css";
@@ -121,6 +122,8 @@ export default function RootLayout({
         <NotificationRealtime />
         {/* 브라우저에서만 — 앱 설치(홈 화면 추가) 유도 띠배너 */}
         <InstallBanner />
+        {/* 서비스 워커 — 푸시와 오프라인 폴백 화면(/offline.html)을 맡는다 */}
+        <ServiceWorkerRegistrar />
       </body>
     </html>
   );

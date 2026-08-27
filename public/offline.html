@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>오프라인 · Vidding</title>
+    <!--
+      오프라인 폴백 화면 (.pen S18b).
+
+      서비스 워커가 install 시점에 이 파일 하나만 미리 받아 두고, 네트워크가
+      끊겨 화면 이동이 실패할 때 대신 돌려준다 (public/sw.js).
+
+      **의존성이 없는 한 장이어야 한다.** 오프라인에서 뜨는 화면이므로 CSS·JS·
+      폰트를 밖에서 받아올 수 없다. 그래서 Tailwind 를 쓰지 못하고 토큰 값을
+      직접 적는다 — 값의 출처는 design.pen 이고 globals.css 와 같다.
+
+      Pretendard 도 해시 경로라 미리 받아둘 수 없다. 기기에 있으면 쓰고,
+      없으면 시스템 한글 서체로 떨어진다.
+    -->
+    <style>
+      :root {
+        --bg: #ffffff;
+        --surface: #f6f7fb;
+        --surface-sunken: #edeff5;
+        --border: #e1e4ec;
+        --border-strong: #cbd0dc;
+        --text-primary: #131720;
+        --text-secondary: #5b6474;
+        --text-tertiary: #9ba3b5;
+        --text-on-accent: #ffffff;
+        --accent: #1d48b0;
+        --accent-pressed: #163784;
+        --accent-subtle: #e2e8fa;
+        --warning-subtle: #fcebea;
+        --warning-text: #a82720;
+        --radius-md: 10px;
+        --shell-width: 390px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--surface);
+        color: var(--text-primary);
+        font-family:
+          Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Malgun Gothic", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .shell {
+        width: 100%;
+        max-width: var(--shell-width);
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+      }
+
+      @media (min-width: 391px) and (pointer: fine) {
+        .shell {
+          border-left: 1px solid var(--border);
+          border-right: 1px solid var(--border);
+        }
+      }
+
+      .banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px 20px;
+        background: var(--warning-subtle);
+        color: var(--warning-text);
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 24px 40px;
+        text-align: center;
+      }
+
+      .icon-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 88px;
+        height: 88px;
+        border-radius: 999px;
+        background: var(--accent-subtle);
+        color: var(--accent);
+      }
+
+      h1 {
+        margin-top: 18px;
+        font-size: 20px;
+        line-height: 1.35;
+        font-weight: 700;
+      }
+
+      .desc {
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--text-secondary);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 12px;
+        color: var(--text-tertiary);
+        background: var(--surface-sunken);
+      }
+
+      .status {
+        margin-top: 18px;
+      }
+
+      .actions {
+        margin-top: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-md);
+        padding: 15px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        border: 0;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: var(--text-on-accent);
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-pressed);
+      }
+
+      .btn-secondary {
+        background: var(--bg);
+        color: var(--text-primary);
+        border: 1px solid var(--border-strong);
+      }
+
+      .btn-secondary:hover {
+        background: var(--surface);
+      }
+
+      .hint {
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        color: var(--text-tertiary);
+      }
+
+      .divider {
+        margin-top: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        font-size: 12px;
+        color: var(--text-tertiary);
+      }
+
+      .divider::before,
+      .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .tips {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .tip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        border: 1px solid var(--border-strong);
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+      }
+
+      svg {
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="shell">
+      <p class="banner">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 20h.01" />
+          <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+          <path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+          <path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+          <path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+          <path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+          <path d="m2 2 20 20" />
+        </svg>
+        오프라인 상태예요
+      </p>
+
+      <main>
+        <span class="icon-circle">
+          <svg width="38" height="38" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 20h.01" />
+            <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+            <path d="M5 12.859a10 10 0 0 1 5.17-2.69" />
+            <path d="M19 12.859a10 10 0 0 0-2.007-1.523" />
+            <path d="M2 8.82a15 15 0 0 1 4.177-2.643" />
+            <path d="M22 8.82a15 15 0 0 0-11.288-3.764" />
+            <path d="m2 2 20 20" />
+          </svg>
+        </span>
+
+        <h1>인터넷에 연결되어 있지 않아요</h1>
+        <p class="desc">연결 상태를 확인한 뒤 다시 시도해 주세요.</p>
+
+        <p class="chip status">
+          <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m19 5 3-3" />
+            <path d="m2 22 3-3" />
+            <path
+              d="M6.3 20.3a2.4 2.4 0 0 0 3.4 0L12 18l-6-6-2.3 2.3a2.4 2.4 0 0 0 0 3.4Z"
+            />
+            <path d="M7.5 13.5 10 11" />
+            <path d="M10.5 16.5 13 14" />
+            <path
+              d="m12 6 6 6 2.3-2.3a2.4 2.4 0 0 0 0-3.4l-2.6-2.6a2.4 2.4 0 0 0-3.4 0Z"
+            />
+          </svg>
+          네트워크에 연결되어 있지 않아요
+        </p>
+
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="retry">
+            다시 시도
+          </button>
+          <a class="btn btn-secondary" href="/main">홈으로</a>
+        </div>
+
+        <p class="hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+            <path d="M8 16H3v5" />
+          </svg>
+          연결이 돌아오면 자동으로 다시 불러와요
+        </p>
+
+        <p class="divider">이럴 때 확인해 보세요</p>
+
+        <div class="tips">
+          <span class="tip">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 20h.01" />
+              <path d="M2 8.82a15 15 0 0 1 20 0" />
+              <path d="M5 12.859a10 10 0 0 1 14 0" />
+              <path d="M8.5 16.429a5 5 0 0 1 7 0" />
+            </svg>
+            Wi-Fi
+          </span>
+          <span class="tip">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 20h.01" />
+              <path d="M7 20v-4" />
+              <path d="M12 20v-8" />
+              <path d="M17 20V8" />
+              <path d="M22 4v16" />
+            </svg>
+            데이터
+          </span>
+          <span class="tip">
+            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"
+              />
+            </svg>
+            비행기 모드
+          </span>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // 이 화면은 캐시에서 나오므로 주소창에는 원래 가려던 주소가 남아 있다.
+      // 그래서 되돌아갈 곳을 따로 기억할 필요 없이 새로고침이면 충분하다.
+      document
+        .getElementById("retry")
+        .addEventListener("click", () => location.reload());
+
+      // 연결이 돌아오면 손대지 않아도 원래 화면으로 넘어간다
+      window.addEventListener("online", () => location.reload());
+    </script>
+  </body>
+</html>
