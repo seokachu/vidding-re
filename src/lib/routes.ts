@@ -6,6 +6,8 @@
  * 미로그인 시 진입 화면으로 보낸다.
  */
 
+import knownRoutes from "./known-routes.json";
+
 export const ROUTES = {
   /** 진입 화면 (비회원) */
   entry: "/",
@@ -75,36 +77,18 @@ const PROTECTED_PREFIX = ["/mypage/", "/chat"];
  * 로그인 화면으로 이어지는데, **로그인해도 그 주소는 여전히 없다** — 사용자를
  * 두 번 헛걸음시키고 404(S17)는 비회원에게 영영 보이지 않는다.
  *
- * **새 화면을 만들면 여기에 함께 적는다.** 빠뜨리면 그 화면이 비회원에게
- * 404 로 보인다 — 조용히 뚫리는 것이 아니라 눈에 띄게 막히는 쪽으로 실패한다.
- * 목록 안에서는 지금처럼 deny-by-default 가 그대로 적용된다.
+ * **새 화면을 만들면 `known-routes.json` 에 함께 적는다.** 빠뜨리면 그 화면이
+ * 비회원에게 404 로 보인다 — 조용히 뚫리는 것이 아니라 눈에 띄게 막히는 쪽으로
+ * 실패한다. 목록 안에서는 지금처럼 deny-by-default 가 그대로 적용된다.
+ *
+ * 손으로 관리하는 목록이지만 어긋난 채로 오래 가지는 않는다 —
+ * `pnpm check:routes` 가 `src/app` 의 실제 라우트와 대조하고 CI 가 이걸 돌린다.
+ * TS 밖(플레인 Node)에서도 읽어야 해서 목록만 JSON 으로 빼 두었다.
  */
 const KNOWN_ROUTES = [
-  ROUTES.entry,
-  ROUTES.onboarding,
-  ROUTES.home,
-  ROUTES.auctions,
-  ROUTES.auctionWrite,
-  "/auctions/:id",
-  "/auctions/:id/edit",
-  "/auctions/:id/episodes/write",
-  ROUTES.notifications,
-  ROUTES.mypage,
-  ROUTES.points,
-  ROUTES.address,
-  ROUTES.chatList,
-  "/chat/:id",
-  ROUTES.signin,
-  ROUTES.callback,
-  "/auth/signout",
-  "/docs",
-  "/docs/design",
-  "/docs/:slug",
-  "/download",
-  "/api/push",
-  // 라우트는 아니지만 프록시를 지나가는 정적 파일 둘 (matcher 가 안 걸러낸다)
-  "/sw.js",
-  "/offline.html",
+  ...knownRoutes.routes,
+  // 라우트는 아니지만 프록시를 지나가는 정적 파일들 (matcher 가 안 걸러낸다)
+  ...knownRoutes.staticFiles,
 ];
 
 /** 위 목록에 있는 주소인가. 없으면 접근 판정을 하지 않고 404 로 흘려보낸다 */

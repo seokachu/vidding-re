@@ -1,0 +1,30 @@
+{
+  "routes": [
+    "/",
+    "/onboarding",
+    "/main",
+    "/auctions",
+    "/auctions/write",
+    "/auctions/:id",
+    "/auctions/:id/edit",
+    "/auctions/:id/episodes/write",
+    "/notifications",
+    "/mypage",
+    "/mypage/points",
+    "/mypage/address",
+    "/chat",
+    "/chat/:id",
+    "/auth/signup",
+    "/auth/callback",
+    "/auth/signout",
+    "/docs",
+    "/docs/design",
+    "/docs/:slug",
+    "/download",
+    "/api/push"
+  ],
+  "staticFiles": [
+    "/sw.js",
+    "/offline.html"
+  ]
+}
