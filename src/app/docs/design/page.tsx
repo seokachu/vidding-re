@@ -5,7 +5,7 @@ import Link from "next/link";
 export const metadata = {
   title: "디자인 시안 · Vidding 문서",
   description:
-    "Pencil .pen 시안 — 화면 29장을 서비스 여정 순서로, 디자인 시스템 4장과 함께",
+    "Pencil .pen 시안 — 화면 32장을 서비스 여정 순서로, 디자인 시스템 4장과 함께",
 };
 
 /** 화면 시안은 전부 390px 기준을 2배로 내보낸 것이라 폭이 같다 */
@@ -98,6 +98,15 @@ const FLOWS: { title: string; note: string; shots: Shot[] }[] = [
       { file: "s08b-notifications-empty", height: 1156, code: "S08b", title: "알림 · 빈 상태" },
     ],
   },
+  {
+    title: "8. 에러 · 오프라인",
+    note: "없는 주소 · 끊긴 연결 · 그리다 터진 화면 셋 다 갈 곳을 준다. 404는 웹과 앱이 같은 화면을 쓰고, 오프라인은 서비스 워커와 앱 셸이 각자 띄운다",
+    shots: [
+      { file: "s17-not-found", height: 1688, code: "S17", title: "404" },
+      { file: "s18-offline", height: 1688, code: "S18", title: "오프라인" },
+      { file: "s19-error", height: 1688, code: "S19", title: "화면 오류 (500)" },
+    ],
+  },
 ];
 
 /** 디자인 시스템 보드 — 시안과 같은 .pen 안에 있다. 폭 1040px 기준 2배 */
@@ -154,7 +163,7 @@ export default function DesignPreviewPage() {
           Pencil <code className="rounded-sm bg-surface-sunken px-1">.pen</code>{" "}
           단일 파일로 그린 시안 — 잉크 블루{" "}
           <code className="rounded-sm bg-surface-sunken px-1">#1D48B0</code> ·
-          Pretendard · 390px 기준. 화면 29장을 서비스 여정 순서로 싣고, 뒤에
+          Pretendard · 390px 기준. 화면 32장을 서비스 여정 순서로 싣고, 뒤에
           디자인 시스템 4장을 붙인다. 이미지를 누르면 원본 크기로 열린다.
         </p>
 
