@@ -24390,11 +24390,230 @@
       "type": "note",
       "id": "c09eg0",
       "x": 0,
-      "y": 11290,
+      "y": 12575,
       "name": "에러 · 오프라인 화면 노트",
       "width": 1400,
       "height": 0,
-      "content": "에러 화면이 없었다 — `auctions/[id]/not-found.tsx` 하나뿐이고 전역 404·오프라인 화면은 없었다. `public/sw.js` 도 푸시 전용이라 오프라인 캐시가 없어, 잘못된 주소는 Next 기본 404, 앱은 WebView 내장 에러 페이지가 그대로 노출됐다. 이 네 장이 그 자리를 메운다.\n\nS17 404 — `src/app/not-found.tsx` (전역). 어느 라우트에도 걸리지 않은 주소와 `notFound()` 를 함께 받는다. 앱(WebView)도 이 화면을 그대로 보므로 앱용 구현이 따로 없다 — 위에 네이티브 상태바만 얹힌다. 안내만 하고 끝내지 않고 갈 곳을 함께 준다 (F3 4.1 과 같은 원칙): CTA [홈으로 가기=/main] + [경매 둘러보기=/auctions], 아래 빠른 이동 칩 [채팅·알림·마이]. 주소 칩은 사용자가 친 경로를 그대로 보여준다 — 오타인지 고장인지 구분시켜 주려는 것이다.\n\nS17b 404 · 웹 셸 — 넓은 화면에서 어떻게 놓이는지 보여주는 컨텍스트 프레임이다. 별도 화면이 아니라 S17 이 390 셸 안에 그대로 들어간 모습 (RootLayout 과 동일).\n\nS18 오프라인 · 앱 — `vidding-app` v1.3.0 에 구현됨. WebView `renderError` 로 안드로이드 웹뷰의 내장 에러 페이지를 막고 그 자리에 이 화면을 그린다. CTA — [다시 시도=reload()] + [홈으로=웹뷰 재마운트]. **연결 복구는 NetInfo 가 아니라 도달 확인으로 잡는다** — 네이티브 모듈이 하나 느는데 알려주는 건 링크가 붙었는지뿐이라, Wi-Fi 에 붙었지만 밖으로 못 나가는 상태를 못 거른다. 화면이 떠 있는 동안에만 `/offline.html` 을 4초 주기로 찔러보고(앱을 다시 켤 때도 한 번) 응답이 오면 자동으로 다시 불러온다. 새 네이티브 의존성 없음. 아이콘은 lucide 글리프를 이 파일 색으로 구워 `assets/` 에 넣었다.\n\nS18b 오프라인 · 웹 — `public/offline.html` + `public/sw.js`. 워커가 설치 시점에 이 한 장만 미리 받아 두고, 화면 이동이 네트워크 실패로 끊길 때 대신 돌려준다. 페이지는 캐시하지 않는다 — 캐시가 늘수록 \"고쳤는데 옛 화면이 뜬다\"만 늘어난다. 워커 등록은 알림 배너에서 앱 시작 지점으로 옮겼다 (푸시를 켠 사람만 오프라인 화면을 갖는 것은 이상하다). `online` 이벤트에서 자동 새로고침.\n\n오프라인 화면은 밖에서 CSS·폰트를 받아올 수 없어 토큰 값을 HTML 안에 직접 적는다. 값의 출처는 이 파일이고 `globals.css` 와 같다. Pretendard 는 해시 경로라 미리 받을 수 없어 시스템 한글 서체로 떨어진다.\n\n토큰만 쓴다 — accent/accent-subtle, surface-sunken, border/border-strong, warning-subtle/warning-text, text-*, radius-md/pill. 임의값은 404 숫자 크기(64px) 하나뿐이고 타입 스케일에 없는 표시용이다. 이 프로젝트는 잉크 블루 라이트 1벌이라 다크 시안은 만들지 않는다.\n\n남은 것 — (1) 프록시가 모르는 경로를 로그인으로 보내므로(routes.ts `requiresAuth` 의 deny-by-default) **비회원은 이 404 를 못 본다**. 정책을 바꿀지 결정이 필요하다. (2) 500(`error.tsx`) 시안은 아직 없다 — 코드의 `ui/error-state.tsx` 언어를 화면 크기로 키우면 된다."
+      "content": "에러 화면이 없었다 — `auctions/[id]/not-found.tsx` 하나뿐이고 전역 404·오프라인 화면은 없었다. `public/sw.js` 도 푸시 전용이라 오프라인 캐시가 없어, 잘못된 주소는 Next 기본 404, 앱은 WebView 내장 에러 페이지가 그대로 노출됐다. 이 네 장이 그 자리를 메운다.\n\nS17 404 — `src/app/not-found.tsx` (전역). 어느 라우트에도 걸리지 않은 주소와 `notFound()` 를 함께 받는다. 앱(WebView)도 이 화면을 그대로 보므로 앱용 구현이 따로 없다 — 위에 네이티브 상태바만 얹힌다. 안내만 하고 끝내지 않고 갈 곳을 함께 준다 (F3 4.1 과 같은 원칙): CTA [홈으로 가기=/main] + [경매 둘러보기=/auctions], 아래 빠른 이동 칩 [채팅·알림·마이]. 주소 칩은 사용자가 친 경로를 그대로 보여준다 — 오타인지 고장인지 구분시켜 주려는 것이다.\n\nS17b 404 · 웹 셸 — 넓은 화면에서 어떻게 놓이는지 보여주는 컨텍스트 프레임이다. 별도 화면이 아니라 S17 이 390 셸 안에 그대로 들어간 모습 (RootLayout 과 동일).\n\nS18 오프라인 · 앱 — `vidding-app` v1.3.0 에 구현됨. WebView `renderError` 로 안드로이드 웹뷰의 내장 에러 페이지를 막고 그 자리에 이 화면을 그린다. CTA — [다시 시도=reload()] + [홈으로=웹뷰 재마운트]. **연결 복구는 NetInfo 가 아니라 도달 확인으로 잡는다** — 네이티브 모듈이 하나 느는데 알려주는 건 링크가 붙었는지뿐이라, Wi-Fi 에 붙었지만 밖으로 못 나가는 상태를 못 거른다. 화면이 떠 있는 동안에만 `/offline.html` 을 4초 주기로 찔러보고(앱을 다시 켤 때도 한 번) 응답이 오면 자동으로 다시 불러온다. 새 네이티브 의존성 없음. 아이콘은 lucide 글리프를 이 파일 색으로 구워 `assets/` 에 넣었다.\n\nS18b 오프라인 · 웹 — `public/offline.html` + `public/sw.js`. 워커가 설치 시점에 이 한 장만 미리 받아 두고, 화면 이동이 네트워크 실패로 끊길 때 대신 돌려준다. 페이지는 캐시하지 않는다 — 캐시가 늘수록 \"고쳤는데 옛 화면이 뜬다\"만 늘어난다. 워커 등록은 알림 배너에서 앱 시작 지점으로 옮겼다 (푸시를 켠 사람만 오프라인 화면을 갖는 것은 이상하다). `online` 이벤트에서 자동 새로고침.\n\n오프라인 화면은 밖에서 CSS·폰트를 받아올 수 없어 토큰 값을 HTML 안에 직접 적는다. 값의 출처는 이 파일이고 `globals.css` 와 같다. Pretendard 는 해시 경로라 미리 받을 수 없어 시스템 한글 서체로 떨어진다.\n\n토큰만 쓴다 — accent/accent-subtle, surface-sunken, border/border-strong, warning-subtle/warning-text, text-*, radius-md/pill. 임의값은 404 숫자 크기(64px) 하나뿐이고 타입 스케일에 없는 표시용이다. 이 프로젝트는 잉크 블루 라이트 1벌이라 다크 시안은 만들지 않는다.\n\n접근 판정은 **실제로 있는 화면에만** 한다 (routes.ts `KNOWN_ROUTES`). 예전에는 모르는 경로를 전부 로그인으로 보내 비회원이 이 404 를 못 봤다 — 없는 주소는 로그인해도 여전히 없으니 두 번 헛걸음이었다. 목록 안에서는 지금처럼 막는 쪽으로 판정한다.\n\nS19 500 · 화면 오류 — `src/app/error.tsx` + `src/app/global-error.tsx`. 404 는 없는 주소, 이건 있는 화면인데 못 그린 경우다. 화면 *일부*의 조회 실패는 여기까지 오지 않고 `ui/error-state.tsx` 가 그 자리에서 받는다. 레드는 여기서도 경고 의미다 (F11 3.6). CTA — [다시 시도=`unstable_retry()` (Next 16 은 `reset` 대신 이쪽이다 — 다시 받아서 다시 그린다)] + [홈으로 가기=/main]. 서버 오류는 내용이 클라이언트로 안 넘어오므로 서버 로그와 맞춰볼 `digest` 를 칩으로 보여준다. `global-error` 는 루트 레이아웃을 대신하므로 `html`·`body`·전역 스타일·390 셸을 직접 그린다 (폰트는 시스템 서체로 떨어진다) — 코드의 `ui/error-state.tsx` 언어를 화면 크기로 키우면 된다."
+    },
+    {
+      "type": "frame",
+      "id": "JGV0H",
+      "x": 3640,
+      "y": 11600,
+      "name": "S19 500 · 화면 오류",
+      "clip": true,
+      "width": 390,
+      "height": 844,
+      "fill": "$bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "aMLn8",
+          "type": "ref",
+          "ref": "h655AG",
+          "name": "Status Bar",
+          "width": "fill_container"
+        },
+        {
+          "type": "frame",
+          "id": "bpWWf",
+          "name": "Body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            0,
+            24
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "ybDZS",
+              "name": "Icon Circle",
+              "width": 88,
+              "height": 88,
+              "fill": "$warning-subtle",
+              "cornerRadius": "$radius-pill",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "jRUzv",
+                  "name": "Alert",
+                  "width": 38,
+                  "height": 38,
+                  "icon": "triangle-alert",
+                  "library": "lucide",
+                  "fill": "$warning-text"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RhAj1",
+              "name": "Sp18",
+              "width": 1,
+              "height": 18
+            },
+            {
+              "type": "text",
+              "id": "ZGB0i",
+              "name": "Title",
+              "fill": "$text-primary",
+              "content": "화면을 불러오지 못했어요",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-title",
+              "fontWeight": "$w-bold"
+            },
+            {
+              "type": "frame",
+              "id": "zhm76",
+              "name": "Sp8",
+              "width": 1,
+              "height": 8
+            },
+            {
+              "type": "text",
+              "id": "MkTac",
+              "name": "Desc",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "일시적인 문제일 수 있어요.\n잠시 후 다시 시도해 주세요.",
+              "lineHeight": "$lh-relaxed",
+              "textAlign": "center",
+              "fontFamily": "$font-body",
+              "fontSize": "$text-caption",
+              "fontWeight": "$w-regular"
+            },
+            {
+              "type": "frame",
+              "id": "o8Zzr8",
+              "name": "Sp18",
+              "width": 1,
+              "height": 18
+            },
+            {
+              "type": "frame",
+              "id": "A5Y6D",
+              "name": "Digest Chip",
+              "fill": "$surface-sunken",
+              "cornerRadius": "$radius-pill",
+              "gap": 6,
+              "padding": [
+                8,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "R8qBOd",
+                  "name": "Hash",
+                  "width": 14,
+                  "height": 14,
+                  "icon": "hash",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                },
+                {
+                  "type": "text",
+                  "id": "gKdjW",
+                  "name": "Digest",
+                  "fill": "$text-tertiary",
+                  "content": "오류 코드 8f3c21a",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-regular"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WhRjt",
+              "name": "Sp28",
+              "width": 1,
+              "height": 28
+            },
+            {
+              "type": "frame",
+              "id": "zYNtV",
+              "name": "Actions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "children": [
+                {
+                  "id": "Obi3B",
+                  "type": "ref",
+                  "ref": "Qjzld",
+                  "name": "다시 시도",
+                  "width": "fill_container",
+                  "context": "error.tsx 의 reset()",
+                  "descendants": {
+                    "yiucs": {
+                      "content": "다시 시도"
+                    }
+                  }
+                },
+                {
+                  "id": "Bw8fx",
+                  "type": "ref",
+                  "ref": "obcSG",
+                  "name": "홈으로 가기",
+                  "width": "fill_container",
+                  "context": "/main",
+                  "descendants": {
+                    "vYpGi": {
+                      "content": "홈으로 가기"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Iw51J",
+              "name": "Sp12",
+              "width": 1,
+              "height": 12
+            },
+            {
+              "type": "frame",
+              "id": "gZES5",
+              "name": "Report Hint",
+              "gap": 5,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "dtv8C",
+                  "name": "Info",
+                  "width": 12,
+                  "height": 12,
+                  "icon": "info",
+                  "library": "lucide",
+                  "fill": "$text-tertiary"
+                },
+                {
+                  "type": "text",
+                  "id": "VdvSN",
+                  "name": "Hint",
+                  "fill": "$text-tertiary",
+                  "content": "문제가 계속되면 오류 코드와 함께 알려주세요",
+                  "fontFamily": "$font-body",
+                  "fontSize": "$text-label",
+                  "fontWeight": "$w-regular"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
