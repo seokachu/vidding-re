@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/routes";
 
 export const metadata = {
   title: "문서 · Vidding",
-  description: "Vidding 기능명세서 아카이브 — 설계(v1.0)와 현행(v2.0)을 모두 보존한다",
+  description: "Vidding 기능명세서 아카이브 — 설계(v1.0)와 현행(v2.4)을 모두 보존한다",
 };
 
 /** 서비스가 걸어온 길. 자세한 내용은 기능명세서 §7 이 원본이다 */
@@ -16,7 +16,9 @@ const VERSIONS = [
   { v: "v1.2", date: "08-02", status: "검증", note: "시안 21화면 배포본 1:1 대조" },
   { v: "v2.0", date: "08-03", status: "확장", note: "웹 푸시 (VAPID · Vault · 트리거)" },
   { v: "v2.1", date: "08-04", status: "확장", note: "하이브리드 앱 · 실시간 배지 · 채팅 목록" },
-  { v: "v2.2", date: "08-05", status: "현행", note: "As-Built 기능명세서 · /docs 공개 · 디자인 시안" },
+  { v: "v2.2", date: "08-05", status: "문서", note: "As-Built 기능명세서 · /docs 공개 · 디자인 시안" },
+  { v: "v2.3", date: "08-14", status: "확장", note: "PWA 설치 · 스플래시 잉크 블루 리디자인" },
+  { v: "v2.4", date: "08-27", status: "현행", note: "에러 처리 · 오프라인 (404 · 오프라인 · 500) · 경매 자동 활성화" },
 ] as const;
 
 /**
@@ -77,7 +79,7 @@ export default function DocsPage() {
               디자인 시안
             </span>
             <span className="text-label leading-normal text-text-secondary">
-              화면 27장 · 디자인 시스템 4장 — Pencil .pen 에서 내보낸 이미지
+              화면 32장 · 디자인 시스템 4장 — Pencil .pen 에서 내보낸 이미지
             </span>
           </span>
           <ArrowUpRight size={16} className="shrink-0 text-text-tertiary" />
