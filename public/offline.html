@@ -38,6 +38,13 @@
         --shell-width: 390px;
       }
 
+      /* 터치 기기(폰 · 펼친 폴드 · 아이패드)는 화면 폭을 그대로 쓴다 — app/globals.css 와 같다 */
+      @media (pointer: coarse) {
+        :root {
+          --shell-width: 100%;
+        }
+      }
+
       * {
         box-sizing: border-box;
         margin: 0;
