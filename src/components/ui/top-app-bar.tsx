@@ -1,14 +1,21 @@
 "use client";
 
 import { ChevronLeft } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { cn } from "@/lib/cn";
+import { hasHistory } from "@/lib/history";
+import { tabRootOf } from "@/lib/routes";
 
 /**
  * 상세·작성 화면의 상단 바. 뒤로가기 + 제목 + 우측 액션.
  *
  * 탭 4개(홈·탐색·알림·마이)는 이 바 대신 `AppHeader` 를 쓴다.
+ *
+ * **뒤로가기는 히스토리 back 이다** (X8). 이 바가 붙는 화면은 전부 2층이라
+ * 한 번 물러나면 1층(탭)이거나 그 위의 2층이다. 돌아갈 히스토리가 없으면
+ * — 공유 링크 · 푸시 알림으로 바로 들어온 경우 — 이 화면이 속한 탭으로
+ * `replace` 한다. 버튼이 죽은 것처럼 보이면 안 된다.
  */
 export function TopAppBar({
   title,
@@ -23,6 +30,12 @@ export function TopAppBar({
   className?: string;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
+
+  function back() {
+    if (hasHistory()) router.back();
+    else router.replace(tabRootOf(pathname));
+  }
 
   return (
     <header
@@ -35,7 +48,7 @@ export function TopAppBar({
       <button
         type="button"
         aria-label="뒤로"
-        onClick={onBack ?? (() => router.back())}
+        onClick={onBack ?? back}
         className="flex size-10 shrink-0 items-center justify-center rounded-sm text-text-primary hover:bg-surface"
       >
         <ChevronLeft size={24} />

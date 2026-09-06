@@ -42,7 +42,8 @@ export function AppHeader({
           {title}
         </h1>
       ) : (
-        <Link href={ROUTES.home} aria-label="Vidding 홈">
+        // 로고는 홈에서만 그려진다 — 같은 1층으로 가는 길이니 쌓지 않는다 (X8)
+        <Link href={ROUTES.home} replace aria-label="Vidding 홈">
           <Logo width={45} />
         </Link>
       )}

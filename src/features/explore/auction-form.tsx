@@ -7,6 +7,7 @@ import { useEffect, useRef, useState, useTransition } from "react";
 
 import { Button, TextAreaField, TextField } from "@/components/ui";
 import { cn } from "@/lib/cn";
+import { hasHistory } from "@/lib/history";
 import {
   AUCTION_DURATION_DEFAULT,
   AUCTION_IMAGE_BUCKET,
@@ -98,14 +99,19 @@ export function AuctionForm({
   const [saved, setSaved] = useState(false);
 
   // 수정 저장 뒤 상세로 '뒤로' 간다. 상세는 이미 히스토리에 있으므로 새로 쌓지
-  // 않는다 — 쌓으면 상세가 두 번 남아 뒤로가기가 헛돈다.
+  // 않는다 — 쌓으면 상세가 두 번 남아 뒤로가기가 헛돈다. 링크로 수정 화면에
+  // 바로 들어와 히스토리가 없으면 상세로 replace 한다 (X8).
   // 단, 액션의 revalidate 가 히스토리에 반영되기 전에 back 을 부르면 Next 가
   // /edit 을 한 번 더 밀어 넣는다. 전환이 끝난 다음 틱까지 기다린다.
+  const editingId = auction?.id;
   useEffect(() => {
     if (!saved || pending) return;
-    const id = setTimeout(() => router.back(), 0);
+    const id = setTimeout(() => {
+      if (hasHistory()) router.back();
+      else if (editingId) router.replace(ROUTES.auction(editingId));
+    }, 0);
     return () => clearTimeout(id);
-  }, [saved, pending, router]);
+  }, [saved, pending, router, editingId]);
 
   const fileInput = useRef<HTMLInputElement>(null);
   const slotRow = useRef<HTMLDivElement>(null);

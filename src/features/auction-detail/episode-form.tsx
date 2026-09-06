@@ -14,6 +14,7 @@ import {
   EPISODE_TITLE_MIN,
 } from "@/lib/constants";
 import { formatPoint } from "@/lib/format";
+import { hasHistory } from "@/lib/history";
 import { ROUTES } from "@/lib/routes";
 
 import {
@@ -57,13 +58,17 @@ export function EpisodeForm({
   >(editing ? updateEpisodeAction : createEpisodeAction, {});
 
   // 저장 성공. 상세가 이미 히스토리에 있으므로 새로 쌓지 않고 '뒤로' 돌아간다.
+  // 링크로 작성 화면에 바로 들어와 히스토리가 없으면 상세로 replace 한다 (X8).
   // 액션의 revalidate 가 히스토리에 반영되기 전에 back 을 부르면 Next 가
   // 작성 화면을 한 번 더 밀어 넣는다. 전환이 끝난 다음 틱까지 기다린다
   useEffect(() => {
     if (!state.done || pending) return;
-    const id = setTimeout(() => router.back(), 0);
+    const id = setTimeout(() => {
+      if (hasHistory()) router.back();
+      else router.replace(ROUTES.auction(auctionId));
+    }, 0);
     return () => clearTimeout(id);
-  }, [state.done, pending, router]);
+  }, [state.done, pending, router, auctionId]);
 
   const [title, setTitle] = useState(state.values?.title ?? episode?.title ?? "");
   const [content, setContent] = useState(

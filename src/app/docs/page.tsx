@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/routes";
 
 export const metadata = {
   title: "문서 · Vidding",
-  description: "Vidding 기능명세서 아카이브 — 설계(v1.0)와 현행(v2.4)을 모두 보존한다",
+  description: "Vidding 기능명세서 아카이브 — 설계(v1.0)와 현행(v2.5)을 모두 보존한다",
 };
 
 /** 서비스가 걸어온 길. 자세한 내용은 기능명세서 §7 이 원본이다 */
@@ -18,7 +18,8 @@ const VERSIONS = [
   { v: "v2.1", date: "08-04", status: "확장", note: "하이브리드 앱 · 실시간 배지 · 채팅 목록" },
   { v: "v2.2", date: "08-05", status: "문서", note: "As-Built 기능명세서 · /docs 공개 · 디자인 시안" },
   { v: "v2.3", date: "08-14", status: "확장", note: "PWA 설치 · 스플래시 잉크 블루 리디자인" },
-  { v: "v2.4", date: "08-27", status: "현행", note: "에러 처리 · 오프라인 (404 · 오프라인 · 500) · 경매 자동 활성화" },
+  { v: "v2.4", date: "08-27", status: "확장", note: "에러 처리 · 오프라인 (404 · 오프라인 · 500) · 경매 자동 활성화" },
+  { v: "v2.5", date: "09-06", status: "현행", note: "뒤로가기 정책 — 탭은 쌓지 않고, 앱은 탭에서 두 번 눌러 종료" },
 ] as const;
 
 /**

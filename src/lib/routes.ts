@@ -37,6 +37,37 @@ export const ROUTES = {
   chat: (id: string) => `/chat/${id}`,
 } as const;
 
+/**
+ * 하단 탭 루트 넷 — 뒤로가기 정책의 **depth 1** 이다 (기능명세서 X8).
+ *
+ * 화면은 두 층뿐이다. 탭 루트가 1층, 그 밖의 모든 화면(상세 · 작성 · 채팅 ·
+ * 포인트 · 배송지)이 2층. 탭끼리는 히스토리를 쌓지 않고(`replace`) 2층의
+ * 뒤로가기는 언제나 히스토리 back 이라, 어디서 시작했든 뒤로가기 한두 번이면
+ * 1층에 닿는다. 앱 셸(`vidding-app`)은 1층에서 두 번 누르면 종료한다 —
+ * **같은 목록을 셸도 갖고 있으므로** 탭을 늘리면 거기도 함께 고친다.
+ */
+export const TAB_ROOTS = [
+  ROUTES.home,
+  ROUTES.auctions,
+  ROUTES.notifications,
+  ROUTES.mypage,
+] as const;
+
+/**
+ * 이 경로가 속한 탭 루트. 하단 탭의 활성 판정이자, 돌아갈 히스토리가 없을 때
+ * 뒤로가기가 향하는 곳이다 — `/auctions/…` 는 탐색, `/mypage/…` 는 마이,
+ * 어디에도 안 걸리면 홈.
+ */
+export function tabRootOf(pathname: string): (typeof TAB_ROOTS)[number] {
+  return (
+    TAB_ROOTS.find(
+      (root) =>
+        root !== ROUTES.home &&
+        (pathname === root || pathname.startsWith(`${root}/`)),
+    ) ?? ROUTES.home
+  );
+}
+
 /** 로그인 없이 열리는 경로 (정확히 일치) */
 const PUBLIC_EXACT = new Set<string>([
   ROUTES.entry,

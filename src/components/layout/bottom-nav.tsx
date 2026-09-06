@@ -5,13 +5,13 @@ import Link, { useLinkStatus } from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/cn";
-import { ROUTES } from "@/lib/routes";
+import { ROUTES, tabRootOf } from "@/lib/routes";
 
 const TABS = [
-  { href: ROUTES.home, label: "홈", icon: House, exact: true },
-  { href: ROUTES.auctions, label: "탐색", icon: Search, exact: false },
-  { href: ROUTES.notifications, label: "알림", icon: Bell, exact: false },
-  { href: ROUTES.mypage, label: "마이", icon: User, exact: false },
+  { href: ROUTES.home, label: "홈", icon: House },
+  { href: ROUTES.auctions, label: "탐색", icon: Search },
+  { href: ROUTES.notifications, label: "알림", icon: Bell },
+  { href: ROUTES.mypage, label: "마이", icon: User },
 ] as const;
 
 /**
@@ -19,9 +19,14 @@ const TABS = [
  *
  * 읽지 않은 알림이 있으면 **알림 탭에 점**을 찍는다 (F9 3.2).
  * 개수를 숫자로 쓰지 않는다 — 디자인은 점 하나다. 비회원에게는 노출하지 않는다 (F9 4).
+ *
+ * **탭 전환은 히스토리에 쌓지 않는다 (`replace`).** 탭 넷은 나란한 1층이지
+ * 위아래가 아니다 — push 로 쌓으면 홈 → 탐색 → 마이 → 홈 … 을 오간 만큼
+ * 뒤로가기가 그 길을 되밟아 끝이 없고, 앱 셸은 "첫 화면"에 영영 못 닿아
+ * 종료도 못 한다. 활성 판정은 뒤로가기의 대체 목적지와 같은 규칙(`tabRootOf`)이다 (X8).
  */
 export function BottomNav({ unreadCount = 0 }: { unreadCount?: number }) {
-  const pathname = usePathname();
+  const current = tabRootOf(usePathname());
 
   return (
     <nav className="pointer-events-none fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[var(--shell-width)] px-4 pb-3 pt-2">
@@ -32,15 +37,14 @@ export function BottomNav({ unreadCount = 0 }: { unreadCount?: number }) {
           "shadow-[0_6px_20px_-4px_#0C1C4026]",
         )}
       >
-        {TABS.map(({ href, label, icon: Icon, exact }) => {
-          const active = exact
-            ? pathname === href
-            : pathname === href || pathname.startsWith(`${href}/`);
+        {TABS.map(({ href, label, icon: Icon }) => {
+          const active = current === href;
 
           return (
             <li key={href} className="h-full flex-1">
               <Link
                 href={href}
+                replace
                 aria-current={active ? "page" : undefined}
                 className="block h-full"
               >
