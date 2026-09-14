@@ -71,6 +71,14 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  /**
+   * **두 손가락 확대를 막는다.** 앱 셸(안드로이드 WebView)은 이 메타를 그대로
+   * 따르므로 핀치 줌이 사라진다. 390px 고정 폭 디자인이라 확대되면 하단 탭과
+   * 고정 입력줄이 화면 밖으로 밀려 앱이 아니라 웹페이지처럼 보인다.
+   * iOS 사파리는 접근성 이유로 이 선언을 무시하지만, 앱은 안드로이드뿐이다.
+   */
+  maximumScale: 1,
+  userScalable: false,
   themeColor: "#ffffff",
   /**
    * **키보드가 뜨면 레이아웃 뷰포트를 줄인다.** Chrome(과 앱 웹뷰)의 기본은
