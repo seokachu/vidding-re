@@ -65,6 +65,8 @@
 - Android 뒤로가기는 두 층 규칙이다 — 하단 탭(1층)에서는 두 번 눌러 종료, 그 밖의 화면은
   웹 히스토리 back. 탭 전환은 히스토리에 쌓지 않아 뒤로가기가 끝없이 이어지지 않는다
 - 키보드가 뜨면 셸이 WebView 를 직접 줄인다 — 엣지투엣지에서도 입력줄이 가려지지 않는다
+- 아이폰에서는 웹 하단 탭바 대신 iOS 기본 탭바(Liquid Glass)를 쓴다 — 탭마다 WebView 가 따로 있어
+  탭별 스크롤 · 방문 기록이 남고, 같은 탭을 다시 누르면 루트로 간다. 웹 코드는 그대로다
 
 **앱 설치 (PWA)**
 - APK 없이도 웹을 홈 화면에 앱처럼 설치한다 — 배너가 유도하고, 크로미움은 네이티브
@@ -107,7 +109,7 @@
 flowchart LR
   subgraph client["클라이언트"]
     web["웹 · Next.js 16 (Vercel)"]
-    app["앱 · Expo WebView 셸"]
+    app["앱 · Expo WebView 셸 (iOS 네이티브 탭)"]
   end
   subgraph supa["Supabase"]
     db[("Postgres + RLS")]
@@ -224,7 +226,7 @@ Android 폰 카메라로 QR 을 찍거나, 아래 링크로 받는다.
 | Styling | Tailwind CSS 4 |
 | Backend | Supabase (DB · 인증 · Realtime · pg_cron) |
 | Push | Web Push(VAPID) · FCM(Expo) |
-| App | Expo (React Native WebView 셸) |
+| App | Expo (React Native WebView 셸 · iOS 는 expo-router NativeTabs) |
 | Docs | Storybook · Pencil(.pen) |
 
 ---
